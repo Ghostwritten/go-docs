@@ -1,0 +1,1342 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>go defer 延迟调用 · Go Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="宗勋 - zongxun">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-change_girls/girls.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-holi-theme.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sidebar-style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="go_24_goroutine.html" />
+    
+    
+    <link rel="prev" href="go_22_panic_and_recover.html" />
+    
+
+    <link href="http://smoothies.com.cn/rss" title="Go Docs" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"Ghostwritten","repo":"go-docs","type":"star","count":true,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn" target="_blank" class="custom-link">Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/kubernetes-docs/" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/go-docs/" target="_blank" class="custom-link">Go</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/prometheus-docs/" target="_blank" class="custom-link">Prometheus</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-command-docs/" target="_blank" class="custom-link">Command</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/shell-docs/" target="_blank" class="custom-link">Shell</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-docs/" target="_blank" class="custom-link">Linux</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/gitbook-docs/" target="_blank" class="custom-link">Gitbook</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/python-docs/" target="_blank" class="custom-link">Python</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://ghostwritten.gitbook.io/kubernetes-exam-in-action/" target="_blank" class="custom-link">Exam</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    序言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Overview.html">
+            
+                <a href="../Overview.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Go-Practice/">
+            
+                <a href="../Go-Practice/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Go Practice
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Go-Practice/go_get_file_size.html">
+            
+                <a href="../Go-Practice/go_get_file_size.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    go 如何获取文件的大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Go-Practice/go_get_URL.html">
+            
+                <a href="../Go-Practice/go_get_URL.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    go 获取 url 实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Go-Practice/go_get_Duplicate_lines.html">
+            
+                <a href="../Go-Practice/go_get_Duplicate_lines.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    go 查找重复的行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Go-Practice/go_dev_command_echo.html">
+            
+                <a href="../Go-Practice/go_dev_command_echo.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    go 编写 echo 命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Go Base
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="go_1_GOPATH_and_GOROOT.html">
+            
+                <a href="go_1_GOPATH_and_GOROOT.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    go goroot 与 gopath 介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="go_2_import.html">
+            
+                <a href="go_2_import.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    go 通过 import 导入包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="go_3_goproxy_configuration.html">
+            
+                <a href="go_3_goproxy_configuration.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    go 代理加速配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="go_4_Modules.html">
+            
+                <a href="go_4_Modules.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    go modules 管理包工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="go_5_type.html">
+            
+                <a href="go_5_type.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    go 基本类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="go_6_const.html">
+            
+                <a href="go_6_const.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    go const 定义常量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="go_7_iota.html">
+            
+                <a href="go_7_iota.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    go 定义常量之 iota
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="go_8_type.html">
+            
+                <a href="go_8_type.html">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    go type 声明变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="go_9_variable.html">
+            
+                <a href="go_9_variable.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    go 定义变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="go_10_operator.html">
+            
+                <a href="go_10_operator.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    go 运算符总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="go_11_pointer_1.html">
+            
+                <a href="go_11_pointer_1.html">
+            
+                    
+                        <b>1.4.11.</b>
+                    
+                    go 指针概念 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="go_11_pointer_2.html">
+            
+                <a href="go_11_pointer_2.html">
+            
+                    
+                        <b>1.4.12.</b>
+                    
+                    go 指针应用实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="go_12_cycle_control.html">
+            
+                <a href="go_12_cycle_control.html">
+            
+                    
+                        <b>1.4.13.</b>
+                    
+                    go 流程控制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="go_13_array.html">
+            
+                <a href="go_13_array.html">
+            
+                    
+                        <b>1.4.14.</b>
+                    
+                    go array 数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="go_14_slice.html">
+            
+                <a href="go_14_slice.html">
+            
+                    
+                        <b>1.4.15.</b>
+                    
+                    go slice 切片引用类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.16" data-path="go_15_map.html">
+            
+                <a href="go_15_map.html">
+            
+                    
+                        <b>1.4.16.</b>
+                    
+                    go map容器引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.17" data-path="go_16_struc.html">
+            
+                <a href="go_16_struc.html">
+            
+                    
+                        <b>1.4.17.</b>
+                    
+                    go struc 结构体
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.18" data-path="go_17_function.html">
+            
+                <a href="go_17_function.html">
+            
+                    
+                        <b>1.4.18.</b>
+                    
+                    go 了解函数运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.19" data-path="go_18_init_function.html">
+            
+                <a href="go_18_init_function.html">
+            
+                    
+                        <b>1.4.19.</b>
+                    
+                    go init 函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.20" data-path="go_19_built_in_function.html">
+            
+                <a href="go_19_built_in_function.html">
+            
+                    
+                        <b>1.4.20.</b>
+                    
+                    go 内置函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.21" data-path="go_20_method.html">
+            
+                <a href="go_20_method.html">
+            
+                    
+                        <b>1.4.21.</b>
+                    
+                    go 了解方法运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.22" data-path="go_21_interface.html">
+            
+                <a href="go_21_interface.html">
+            
+                    
+                        <b>1.4.22.</b>
+                    
+                    go 了解接口运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.23" data-path="go_22_panic_and_recover.html">
+            
+                <a href="go_22_panic_and_recover.html">
+            
+                    
+                        <b>1.4.23.</b>
+                    
+                    go panic 与 recover 异常处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.24" data-path="go_23_defer.html">
+            
+                <a href="go_23_defer.html">
+            
+                    
+                        <b>1.4.24.</b>
+                    
+                    go defer 延迟调用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.25" data-path="go_24_goroutine.html">
+            
+                <a href="go_24_goroutine.html">
+            
+                    
+                        <b>1.4.25.</b>
+                    
+                    go 了解 goroutine 运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.26" data-path="go_25_channel.html">
+            
+                <a href="go_25_channel.html">
+            
+                    
+                        <b>1.4.26.</b>
+                    
+                    go 了解 channel 管道
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.27" data-path="go_26_container.html">
+            
+                <a href="go_26_container.html">
+            
+                    
+                        <b>1.4.27.</b>
+                    
+                    go container 容器数据类型 heap list  ring
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.28" data-path="go_27_cas.html">
+            
+                <a href="go_27_cas.html">
+            
+                    
+                        <b>1.4.28.</b>
+                    
+                    go cas操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Go-Package/">
+            
+                <a href="../Go-Package/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Go Package
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Go-Package/go-pflag.html">
+            
+                <a href="../Go-Package/go-pflag.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    go 库 pflag 命令行参数解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Go-Package/go-viper.html">
+            
+                <a href="../Go-Package/go-viper.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    go 库 viper 配置解析神器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Go-Package/go-fmt.html">
+            
+                <a href="../Go-Package/go-fmt.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    go 包 fmt 打印输出
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Go-Package/go-os.html">
+            
+                <a href="../Go-Package/go-os.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    go 包 os 文件操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >go defer 延迟调用</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#go-defer-&#x5EF6;&#x8FDF;&#x8C03;&#x7528;"><b></b>Go defer &#x5EF6;&#x8FDF;&#x8C03;&#x7528;</a></li><ul><li><span class="title-icon "></span><a href="#1-&#x7B80;&#x4ECB;"><b></b>1. &#x7B80;&#x4ECB;</a></li><li><span class="title-icon "></span><a href="#2-&#x539F;&#x5219;"><b></b>2. &#x539F;&#x5219;</a></li><li><span class="title-icon "></span><a href="#3-defer-&#x7279;&#x6027;"><b></b>3. defer &#x7279;&#x6027;</a></li><li><span class="title-icon "></span><a href="#4-defer-&#x7528;&#x9014;"><b></b>4. defer &#x7528;&#x9014;</a></li><li><span class="title-icon "></span><a href="#5-defer-&#x9677;&#x9631;"><b></b>5. defer &#x9677;&#x9631;</a></li><li><span class="title-icon "></span><a href="#6-defer-nil-&#x51FD;&#x6570;"><b></b>6. defer nil &#x51FD;&#x6570;</a></li><li><span class="title-icon "></span><a href="#7-&#x9519;&#x8BEF;&#x7684;&#x4F4D;&#x7F6E;&#x4F7F;&#x7528;-defer&#x672A;&#x901A;&#x8FC7;&#x9A8C;&#x8BC1;"><b></b>7. &#x9519;&#x8BEF;&#x7684;&#x4F4D;&#x7F6E;&#x4F7F;&#x7528; defer(&#x672A;&#x901A;&#x8FC7;&#x9A8C;&#x8BC1;)</a></li></ul></ul></div><a href="#go-defer-&#x5EF6;&#x8FDF;&#x8C03;&#x7528;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="go-defer-&#x5EF6;&#x8FDF;&#x8C03;&#x7528;"><a name="go-defer-&#x5EF6;&#x8FDF;&#x8C03;&#x7528;" class="anchor-navigation-ex-anchor" href="#go-defer-&#x5EF6;&#x8FDF;&#x8C03;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>Go defer &#x5EF6;&#x8FDF;&#x8C03;&#x7528;</h1>
+<p><img src="https://img-blog.csdnimg.cn/b090c1eb7c0b4e33bcd75952648c3ba5.png" alt=""></p>
+<h2 id="1-&#x7B80;&#x4ECB;"><a name="1-&#x7B80;&#x4ECB;" class="anchor-navigation-ex-anchor" href="#1-&#x7B80;&#x4ECB;"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x7B80;&#x4ECB;</h2>
+<p>defer&#x5173;&#x952E;&#x5B57;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x5F53;&#x5916;&#x56F4;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E4B;&#x540E;&#x624D;&#x6267;&#x884C;&#x88AB;&#x63A8;&#x8FDF;&#x7684;&#x51FD;&#x6570;&#x3002;&#x5728;&#x6587;&#x4EF6;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x64CD;&#x4F5C;&#x4E2D;&#x7ECF;&#x5E38;&#x53EF;&#x4EE5;&#x89C1;&#x5230;
+defer&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4F7F;&#x60A8;&#x4E0D;&#x5FC5;&#x8BB0;&#x4F4F;&#x4F55;&#x65F6;&#x5173;&#x95ED;&#x5DF2;&#x6253;&#x5F00;&#x7684;&#x6587;&#x4EF6;&#xFF1A;defer&#x5173;&#x952E;&#x5B57;&#x8C03;&#x7528;&#x6587;&#x4EF6;&#x5173;&#x95ED;&#x51FD;&#x6570;&#x5173;&#x95ED;&#x5DF2;&#x6253;&#x5F00;
+&#x7684;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x7D27;&#x9760;&#x7740;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x51FD;&#x6570;&#x4E4B;&#x540E;</p>
+<h2 id="2-&#x539F;&#x5219;"><a name="2-&#x539F;&#x5219;" class="anchor-navigation-ex-anchor" href="#2-&#x539F;&#x5219;"><i class="fa fa-link" aria-hidden="true"></i></a>2. &#x539F;&#x5219;</h2>
+<p>defer&#x51FD;&#x6570;&#x5728;&#x5916;&#x56F4;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E4B;&#x540E;&#xFF0C;&#x4EE5;&#x540E;&#x8FDB;&#x5148;&#x51FA;(LIFO)&#x7684;&#x539F;&#x5219;&#x6267;&#x884C;&#x3002;&#x7B80;&#x5355;&#x70B9;
+&#x8BF4;&#xFF0C;&#x5728;&#x4E00;&#x4E2A;&#x5916;&#x56F4;&#x51FD;&#x6570;&#x4E2D;&#x6709;3&#x4E2A;defer&#x51FD;&#x6570;&#xFF1A; f1() &#x6700;&#x5148;&#x51FA;&#x73B0;&#xFF0C;&#x7136;&#x540E; f2() &#xFF0C;&#x6700;&#x540E; f3() &#xFF0C;&#x5F53;&#x5916;&#x56F4;&#x51FD;&#x6570;&#x6267;&#x884C;&#x8FD4;&#x56DE;&#x4E4B;&#x540E;&#xFF0C; f3() &#x6700;&#x5148;&#x88AB;&#x6267;&#x884C;&#xFF0C;&#x63A5;&#x7740;&#x662F; f2() &#xFF0C;&#x6700;&#x540E;&#x662F; f1()</p>
+<h2 id="3-defer-&#x7279;&#x6027;"><a name="3-defer-&#x7279;&#x6027;" class="anchor-navigation-ex-anchor" href="#3-defer-&#x7279;&#x6027;"><i class="fa fa-link" aria-hidden="true"></i></a>3. defer &#x7279;&#x6027;</h2>
+<ul>
+<li>&#x5173;&#x952E;&#x5B57; defer &#x7528;&#x4E8E;&#x6CE8;&#x518C;&#x5EF6;&#x8FDF;&#x8C03;&#x7528;&#x3002;</li>
+<li>&#x8FD9;&#x4E9B;&#x8C03;&#x7528;&#x76F4;&#x5230; return &#x524D;&#x624D;&#x88AB;&#x6267;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x505A;&#x8D44;&#x6E90;&#x6E05;&#x7406;&#x3002;</li>
+<li>&#x591A;&#x4E2A;defer&#x8BED;&#x53E5;&#xFF0C;&#x6309;&#x5148;&#x8FDB;&#x540E;&#x51FA;&#x7684;&#x65B9;&#x5F0F;&#x6267;&#x884C;&#x3002;</li>
+<li>defer&#x8BED;&#x53E5;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x5728;defer&#x58F0;&#x660E;&#x65F6;&#x5C31;&#x51B3;&#x5B9A;&#x4E86;&#x3002;</li>
+</ul>
+<h2 id="4-defer-&#x7528;&#x9014;"><a name="4-defer-&#x7528;&#x9014;" class="anchor-navigation-ex-anchor" href="#4-defer-&#x7528;&#x9014;"><i class="fa fa-link" aria-hidden="true"></i></a>4. defer &#x7528;&#x9014;</h2>
+<ul>
+<li>&#x5173;&#x95ED;&#x6587;&#x4EF6;&#x53E5;&#x67C4;</li>
+<li>&#x9501;&#x8D44;&#x6E90;&#x91CA;&#x653E;</li>
+<li>&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x91CA;&#x653E;</li>
+</ul>
+<p>go&#x8BED;&#x8A00; defer
+go &#x8BED;&#x8A00;&#x7684;defer&#x529F;&#x80FD;&#x5F3A;&#x5927;&#xFF0C;&#x5BF9;&#x4E8E;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x6CA1;&#x7528;&#x597D;&#xFF0C;&#x4E5F;&#x4F1A;&#x6709;&#x9677;&#x9631;&#x3002;
+defer &#x662F;&#x5148;&#x8FDB;&#x540E;&#x51FA;
+&#x8FD9;&#x4E2A;&#x5F88;&#x81EA;&#x7136;,&#x540E;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x4F1A;&#x4F9D;&#x8D56;&#x524D;&#x9762;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x56E0;&#x6B64;&#x5982;&#x679C;&#x5148;&#x524D;&#x9762;&#x7684;&#x8D44;&#x6E90;&#x5148;&#x91CA;&#x653E;&#x4E86;&#xFF0C;&#x540E;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x5C31;&#x6CA1;&#x6CD5;&#x6267;&#x884C;&#x4E86;</p>
+<pre class="language-"><code class="lang-go">$ cat defer1<span class="token punctuation">.</span><span class="token keyword">go</span> 
+<span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> whatever <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span> 
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token keyword">range</span> whatever <span class="token punctuation">{</span>
+        <span class="token keyword">defer</span> fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span># <span class="token keyword">go</span> run defer1<span class="token punctuation">.</span><span class="token keyword">go</span> 
+<span class="token number">4</span>
+<span class="token number">3</span>
+<span class="token number">2</span>
+<span class="token number">1</span>
+<span class="token number">0</span>
+</code></pre>
+<p>defer &#x78B0;&#x4E0A;&#x95ED;&#x5305;</p>
+<pre class="language-"><code class="lang-go">$ cat defer2<span class="token punctuation">.</span><span class="token keyword">go</span> 
+<span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> whatever <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token keyword">range</span> whatever <span class="token punctuation">{</span>
+        <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span># <span class="token keyword">go</span> run defer2<span class="token punctuation">.</span><span class="token keyword">go</span> 
+<span class="token number">4</span>
+<span class="token number">4</span>
+<span class="token number">4</span>
+<span class="token number">4</span>
+<span class="token number">4</span>
+</code></pre>
+<p>&#x5176;&#x5B9E;go&#x8BF4;&#x7684;&#x5F88;&#x6E05;&#x695A;,&#x6211;&#x4EEC;&#x4E00;&#x8D77;&#x6765;&#x770B;&#x770B;go spec&#x5982;&#x4F55;&#x8BF4;&#x7684;</p>
+<pre class="language-"><code class="lang-bash">Each <span class="token function">time</span> a &#x201C;defer&#x201D; statement executes, the <span class="token keyword">function</span> value and parameters to the call are evaluated as usualand saved anew but the actual <span class="token keyword">function</span> is not invoked.
+</code></pre>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x51FD;&#x6570;&#x6B63;&#x5E38;&#x6267;&#x884C;,&#x7531;&#x4E8E;&#x95ED;&#x5305;&#x7528;&#x5230;&#x7684;&#x53D8;&#x91CF; i &#x5728;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#x5DF2;&#x7ECF;&#x53D8;&#x6210;4,&#x6240;&#x4EE5;&#x8F93;&#x51FA;&#x5168;&#x90FD;&#x662F;4.</p>
+<p>defer f.Close</p>
+<p>&#x8FD9;&#x4E2A;&#x5927;&#x5BB6;&#x7528;&#x7684;&#x90FD;&#x5F88;&#x9891;&#x7E41;,&#x4F46;&#x662F;go&#x8BED;&#x8A00;&#x7F16;&#x7A0B;&#x4E3E;&#x4E86;&#x4E00;&#x4E2A;&#x53EF;&#x80FD;&#x4E00;&#x4E0D;&#x5C0F;&#x5FC3;&#x4F1A;&#x72AF;&#x9519;&#x7684;&#x4F8B;&#x5B50;.</p>
+<pre class="language-"><code class="lang-go">$ cat defer3<span class="token punctuation">.</span><span class="token keyword">go</span>
+<span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+<span class="token keyword">type</span> Test <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    name <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>t <span class="token operator">*</span>Test<span class="token punctuation">)</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>name<span class="token punctuation">,</span><span class="token string">&quot; closed&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    ts <span class="token operator">:=</span><span class="token punctuation">[</span><span class="token punctuation">]</span>Test<span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token string">&quot;a&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">&quot;b&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">&quot;c&quot;</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> t <span class="token operator">:=</span> <span class="token keyword">range</span> ts <span class="token punctuation">{</span>
+        <span class="token keyword">defer</span> t<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span># <span class="token keyword">go</span> run defer3<span class="token punctuation">.</span><span class="token keyword">go</span> 
+c  closed
+c  closed
+c  closed
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x8F93;&#x51FA;&#x5E76;&#x4E0D;&#x4F1A;&#x50CF;&#x6211;&#x4EEC;&#x9884;&#x8BA1;&#x7684;&#x8F93;&#x51FA;c b a,&#x800C;&#x662F;&#x8F93;&#x51FA;c c c</p>
+<p>&#x53EF;&#x662F;&#x6309;&#x7167;&#x524D;&#x9762;&#x7684;go spec&#x4E2D;&#x7684;&#x8BF4;&#x660E;,&#x5E94;&#x8BE5;&#x8F93;&#x51FA;c b a&#x624D;&#x5BF9;&#x554A;.</p>
+<p>&#x90A3;&#x6211;&#x4EEC;&#x6362;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x6765;&#x8C03;&#x7528;&#x4E00;&#x4E0B;.</p>
+<pre class="language-"><code class="lang-go">$ cat defer4<span class="token punctuation">.</span><span class="token keyword">go</span>
+<span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+<span class="token keyword">type</span> Test <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    name <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>t <span class="token operator">*</span>Test<span class="token punctuation">)</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>name<span class="token punctuation">,</span><span class="token string">&quot; closed&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">Close</span><span class="token punctuation">(</span>t Test<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    t<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    ts <span class="token operator">:=</span><span class="token punctuation">[</span><span class="token punctuation">]</span>Test<span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token string">&quot;a&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">&quot;b&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">&quot;c&quot;</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> t <span class="token operator">:=</span> <span class="token keyword">range</span> ts <span class="token punctuation">{</span>
+            <span class="token keyword">defer</span> <span class="token function">Close</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span># <span class="token keyword">go</span> run defer4<span class="token punctuation">.</span><span class="token keyword">go</span> 
+c  closed
+b  closed
+a  closed
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x8F93;&#x51FA;&#x7684;&#x5C31;&#x662F;c b a
+&#x5F53;&#x7136;,&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x60F3;&#x591A;&#x5199;&#x4E00;&#x4E2A;&#x51FD;&#x6570;,&#x4E5F;&#x5F88;&#x7B80;&#x5355;,&#x53EF;&#x4EE5;&#x50CF;&#x4E0B;&#x9762;&#x8FD9;&#x6837;,&#x540C;&#x6837;&#x4F1A;&#x8F93;&#x51FA;c b a
+&#x770B;&#x4F3C;&#x591A;&#x6B64;&#x4E00;&#x4E3E;&#x7684;&#x58F0;&#x660E;</p>
+<pre class="language-"><code class="lang-go">$ cat defer5<span class="token punctuation">.</span><span class="token keyword">go</span>
+<span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+<span class="token keyword">type</span> Test <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    name <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>t <span class="token operator">*</span>Test<span class="token punctuation">)</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>name<span class="token punctuation">,</span><span class="token string">&quot; closed&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    ts <span class="token operator">:=</span><span class="token punctuation">[</span><span class="token punctuation">]</span>Test<span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token string">&quot;a&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">&quot;b&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">&quot;c&quot;</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> t <span class="token operator">:=</span> <span class="token keyword">range</span> ts <span class="token punctuation">{</span>
+        t2 <span class="token operator">:=</span> t
+        <span class="token keyword">defer</span> t2<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span># <span class="token keyword">go</span> run defer5<span class="token punctuation">.</span><span class="token keyword">go</span> 
+c  closed
+b  closed
+a  closed
+</code></pre>
+<p>&#x901A;&#x8FC7;&#x4EE5;&#x4E0A;&#x4F8B;&#x5B50;&#xFF0C;&#x7ED3;&#x5408;</p>
+<p>Each time a &#x201C;defer&#x201D; statement executes, the function value and parameters to the call are evaluated as usualand saved anew but the actual function is not invoked.</p>
+<p>&#x8FD9;&#x53E5;&#x8BDD;&#x3002;&#x53EF;&#x4EE5;&#x5F97;&#x51FA;&#x4E0B;&#x9762;&#x7684;&#x7ED3;&#x8BBA;&#xFF1A;</p>
+<p>defer&#x540E;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x5728;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x7684;&#x53C2;&#x6570;&#x4F1A;&#x88AB;&#x4FDD;&#x5B58;&#x8D77;&#x6765;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x6267;&#x884C;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x590D;&#x5236;&#x4E86;&#x4E00;&#x4EFD;&#x3002;&#x4F46;&#x662F;&#x5E76;&#x6CA1;&#x6709;&#x8BF4;struct&#x8FD9;&#x91CC;&#x7684;this&#x6307;&#x9488;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x53EF;&#x4EE5;&#x770B;&#x51FA;go&#x8BED;&#x8A00;&#x5E76;&#x6CA1;&#x6709;&#x628A;&#x8FD9;&#x4E2A;&#x660E;&#x786E;&#x5199;&#x51FA;&#x6765;&#x7684;this&#x6307;&#x9488;&#x5F53;&#x4F5C;&#x53C2;&#x6570;&#x6765;&#x770B;&#x5F85;&#x3002;</p>
+<p>&#x591A;&#x4E2A; defer &#x6CE8;&#x518C;&#xFF0C;&#x6309; FILO &#x6B21;&#x5E8F;&#x6267;&#x884C; ( &#x5148;&#x8FDB;&#x540E;&#x51FA; )&#x3002;&#x54EA;&#x6015;&#x51FD;&#x6570;&#x6216;&#x67D0;&#x4E2A;&#x5EF6;&#x8FDF;&#x8C03;&#x7528;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#xFF0C;&#x8FD9;&#x4E9B;&#x8C03;&#x7528;&#x4F9D;&#x65E7;&#x4F1A;&#x88AB;&#x6267;&#x884C;&#x3002;</p>
+<pre class="language-"><code class="lang-go">$ cat defer6<span class="token punctuation">.</span><span class="token keyword">go</span>
+<span class="token keyword">package</span> main
+<span class="token keyword">func</span> <span class="token function">test</span><span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">defer</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;a&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;b&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token operator">/</span> x<span class="token punctuation">)</span><span class="token comment">// div0 &#x5F02;&#x5E38;&#x672A;&#x88AB;&#x6355;&#x83B7;&#xFF0C;&#x9010;&#x6B65;&#x5F80;&#x5916;&#x4F20;&#x9012;&#xFF0C;&#x6700;&#x7EC8;&#x7EC8;&#x6B62;&#x8FDB;&#x7A0B;&#x3002;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;c&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span># <span class="token keyword">go</span> run defer6<span class="token punctuation">.</span><span class="token keyword">go</span> 
+c
+b
+a
+<span class="token builtin">panic</span><span class="token punctuation">:</span> runtime <span class="token builtin">error</span><span class="token punctuation">:</span> integer divide by zero
+
+goroutine <span class="token number">1</span> <span class="token punctuation">[</span>running<span class="token punctuation">]</span><span class="token punctuation">:</span>
+main<span class="token punctuation">.</span>test<span class="token punctuation">.</span><span class="token function">func1</span><span class="token punctuation">(</span><span class="token number">0x0</span><span class="token punctuation">)</span>
+    <span class="token operator">/</span>root<span class="token operator">/</span><span class="token keyword">go</span><span class="token operator">/</span><span class="token keyword">defer</span><span class="token operator">/</span>defer6<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">6</span> <span class="token operator">+</span><span class="token number">0x6f</span>
+main<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token number">0x0</span><span class="token punctuation">)</span>
+    <span class="token operator">/</span>root<span class="token operator">/</span><span class="token keyword">go</span><span class="token operator">/</span><span class="token keyword">defer</span><span class="token operator">/</span>defer6<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">9</span> <span class="token operator">+</span><span class="token number">0x140</span>
+main<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token operator">/</span>root<span class="token operator">/</span><span class="token keyword">go</span><span class="token operator">/</span><span class="token keyword">defer</span><span class="token operator">/</span>defer6<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">11</span> <span class="token operator">+</span><span class="token number">0x2a</span>
+exit status <span class="token number">2</span>
+</code></pre>
+<p><em>&#x5EF6;&#x8FDF;&#x8C03;&#x7528;&#x53C2;&#x6570;&#x5728;&#x6CE8;&#x518C;&#x65F6;&#x6C42;&#x503C;&#x6216;&#x590D;&#x5236;&#xFF0C;&#x53EF;&#x7528;&#x6307;&#x9488;&#x6216;&#x95ED;&#x5305; &#x201C;&#x5EF6;&#x8FDF;&#x201D; &#x8BFB;&#x53D6;&#x3002;(<em>*&#x672A;&#x901A;&#x8FC7;</em></em>)</p>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+<span class="token keyword">func</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    x<span class="token punctuation">,</span> y <span class="token operator">:=</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span>
+    <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;defer:&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token comment">// y &#x95ED;&#x5305;&#x5F15;&#x7528;}(x)// x &#x88AB;&#x590D;&#x5236;</span>
+    x <span class="token operator">+=</span><span class="token number">10</span>
+    y <span class="token operator">+=</span><span class="token function">100println</span><span class="token punctuation">(</span><span class="token string">&quot;x =&quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span><span class="token string">&quot;y =&quot;</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x7ED3;&#x679C;:</p>
+<pre class="language-"><code class="lang-go">x <span class="token operator">=</span><span class="token number">20</span> y <span class="token operator">=</span><span class="token number">120</span>
+<span class="token keyword">defer</span><span class="token punctuation">:</span><span class="token number">10120</span>
+</code></pre>
+<p>*&#x6EE5;&#x7528; defer &#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x6027;&#x80FD;&#x95EE;&#x9898;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5728;&#x4E00;&#x4E2A; &#x201C;&#x5927;&#x5FAA;&#x73AF;&#x201D; &#x91CC;&#x3002;</p>
+<pre class="language-"><code class="lang-go">$ cat defer8<span class="token punctuation">.</span><span class="token keyword">go</span> 
+<span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+<span class="token string">&quot;fmt&quot;</span>
+<span class="token string">&quot;sync&quot;</span>
+<span class="token string">&quot;time&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">var</span> lock sync<span class="token punctuation">.</span>Mutex
+<span class="token keyword">func</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    lock<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    lock<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">testdefer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    lock<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> lock<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        t1 <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i <span class="token operator">:=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span><span class="token number">10000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">{</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+        elapsed <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Since</span><span class="token punctuation">(</span>t1<span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;test elapsed: &quot;</span><span class="token punctuation">,</span> elapsed<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        t1 <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i <span class="token operator">:=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span><span class="token number">10000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">{</span><span class="token function">testdefer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+        elapsed <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Since</span><span class="token punctuation">(</span>t1<span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;testdefer elapsed: &quot;</span><span class="token punctuation">,</span> elapsed<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span># <span class="token keyword">go</span> run defer8<span class="token punctuation">.</span><span class="token keyword">go</span> 
+test elapsed<span class="token punctuation">:</span>  <span class="token number">238.665</span>&#xB5;s
+testdefer elapsed<span class="token punctuation">:</span>  <span class="token number">428.412</span>&#xB5;s
+</code></pre>
+<h2 id="5-defer-&#x9677;&#x9631;"><a name="5-defer-&#x9677;&#x9631;" class="anchor-navigation-ex-anchor" href="#5-defer-&#x9677;&#x9631;"><i class="fa fa-link" aria-hidden="true"></i></a>5. defer &#x9677;&#x9631;</h2>
+<p>defer &#x4E0E; closure</p>
+<pre class="language-"><code class="lang-go">$ cat defer10<span class="token punctuation">.</span><span class="token keyword">go</span> 
+<span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;errors&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">foo</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>i <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">defer</span> fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;first defer err %v\n&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span>err <span class="token builtin">error</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;second defer err %v\n&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;third defer err %v\n&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> b <span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">{</span>
+        err <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;divided by zero!&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    i <span class="token operator">=</span> a <span class="token operator">/</span> b
+    <span class="token keyword">return</span><span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+     <span class="token function">foo</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span># <span class="token keyword">go</span> run defer10<span class="token punctuation">.</span><span class="token keyword">go</span> 
+third <span class="token keyword">defer</span> err divided by zero<span class="token operator">!</span>
+second <span class="token keyword">defer</span> err <span class="token operator">&lt;</span><span class="token boolean">nil</span><span class="token operator">&gt;</span>
+first <span class="token keyword">defer</span> err <span class="token operator">&lt;</span><span class="token boolean">nil</span><span class="token operator">&gt;</span>
+</code></pre>
+<p>&#x89E3;&#x91CA;&#xFF1A;&#x5982;&#x679C; defer &#x540E;&#x9762;&#x8DDF;&#x7684;&#x4E0D;&#x662F;&#x4E00;&#x4E2A; closure &#x6700;&#x540E;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x5F97;&#x5230;&#x7684;&#x5E76;&#x4E0D;&#x662F;&#x6700;&#x65B0;&#x7684;&#x503C;&#x3002;</p>
+<pre class="language-"><code class="lang-go">$ cat defer11<span class="token punctuation">.</span><span class="token keyword">go</span>
+<span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+<span class="token keyword">func</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>i <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    i <span class="token operator">=</span><span class="token number">0</span>
+    <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">2</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span># <span class="token keyword">go</span> run defer11<span class="token punctuation">.</span><span class="token keyword">go</span> 
+<span class="token number">2</span>
+</code></pre>
+<p>&#x89E3;&#x91CA;&#xFF1A;&#x5728;&#x6709;&#x5177;&#x540D;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x51FD;&#x6570;&#x4E2D;&#xFF08;&#x8FD9;&#x91CC;&#x5177;&#x540D;&#x8FD4;&#x56DE;&#x503C;&#x4E3A; i&#xFF09;&#xFF0C;&#x6267;&#x884C; return 2 &#x7684;&#x65F6;&#x5019;&#x5B9E;&#x9645;&#x4E0A;&#x5DF2;&#x7ECF;&#x5C06; i &#x7684;&#x503C;&#x91CD;&#x65B0;&#x8D4B;&#x503C;&#x4E3A; 2&#x3002;&#x6240;&#x4EE5;defer closure &#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x4E3A; 2 &#x800C;&#x4E0D;&#x662F; 1&#x3002;</p>
+<h2 id="6-defer-nil-&#x51FD;&#x6570;"><a name="6-defer-nil-&#x51FD;&#x6570;" class="anchor-navigation-ex-anchor" href="#6-defer-nil-&#x51FD;&#x6570;"><i class="fa fa-link" aria-hidden="true"></i></a>6. defer nil &#x51FD;&#x6570;</h2>
+<pre class="language-"><code class="lang-go">$ cat  defer12<span class="token punctuation">.</span><span class="token keyword">go</span>
+<span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token punctuation">(</span><span class="token string">&quot;fmt&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> run <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span> <span class="token boolean">nil</span>
+    <span class="token keyword">defer</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;runs&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">if</span> err <span class="token operator">:=</span><span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">[</span>root@localhost <span class="token keyword">defer</span><span class="token punctuation">]</span>#  <span class="token keyword">go</span> run defer12<span class="token punctuation">.</span><span class="token keyword">go</span>
+runs
+runtime <span class="token builtin">error</span><span class="token punctuation">:</span> invalid memory address or <span class="token boolean">nil</span> pointer dereference
+</code></pre>
+<p>&#x89E3;&#x91CA;&#xFF1A;&#x540D;&#x4E3A; test &#x7684;&#x51FD;&#x6570;&#x4E00;&#x76F4;&#x8FD0;&#x884C;&#x81F3;&#x7ED3;&#x675F;&#xFF0C;&#x7136;&#x540E; defer &#x51FD;&#x6570;&#x4F1A;&#x88AB;&#x6267;&#x884C;&#x4E14;&#x4F1A;&#x56E0;&#x4E3A;&#x503C;&#x4E3A; nil &#x800C;&#x4EA7;&#x751F; panic &#x5F02;&#x5E38;&#x3002;&#x7136;&#x800C;&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;run() &#x7684;&#x58F0;&#x660E;&#x662F;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;test&#x51FD;&#x6570;&#x8FD0;&#x884C;&#x5B8C;&#x6210;&#x540E;&#x5B83;&#x624D;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#x3002;</p>
+<h2 id="7-&#x9519;&#x8BEF;&#x7684;&#x4F4D;&#x7F6E;&#x4F7F;&#x7528;-defer&#x672A;&#x901A;&#x8FC7;&#x9A8C;&#x8BC1;"><a name="7-&#x9519;&#x8BEF;&#x7684;&#x4F4D;&#x7F6E;&#x4F7F;&#x7528;-defer&#x672A;&#x901A;&#x8FC7;&#x9A8C;&#x8BC1;" class="anchor-navigation-ex-anchor" href="#7-&#x9519;&#x8BEF;&#x7684;&#x4F4D;&#x7F6E;&#x4F7F;&#x7528;-defer&#x672A;&#x901A;&#x8FC7;&#x9A8C;&#x8BC1;"><i class="fa fa-link" aria-hidden="true"></i></a>7. &#x9519;&#x8BEF;&#x7684;&#x4F4D;&#x7F6E;&#x4F7F;&#x7528; defer(&#x672A;&#x901A;&#x8FC7;&#x9A8C;&#x8BC1;)</h2>
+<p>&#x5F53; http.Get &#x5931;&#x8D25;&#x65F6;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;</p>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token string">&quot;net/http&quot;</span>
+<span class="token keyword">func</span> <span class="token function">do</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">&quot;http://www.google.com&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> res<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span><span class="token keyword">return</span> err
+    <span class="token punctuation">}</span><span class="token comment">// ..code...return nil</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token function">do</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#xFF1A;</p>
+<pre class="language-"><code class="lang-go"><span class="token builtin">panic</span><span class="token punctuation">:</span> runtime <span class="token builtin">error</span><span class="token punctuation">:</span> invalid memory address or <span class="token boolean">nil</span> pointer dereference
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5E76;&#x6CA1;&#x6709;&#x68C0;&#x67E5;&#x6211;&#x4EEC;&#x7684;&#x8BF7;&#x6C42;&#x662F;&#x5426;&#x6210;&#x529F;&#x6267;&#x884C;&#xFF0C;&#x5F53;&#x5B83;&#x5931;&#x8D25;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x8BBF;&#x95EE;&#x4E86; Body &#x4E2D;&#x7684;&#x7A7A;&#x53D8;&#x91CF; res &#xFF0C;&#x56E0;&#x6B64;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;
+&#x89E3;&#x51B3;&#x65B9;&#x6848;</p>
+<p>&#x603B;&#x662F;&#x5728;&#x4E00;&#x6B21;&#x6210;&#x529F;&#x7684;&#x8D44;&#x6E90;&#x5206;&#x914D;&#x4E0B;&#x9762;&#x4F7F;&#x7528; defer &#xFF0C;&#x5BF9;&#x4E8E;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x6765;&#x8BF4;&#x610F;&#x5473;&#x7740;&#xFF1A;&#x5F53;&#x4E14;&#x4EC5;&#x5F53; <code>http.Get</code> &#x6210;&#x529F;&#x6267;&#x884C;&#x65F6;&#x624D;&#x4F7F;&#x7528; defer&#x3002;</p>
+<p>&#x53C2;&#x8003;&#xFF1A;</p>
+<ul>
+<li><a href="http://www.ahadoc.com/read/Golang-Detailed-Explanation/ch4.6.md" target="_blank">http://www.ahadoc.com/read/Golang-Detailed-Explanation/ch4.6.md</a></li>
+</ul>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; ghostwritten &#x6D59;ICP&#x5907;2020032454&#x53F7; 2022 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2022-12-22 13:23:35
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="go_22_panic_and_recover.html" class="navigation navigation-prev " aria-label="Previous page: go panic 与 recover 异常处理">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="go_24_goroutine.html" class="navigation navigation-next " aria-label="Next page: go 了解 goroutine 运用">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"go defer 延迟调用","level":"1.4.24","depth":2,"next":{"title":"go 了解 goroutine 运用","level":"1.4.25","depth":2,"path":"Go-Base/go_24_goroutine.md","ref":"Go-Base/go_24_goroutine.md","articles":[]},"previous":{"title":"go panic 与 recover 异常处理","level":"1.4.23","depth":2,"path":"Go-Base/go_22_panic_and_recover.md","ref":"Go-Base/go_22_panic_and_recover.md","articles":[]},"dir":"ltr"},"config":{"plugins":["3-ba","accordion","advanced-emoji","anchor-navigation-ex","baidu-tongji","code","change_girls","custom-favicon","donate","expandable-chapters-small","edit-link","flexible-alerts","github-buttons","github","insert-logo","musicxml","prism","prism-themes","pageview-count","-highlight","-search","-lunr","rss","search-plus","splitter","-sharing","sharing-plus","sidebar-style","theme-default","tags","tbfed-pagefooter"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"sidebar-style":{"author":"zongxun","title":"《Go Docs》"},"tbfed-pagefooter":{"copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-holi-theme.css"],"lang":{"shell":"bash"}},"github":{"url":"https://github.com/Ghostwritten"},"baidu-tongji":{"url":"https://hm.baidu.com/hm.js","token":"55e7dfe47f4dc1c018d4042fdfa62565"},"splitter":{},"change_girls":{"time":10,"urls":["https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg","https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg","https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg","https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg","https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg","https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg","https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg","https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg","https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg","https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg","https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg","https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg","https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"]},"accordion":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"donate":{"alipay":"https://github.com/Ghostwritten/go-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://github.com/Ghostwritten/go-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["go"],"title":"Go Docs","description":"This is the best book ever.","author":"Zong Xun","feed_url":"http://smoothies.com.cn/rss","site_url":"https://smoothies.com.cn/go-docs/","managingEditor":"writer@smoothies.com.cn (Zong Xun)","webMaster":"webmaster@smoothies.com.cn (Zong Xun)"},"musicxml":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"assets/imgs/1_girl.ico","pageview-count":{},"prism-themes":{},"github-buttons":{"buttons":[{"user":"Ghostwritten","repo":"go-docs","type":"star","count":true,"size":"small"}]},"custom-favicon":{},"tags":{"placement":"top"},"3-ba":{"configuration":"auto","token":"9ffc0dce8d7079aceab6b0bc18eb626b"},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Danger"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"advanced-emoji":{"embedEmojis":false},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"douban":false,"facebook":true,"weibo":false,"twitter":true,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"Edit","base":"https://github.com/Ghostwritten/go-docs/edit/master/"},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"insert-logo":{"style":"background: none; max-height: 120px; min-height: 120px","url":"https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg"},"search-plus":{}},"theme":"default","author":"宗勋 - zongxun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Go Docs","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Blog":"https://smoothies.com.cn","Kubernetes":"https://smoothies.com.cn/kubernetes-docs/","Go":"https://smoothies.com.cn/go-docs/","Prometheus":"https://smoothies.com.cn/prometheus-docs/","Command":"https://smoothies.com.cn/linux-command-docs/","Shell":"https://smoothies.com.cn/shell-docs/","Linux":"https://smoothies.com.cn/linux-docs/","Gitbook":"https://smoothies.com.cn/gitbook-docs/","Python":"https://smoothies.com.cn/python-docs/","Exam":"https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"}},"gitbook":"*","description":"这是一本关于 [Go](https://go.dev/) 的书籍"},"file":{"path":"Go-Base/go_23_defer.md","mtime":"2022-12-22T05:23:35.827Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-22T10:32:54.750Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-baidu-tongji/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-change_girls/girls.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/osmd.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/musicxml.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/promise.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sidebar-style/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

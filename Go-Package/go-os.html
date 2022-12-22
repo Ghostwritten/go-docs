@@ -1,0 +1,1839 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>go 包 os 文件操作 · Go Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="宗勋 - zongxun">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-change_girls/girls.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-holi-theme.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sidebar-style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="go-fmt.html" />
+    
+
+    <link href="http://smoothies.com.cn/rss" title="Go Docs" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"Ghostwritten","repo":"go-docs","type":"star","count":true,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn" target="_blank" class="custom-link">Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/kubernetes-docs/" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/go-docs/" target="_blank" class="custom-link">Go</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/prometheus-docs/" target="_blank" class="custom-link">Prometheus</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-command-docs/" target="_blank" class="custom-link">Command</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/shell-docs/" target="_blank" class="custom-link">Shell</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-docs/" target="_blank" class="custom-link">Linux</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/gitbook-docs/" target="_blank" class="custom-link">Gitbook</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/python-docs/" target="_blank" class="custom-link">Python</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://ghostwritten.gitbook.io/kubernetes-exam-in-action/" target="_blank" class="custom-link">Exam</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    序言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Overview.html">
+            
+                <a href="../Overview.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Go-Practice/">
+            
+                <a href="../Go-Practice/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Go Practice
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Go-Practice/go_get_file_size.html">
+            
+                <a href="../Go-Practice/go_get_file_size.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    go 如何获取文件的大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Go-Practice/go_get_URL.html">
+            
+                <a href="../Go-Practice/go_get_URL.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    go 获取 url 实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Go-Practice/go_get_Duplicate_lines.html">
+            
+                <a href="../Go-Practice/go_get_Duplicate_lines.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    go 查找重复的行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Go-Practice/go_dev_command_echo.html">
+            
+                <a href="../Go-Practice/go_dev_command_echo.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    go 编写 echo 命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Go-Base/">
+            
+                <a href="../Go-Base/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Go Base
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Go-Base/go_1_GOPATH_and_GOROOT.html">
+            
+                <a href="../Go-Base/go_1_GOPATH_and_GOROOT.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    go goroot 与 gopath 介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Go-Base/go_2_import.html">
+            
+                <a href="../Go-Base/go_2_import.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    go 通过 import 导入包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Go-Base/go_3_goproxy_configuration.html">
+            
+                <a href="../Go-Base/go_3_goproxy_configuration.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    go 代理加速配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Go-Base/go_4_Modules.html">
+            
+                <a href="../Go-Base/go_4_Modules.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    go modules 管理包工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Go-Base/go_5_type.html">
+            
+                <a href="../Go-Base/go_5_type.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    go 基本类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Go-Base/go_6_const.html">
+            
+                <a href="../Go-Base/go_6_const.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    go const 定义常量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Go-Base/go_7_iota.html">
+            
+                <a href="../Go-Base/go_7_iota.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    go 定义常量之 iota
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Go-Base/go_8_type.html">
+            
+                <a href="../Go-Base/go_8_type.html">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    go type 声明变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Go-Base/go_9_variable.html">
+            
+                <a href="../Go-Base/go_9_variable.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    go 定义变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Go-Base/go_10_operator.html">
+            
+                <a href="../Go-Base/go_10_operator.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    go 运算符总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../Go-Base/go_11_pointer_1.html">
+            
+                <a href="../Go-Base/go_11_pointer_1.html">
+            
+                    
+                        <b>1.4.11.</b>
+                    
+                    go 指针概念 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../Go-Base/go_11_pointer_2.html">
+            
+                <a href="../Go-Base/go_11_pointer_2.html">
+            
+                    
+                        <b>1.4.12.</b>
+                    
+                    go 指针应用实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="../Go-Base/go_12_cycle_control.html">
+            
+                <a href="../Go-Base/go_12_cycle_control.html">
+            
+                    
+                        <b>1.4.13.</b>
+                    
+                    go 流程控制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="../Go-Base/go_13_array.html">
+            
+                <a href="../Go-Base/go_13_array.html">
+            
+                    
+                        <b>1.4.14.</b>
+                    
+                    go array 数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="../Go-Base/go_14_slice.html">
+            
+                <a href="../Go-Base/go_14_slice.html">
+            
+                    
+                        <b>1.4.15.</b>
+                    
+                    go slice 切片引用类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.16" data-path="../Go-Base/go_15_map.html">
+            
+                <a href="../Go-Base/go_15_map.html">
+            
+                    
+                        <b>1.4.16.</b>
+                    
+                    go map容器引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.17" data-path="../Go-Base/go_16_struc.html">
+            
+                <a href="../Go-Base/go_16_struc.html">
+            
+                    
+                        <b>1.4.17.</b>
+                    
+                    go struc 结构体
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.18" data-path="../Go-Base/go_17_function.html">
+            
+                <a href="../Go-Base/go_17_function.html">
+            
+                    
+                        <b>1.4.18.</b>
+                    
+                    go 了解函数运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.19" data-path="../Go-Base/go_18_init_function.html">
+            
+                <a href="../Go-Base/go_18_init_function.html">
+            
+                    
+                        <b>1.4.19.</b>
+                    
+                    go init 函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.20" data-path="../Go-Base/go_19_built_in_function.html">
+            
+                <a href="../Go-Base/go_19_built_in_function.html">
+            
+                    
+                        <b>1.4.20.</b>
+                    
+                    go 内置函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.21" data-path="../Go-Base/go_20_method.html">
+            
+                <a href="../Go-Base/go_20_method.html">
+            
+                    
+                        <b>1.4.21.</b>
+                    
+                    go 了解方法运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.22" data-path="../Go-Base/go_21_interface.html">
+            
+                <a href="../Go-Base/go_21_interface.html">
+            
+                    
+                        <b>1.4.22.</b>
+                    
+                    go 了解接口运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.23" data-path="../Go-Base/go_22_panic_and_recover.html">
+            
+                <a href="../Go-Base/go_22_panic_and_recover.html">
+            
+                    
+                        <b>1.4.23.</b>
+                    
+                    go panic 与 recover 异常处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.24" data-path="../Go-Base/go_23_defer.html">
+            
+                <a href="../Go-Base/go_23_defer.html">
+            
+                    
+                        <b>1.4.24.</b>
+                    
+                    go defer 延迟调用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.25" data-path="../Go-Base/go_24_goroutine.html">
+            
+                <a href="../Go-Base/go_24_goroutine.html">
+            
+                    
+                        <b>1.4.25.</b>
+                    
+                    go 了解 goroutine 运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.26" data-path="../Go-Base/go_25_channel.html">
+            
+                <a href="../Go-Base/go_25_channel.html">
+            
+                    
+                        <b>1.4.26.</b>
+                    
+                    go 了解 channel 管道
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.27" data-path="../Go-Base/go_26_container.html">
+            
+                <a href="../Go-Base/go_26_container.html">
+            
+                    
+                        <b>1.4.27.</b>
+                    
+                    go container 容器数据类型 heap list  ring
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.28" data-path="../Go-Base/go_27_cas.html">
+            
+                <a href="../Go-Base/go_27_cas.html">
+            
+                    
+                        <b>1.4.28.</b>
+                    
+                    go cas操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Go Package
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="go-pflag.html">
+            
+                <a href="go-pflag.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    go 库 pflag 命令行参数解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="go-viper.html">
+            
+                <a href="go-viper.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    go 库 viper 配置解析神器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="go-fmt.html">
+            
+                <a href="go-fmt.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    go 包 fmt 打印输出
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.4" data-path="go-os.html">
+            
+                <a href="go-os.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    go 包 os 文件操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >go 包 os 文件操作</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#go-&#x5305;-os-&#x6587;&#x4EF6;&#x64CD;&#x4F5C;"><b></b>Go &#x5305; os &#x6587;&#x4EF6;&#x64CD;&#x4F5C;</a></li><ul><li><span class="title-icon "></span><a href="#1-&#x7B80;&#x4ECB;"><b></b>1 &#x7B80;&#x4ECB;</a></li><li><span class="title-icon "></span><a href="#2-&#x7EC3;&#x4E60;"><b></b>2 &#x7EC3;&#x4E60;</a></li><ul><li><span class="title-icon "></span><a href="#21-&#x73AF;&#x5883;&#x53D8;&#x91CF;"><b></b>2.1 &#x73AF;&#x5883;&#x53D8;&#x91CF;</a></li><li><span class="title-icon "></span><a href="#22-&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x65B9;&#x5F0F;&#x4E0E;&#x6253;&#x5F00;&#x6A21;&#x5F0F;&#xFF08;&#x8FD0;&#x7528;openfile&#x51FD;&#x6570;&#xFF09;"><b></b>2.2 &#x6587;&#x4EF6;&#x6253;&#x5F00;&#x65B9;&#x5F0F;&#x4E0E;&#x6253;&#x5F00;&#x6A21;&#x5F0F;&#xFF08;&#x8FD0;&#x7528;OpenFile&#x51FD;&#x6570;&#xFF09;</a></li><li><span class="title-icon "></span><a href="#23-&#x6587;&#x4EF6;&#x4FE1;&#x606F;"><b></b>2.3 &#x6587;&#x4EF6;&#x4FE1;&#x606F;</a></li><li><span class="title-icon "></span><a href="#24-&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x64CD;&#x4F5C;"><b></b>2.4 &#x6587;&#x4EF6;/&#x76EE;&#x5F55;&#x64CD;&#x4F5C;</a></li><li><span class="title-icon "></span><a href="#25-&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x5BF9;&#x8C61;"><b></b>2.5 &#x6587;&#x4EF6;/&#x76EE;&#x5F55;&#x5BF9;&#x8C61;</a></li><li><span class="title-icon "></span><a href="#26-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#x64CD;&#x7EB5;"><b></b>2.6 &#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#x64CD;&#x7EB5;</a></li><li><span class="title-icon "></span><a href="#27-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;"><b></b>2.7 &#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;</a></li></ul></ul></ul></div><a href="#go-&#x5305;-os-&#x6587;&#x4EF6;&#x64CD;&#x4F5C;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="go-&#x5305;-os-&#x6587;&#x4EF6;&#x64CD;&#x4F5C;"><a name="go-&#x5305;-os-&#x6587;&#x4EF6;&#x64CD;&#x4F5C;" class="anchor-navigation-ex-anchor" href="#go-&#x5305;-os-&#x6587;&#x4EF6;&#x64CD;&#x4F5C;"><i class="fa fa-link" aria-hidden="true"></i></a>Go &#x5305; os &#x6587;&#x4EF6;&#x64CD;&#x4F5C;</h1>
+<p><img src="https://img-blog.csdnimg.cn/8218d086d67e463685edece261f29cc8.png" alt=""></p>
+<h2 id="1-&#x7B80;&#x4ECB;"><a name="1-&#x7B80;&#x4ECB;" class="anchor-navigation-ex-anchor" href="#1-&#x7B80;&#x4ECB;"><i class="fa fa-link" aria-hidden="true"></i></a>1 &#x7B80;&#x4ECB;</h2>
+<p>Go &#x5728; os &#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#x6587;&#x4EF6;&#x7684;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#xFF0C;&#x5305;&#x62EC;&#x901A;&#x5E38;&#x610F;&#x4E49;&#x7684;&#x6253;&#x5F00;&#x3001;&#x521B;&#x5EFA;&#x3001;&#x8BFB;&#x5199;&#x7B49;&#x64CD;&#x4F5C;&#xFF0C;&#x9664;&#x6B64;&#x4EE5;&#x5916;&#x4E3A;&#x4E86;&#x8FFD;&#x6C42;&#x4FBF;&#x6377;&#x4EE5;&#x53CA;&#x6027;&#x80FD;&#x4E0A;&#xFF0C;Go &#x8FD8;&#x5728; io/ioutil &#x4EE5;&#x53CA; bufio &#x63D0;&#x4F9B;&#x4E00;&#x4E9B;&#x5176;&#x4ED6;&#x51FD;&#x6570;&#x4F9B;&#x5F00;&#x53D1;&#x8005;&#x4F7F;&#x7528;</p>
+<h2 id="2-&#x7EC3;&#x4E60;"><a name="2-&#x7EC3;&#x4E60;" class="anchor-navigation-ex-anchor" href="#2-&#x7EC3;&#x4E60;"><i class="fa fa-link" aria-hidden="true"></i></a>2 &#x7EC3;&#x4E60;</h2>
+<h3 id="21-&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a name="21-&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="anchor-navigation-ex-anchor" href="#21-&#x73AF;&#x5883;&#x53D8;&#x91CF;"><i class="fa fa-link" aria-hidden="true"></i></a>2.1 &#x73AF;&#x5883;&#x53D8;&#x91CF;</h3>
+<h4 id="211-&#x83B7;&#x53D6;&#x6240;&#x6709;&#x73AF;&#x5883;&#x53D8;&#x91CF;-&#x8FD4;&#x56DE;&#x53D8;&#x91CF;&#x5217;&#x8868;"><a name="211-&#x83B7;&#x53D6;&#x6240;&#x6709;&#x73AF;&#x5883;&#x53D8;&#x91CF;-&#x8FD4;&#x56DE;&#x53D8;&#x91CF;&#x5217;&#x8868;" class="anchor-navigation-ex-anchor" href="#211-&#x83B7;&#x53D6;&#x6240;&#x6709;&#x73AF;&#x5883;&#x53D8;&#x91CF;-&#x8FD4;&#x56DE;&#x53D8;&#x91CF;&#x5217;&#x8868;"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.1 &#x83B7;&#x53D6;&#x6240;&#x6709;&#x73AF;&#x5883;&#x53D8;&#x91CF;, &#x8FD4;&#x56DE;&#x53D8;&#x91CF;&#x5217;&#x8868;</h4>
+<pre class="language-"><code class="lang-bash">func Environ<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>string
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+    <span class="token string">&quot;strings&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    envs :<span class="token operator">=</span> os.Environ<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> _, <span class="token function">env</span> :<span class="token operator">=</span> range envs <span class="token punctuation">{</span>
+        cache :<span class="token operator">=</span> strings.Split<span class="token punctuation">(</span>env, <span class="token string">&quot;=&quot;</span><span class="token punctuation">)</span>
+        fmt.Printf<span class="token punctuation">(</span><span class="token variable"><span class="token variable">`</span>
+        key: %s value: %s
+        <span class="token variable">`</span></span>, cache<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>, cache<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os1.go</span>
+
+        key: <span class="token environment constant">XDG_SESSION_ID</span> value: <span class="token number">27</span>
+
+        key: GUESTFISH_INIT value: <span class="token punctuation">\</span>e<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">;</span>34m
+
+        key: <span class="token environment constant">HOSTNAME</span> value: localhost.localdomain
+        <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+</code></pre>
+<h4 id="212-&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a name="212-&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="anchor-navigation-ex-anchor" href="#212-&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.2 &#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h4>
+<pre class="language-"><code class="lang-bash">func Getenv<span class="token punctuation">(</span>key string<span class="token punctuation">)</span> string
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt.Println<span class="token punctuation">(</span>os.Getenv<span class="token punctuation">(</span><span class="token string">&quot;GOPATH&quot;</span><span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os2.go</span>
+/usr/local/gopath
+</code></pre>
+<h4 id="213-&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a name="213-&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="anchor-navigation-ex-anchor" href="#213-&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.3 &#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h4>
+<pre class="language-"><code class="lang-bash">func Setenv<span class="token punctuation">(</span>key, value string<span class="token punctuation">)</span> error
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt.Println<span class="token punctuation">(</span>os.Getenv<span class="token punctuation">(</span><span class="token string">&quot;GOPATH&quot;</span><span class="token punctuation">))</span>
+
+    <span class="token keyword">if</span> err :<span class="token operator">=</span> os.Setenv<span class="token punctuation">(</span><span class="token string">&quot;GOPATH&quot;</span>, <span class="token string">&quot;./GO/bin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;success&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os3.go</span>
+/usr/local/gopath
+success
+</code></pre>
+<h4 id="214-&#x6E05;&#x9664;&#x6240;&#x6709;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a name="214-&#x6E05;&#x9664;&#x6240;&#x6709;&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="anchor-navigation-ex-anchor" href="#214-&#x6E05;&#x9664;&#x6240;&#x6709;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.4 &#x6E05;&#x9664;&#x6240;&#x6709;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h4>
+<pre class="language-"><code class="lang-bash">func os.Clearenv<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ data :<span class="token operator">=</span> os.Environ<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+ fmt.Println<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+ os.Clearenv<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+ data <span class="token operator">=</span> os.Environ<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ fmt.Println<span class="token punctuation">(</span>data<span class="token punctuation">)</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="22-&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x65B9;&#x5F0F;&#x4E0E;&#x6253;&#x5F00;&#x6A21;&#x5F0F;&#xFF08;&#x8FD0;&#x7528;openfile&#x51FD;&#x6570;&#xFF09;"><a name="22-&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x65B9;&#x5F0F;&#x4E0E;&#x6253;&#x5F00;&#x6A21;&#x5F0F;&#xFF08;&#x8FD0;&#x7528;openfile&#x51FD;&#x6570;&#xFF09;" class="anchor-navigation-ex-anchor" href="#22-&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x65B9;&#x5F0F;&#x4E0E;&#x6253;&#x5F00;&#x6A21;&#x5F0F;&#xFF08;&#x8FD0;&#x7528;openfile&#x51FD;&#x6570;&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>2.2 &#x6587;&#x4EF6;&#x6253;&#x5F00;&#x65B9;&#x5F0F;&#x4E0E;&#x6253;&#x5F00;&#x6A21;&#x5F0F;&#xFF08;&#x8FD0;&#x7528;OpenFile&#x51FD;&#x6570;&#xFF09;</h3>
+<p>//&#x6253;&#x5F00;&#x65B9;&#x5F0F;</p>
+<pre class="language-"><code class="lang-bash">const <span class="token punctuation">(</span>
+//&#x53EA;&#x8BFB;&#x6A21;&#x5F0F;
+O_RDONLY int <span class="token operator">=</span> syscall.O_RDONLY // <span class="token function">open</span> the <span class="token function">file</span> read-only.
+//&#x53EA;&#x5199;&#x6A21;&#x5F0F;
+O_WRONLY int <span class="token operator">=</span> syscall.O_WRONLY // <span class="token function">open</span> the <span class="token function">file</span> write-only.
+//&#x53EF;&#x8BFB;&#x53EF;&#x5199;
+O_RDWR int <span class="token operator">=</span> syscall.O_RDWR // <span class="token function">open</span> the <span class="token function">file</span> read-write.
+//&#x8FFD;&#x52A0;&#x5185;&#x5BB9;
+O_APPEND int <span class="token operator">=</span> syscall.O_APPEND // append data to the <span class="token function">file</span> when writing.
+//&#x521B;&#x5EFA;&#x6587;&#x4EF6;,&#x5982;&#x679C;&#x6587;&#x4EF6;&#x4E0D;&#x5B58;&#x5728;
+O_CREATE int <span class="token operator">=</span> syscall.O_CREAT // create a new <span class="token function">file</span> <span class="token keyword">if</span> none exists.
+//&#x4E0E;&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x4E00;&#x540C;&#x4F7F;&#x7528;,&#x6587;&#x4EF6;&#x5FC5;&#x987B;&#x5B58;&#x5728;
+O_EXCL int <span class="token operator">=</span> syscall.O_EXCL // used with O_CREATE, <span class="token function">file</span> must not exist
+//&#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x540C;&#x6B65;&#x7684;&#x6587;&#x4EF6;&#x6D41;
+O_SYNC int <span class="token operator">=</span> syscall.O_SYNC // <span class="token function">open</span> <span class="token keyword">for</span> synchronous I/O.
+//&#x5982;&#x679C;&#x53EF;&#x80FD;,&#x6253;&#x5F00;&#x65F6;&#x7F29;&#x77ED;&#x6587;&#x4EF6;
+O_TRUNC int <span class="token operator">=</span> syscall.O_TRUNC // <span class="token keyword">if</span> possible, truncate <span class="token function">file</span> when opened.
+<span class="token punctuation">)</span>
+</code></pre>
+<p>&#x6253;&#x5F00;&#x6A21;&#x5F0F;</p>
+<pre class="language-"><code class="lang-bash">const <span class="token punctuation">(</span>
+    // &#x5355;&#x5B57;&#x7B26;&#x662F;&#x88AB;String&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x683C;&#x5F0F;&#x5316;&#x7684;&#x5C5E;&#x6027;&#x7F29;&#x5199;&#x3002;
+    ModeDir        FileMode <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token number">32</span> - <span class="token number">1</span> - iota<span class="token punctuation">)</span> // d: &#x76EE;&#x5F55;
+    ModeAppend                                     // a: &#x53EA;&#x80FD;&#x5199;&#x5165;&#xFF0C;&#x4E14;&#x53EA;&#x80FD;&#x5199;&#x5165;&#x5230;&#x672B;&#x5C3E;
+    ModeExclusive                                  // l: &#x7528;&#x4E8E;&#x6267;&#x884C;
+    ModeTemporary                                  // T: &#x4E34;&#x65F6;&#x6587;&#x4EF6;&#xFF08;&#x975E;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#xFF09;
+    ModeSymlink                                    // L: &#x7B26;&#x53F7;&#x94FE;&#x63A5;&#xFF08;&#x4E0D;&#x662F;&#x5FEB;&#x6377;&#x65B9;&#x5F0F;&#x6587;&#x4EF6;&#xFF09;
+    ModeDevice                                     // D: &#x8BBE;&#x5907;
+    ModeNamedPipe                                  // p: &#x547D;&#x540D;&#x7BA1;&#x9053;&#xFF08;FIFO&#xFF09;
+    ModeSocket                                     // S: Unix&#x57DF;socket
+    ModeSetuid                                     // u: &#x8868;&#x793A;&#x6587;&#x4EF6;&#x5177;&#x6709;&#x5176;&#x521B;&#x5EFA;&#x8005;&#x7528;&#x6237;id&#x6743;&#x9650;
+    ModeSetgid                                     // g: &#x8868;&#x793A;&#x6587;&#x4EF6;&#x5177;&#x6709;&#x5176;&#x521B;&#x5EFA;&#x8005;&#x7EC4;id&#x7684;&#x6743;&#x9650;
+    ModeCharDevice                                 // c: &#x5B57;&#x7B26;&#x8BBE;&#x5907;&#xFF0C;&#x9700;&#x5DF2;&#x8BBE;&#x7F6E;ModeDevice
+    ModeSticky                                     // t: &#x53EA;&#x6709;root/&#x521B;&#x5EFA;&#x8005;&#x80FD;&#x5220;&#x9664;/&#x79FB;&#x52A8;&#x6587;&#x4EF6;
+    // &#x8986;&#x76D6;&#x6240;&#x6709;&#x7C7B;&#x578B;&#x4F4D;&#xFF08;&#x7528;&#x4E8E;&#x901A;&#x8FC7;<span class="token operator">&amp;</span>&#x83B7;&#x53D6;&#x7C7B;&#x578B;&#x4F4D;&#xFF09;&#xFF0C;&#x5BF9;&#x666E;&#x901A;&#x6587;&#x4EF6;&#xFF0C;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x4F4D;&#x90FD;&#x4E0D;&#x5E94;&#x88AB;&#x8BBE;&#x7F6E;
+    ModeType <span class="token operator">=</span> ModeDir <span class="token operator">|</span> ModeSymlink <span class="token operator">|</span> ModeNamedPipe <span class="token operator">|</span> ModeSocket <span class="token operator">|</span> ModeDevice
+    ModePerm FileMode <span class="token operator">=</span> 0777 // &#x8986;&#x76D6;&#x6240;&#x6709;Unix&#x6743;&#x9650;&#x4F4D;&#xFF08;&#x7528;&#x4E8E;&#x901A;&#x8FC7;<span class="token operator">&amp;</span>&#x83B7;&#x53D6;&#x7C7B;&#x578B;&#x4F4D;&#xFF09;
+<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="23-&#x6587;&#x4EF6;&#x4FE1;&#x606F;"><a name="23-&#x6587;&#x4EF6;&#x4FE1;&#x606F;" class="anchor-navigation-ex-anchor" href="#23-&#x6587;&#x4EF6;&#x4FE1;&#x606F;"><i class="fa fa-link" aria-hidden="true"></i></a>2.3 &#x6587;&#x4EF6;&#x4FE1;&#x606F;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">type</span> FileInfo interface <span class="token punctuation">{</span>
+    Name<span class="token punctuation">(</span><span class="token punctuation">)</span> string       // &#x6587;&#x4EF6;&#x7684;&#x540D;&#x5B57;&#xFF08;&#x4E0D;&#x542B;&#x6269;&#x5C55;&#x540D;&#xFF09;
+    Size<span class="token punctuation">(</span><span class="token punctuation">)</span> int64        // &#x666E;&#x901A;&#x6587;&#x4EF6;&#x8FD4;&#x56DE;&#x503C;&#x8868;&#x793A;&#x5176;&#x5927;&#x5C0F;&#xFF1B;&#x5176;&#x4ED6;&#x6587;&#x4EF6;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x542B;&#x4E49;&#x5404;&#x7CFB;&#x7EDF;&#x4E0D;&#x540C;
+    Mode<span class="token punctuation">(</span><span class="token punctuation">)</span> FileMode     // &#x6587;&#x4EF6;&#x7684;&#x6A21;&#x5F0F;&#x4F4D;
+    ModTime<span class="token punctuation">(</span><span class="token punctuation">)</span> time.Time // &#x6587;&#x4EF6;&#x7684;&#x4FEE;&#x6539;&#x65F6;&#x95F4;
+    IsDir<span class="token punctuation">(</span><span class="token punctuation">)</span> bool        // &#x7B49;&#x4EF7;&#x4E8E;Mode<span class="token punctuation">(</span><span class="token punctuation">)</span>.IsDir<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    Sys<span class="token punctuation">(</span><span class="token punctuation">)</span> interface<span class="token punctuation">{</span><span class="token punctuation">}</span>   // &#x5E95;&#x5C42;&#x6570;&#x636E;&#x6765;&#x6E90;&#xFF08;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;nil&#xFF09;
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="231-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;-&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x5C06;&#x8DF3;&#x8F6C;"><a name="231-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;-&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x5C06;&#x8DF3;&#x8F6C;" class="anchor-navigation-ex-anchor" href="#231-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;-&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x5C06;&#x8DF3;&#x8F6C;"><i class="fa fa-link" aria-hidden="true"></i></a>2.3.1 &#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;, &#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x5C06;&#x8DF3;&#x8F6C;</h4>
+<pre class="language-"><code class="lang-bash">func Stat<span class="token punctuation">(</span>name string<span class="token punctuation">)</span> <span class="token punctuation">(</span>fi FileInfo, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     fi, _ :<span class="token operator">=</span> os.Stat<span class="token punctuation">(</span><span class="token string">&quot;./1.txt&quot;</span><span class="token punctuation">)</span>
+
+     fmt.Println<span class="token punctuation">(</span>fi.Size<span class="token punctuation">(</span><span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os4.go </span>
+<span class="token number">6</span>
+</code></pre>
+<h4 id="232-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;-&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x4E0D;&#x8DF3;&#x8F6C;"><a name="232-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;-&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x4E0D;&#x8DF3;&#x8F6C;" class="anchor-navigation-ex-anchor" href="#232-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;-&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x4E0D;&#x8DF3;&#x8F6C;"><i class="fa fa-link" aria-hidden="true"></i></a>2.3.2 &#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;, &#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x4E0D;&#x8DF3;&#x8F6C;</h4>
+<p>package main</p>
+<p>import (
+    &quot;fmt&quot;
+    &quot;os&quot;
+)</p>
+<p>func main() {
+    fi, _ := os.Lstat(&quot;./1.txt&quot;)</p>
+<pre class="language-"><code>fmt.Println(fi.Size())
+</code></pre><p>}
+[root@localhost os]# go run os5.go
+6</p>
+<h4 id="233-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x6839;&#x636E;&#x9519;&#x8BEF;&#xFF0C;&#x5224;&#x65AD;-&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x662F;&#x5426;&#x5B58;&#x5728;"><a name="233-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x6839;&#x636E;&#x9519;&#x8BEF;&#xFF0C;&#x5224;&#x65AD;-&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x662F;&#x5426;&#x5B58;&#x5728;" class="anchor-navigation-ex-anchor" href="#233-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x6839;&#x636E;&#x9519;&#x8BEF;&#xFF0C;&#x5224;&#x65AD;-&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x662F;&#x5426;&#x5B58;&#x5728;"><i class="fa fa-link" aria-hidden="true"></i></a>2.3.3 &#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x6839;&#x636E;&#x9519;&#x8BEF;&#xFF0C;&#x5224;&#x65AD; &#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x662F;&#x5426;&#x5B58;&#x5728;</h4>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> _, err :<span class="token operator">=</span> os.Open<span class="token punctuation">(</span><span class="token string">&quot;./empty.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        // <span class="token boolean">false</span> &#x4E0D;&#x5B58;&#x5728;   <span class="token boolean">true</span> &#x5B58;&#x5728;
+        emptyErr :<span class="token operator">=</span> os.IsExist<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+        fmt.Println<span class="token punctuation">(</span>emptyErr, <span class="token string">&quot;<span class="token entity" title="\n">\n</span>&quot;</span>, err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os6.go</span>
+<span class="token boolean">false</span> 
+ <span class="token function">open</span> ./empty.js: no such <span class="token function">file</span> or directory
+</code></pre>
+<h4 id="234-isexist-&#x53CD;&#x4E49;&#x65B9;&#x6CD5;"><a name="234-isexist-&#x53CD;&#x4E49;&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#234-isexist-&#x53CD;&#x4E49;&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>2.3.4 IsExist &#x53CD;&#x4E49;&#x65B9;&#x6CD5;</h4>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> _, err :<span class="token operator">=</span> os.Open<span class="token punctuation">(</span><span class="token string">&quot;./empty.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        // <span class="token boolean">false</span> &#x4E0D;&#x5B58;&#x5728;   <span class="token boolean">true</span> &#x5B58;&#x5728;
+        emptyErr :<span class="token operator">=</span> os.IsNotExist<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+        fmt.Println<span class="token punctuation">(</span>emptyErr, <span class="token string">&quot;<span class="token entity" title="\n">\n</span>&quot;</span>, err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os7.go</span>
+<span class="token boolean">true</span> 
+ <span class="token function">open</span> ./empty.js: no such <span class="token function">file</span> or directory
+</code></pre>
+<h4 id="235-&#x6839;&#x636E;&#x9519;&#x8BEF;&#xFF0C;&#x5224;&#x65AD;&#x662F;&#x5426;&#x4E3A;&#x6743;&#x9650;&#x9519;&#x8BEF;"><a name="235-&#x6839;&#x636E;&#x9519;&#x8BEF;&#xFF0C;&#x5224;&#x65AD;&#x662F;&#x5426;&#x4E3A;&#x6743;&#x9650;&#x9519;&#x8BEF;" class="anchor-navigation-ex-anchor" href="#235-&#x6839;&#x636E;&#x9519;&#x8BEF;&#xFF0C;&#x5224;&#x65AD;&#x662F;&#x5426;&#x4E3A;&#x6743;&#x9650;&#x9519;&#x8BEF;"><i class="fa fa-link" aria-hidden="true"></i></a>2.3.5 &#x6839;&#x636E;&#x9519;&#x8BEF;&#xFF0C;&#x5224;&#x65AD;&#x662F;&#x5426;&#x4E3A;&#x6743;&#x9650;&#x9519;&#x8BEF;</h4>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    file, _ :<span class="token operator">=</span> os.Open<span class="token punctuation">(</span><span class="token string">&quot;./cache.js&quot;</span><span class="token punctuation">)</span>
+    _, err :<span class="token operator">=</span> file.WriteString<span class="token punctuation">(</span><span class="token string">&quot;// new info&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>os.IsPermission<span class="token punctuation">(</span>err<span class="token punctuation">))</span>
+    <span class="token punctuation">}</span>
+    defer file.Close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os8.go</span>
+<span class="token boolean">false</span>
+</code></pre>
+<h3 id="24-&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x64CD;&#x4F5C;"><a name="24-&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x64CD;&#x4F5C;" class="anchor-navigation-ex-anchor" href="#24-&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x64CD;&#x4F5C;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4 &#x6587;&#x4EF6;/&#x76EE;&#x5F55;&#x64CD;&#x4F5C;</h3>
+<p>&#x5C5E;&#x6027;&#x64CD;&#x4F5C;</p>
+<h4 id="241-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;"><a name="241-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;" class="anchor-navigation-ex-anchor" href="#241-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.1 &#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;</h4>
+<pre class="language-"><code class="lang-bash">func Getwd<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>dir string, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    path, _ :<span class="token operator">=</span> os.Getwd<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># pwd</span>
+/root/go/os
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run  os9.go</span>
+/root/go/os
+</code></pre>
+<h4 id="242-&#x4FEE;&#x6539;&#x5F53;&#x524D;&#xFF0C;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;"><a name="242-&#x4FEE;&#x6539;&#x5F53;&#x524D;&#xFF0C;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;" class="anchor-navigation-ex-anchor" href="#242-&#x4FEE;&#x6539;&#x5F53;&#x524D;&#xFF0C;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.2 &#x4FEE;&#x6539;&#x5F53;&#x524D;&#xFF0C;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;</h4>
+<pre class="language-"><code class="lang-bash">func Chdir<span class="token punctuation">(</span>dir string<span class="token punctuation">)</span> error
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    path1, _ :<span class="token operator">=</span> os.Getwd<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>path1<span class="token punctuation">)</span>
+    os.Chdir<span class="token punctuation">(</span><span class="token string">&quot;./../&quot;</span><span class="token punctuation">)</span>
+    path, _ :<span class="token operator">=</span> os.Getwd<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os10.go</span>
+/root/go/os
+/root/go
+</code></pre>
+<h4 id="243-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;-filemode"><a name="243-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;-filemode" class="anchor-navigation-ex-anchor" href="#243-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;-filemode"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.3 &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684; FileMode</h4>
+<pre class="language-"><code class="lang-bash">func Chmod<span class="token punctuation">(</span>name string, mode FileMode<span class="token punctuation">)</span> error
+</code></pre>
+<h4 id="244-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;-&#x8BBF;&#x95EE;&#x65F6;&#x95F4;&#x548C;&#x4FEE;&#x6539;&#x65F6;&#x95F4;"><a name="244-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;-&#x8BBF;&#x95EE;&#x65F6;&#x95F4;&#x548C;&#x4FEE;&#x6539;&#x65F6;&#x95F4;" class="anchor-navigation-ex-anchor" href="#244-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;-&#x8BBF;&#x95EE;&#x65F6;&#x95F4;&#x548C;&#x4FEE;&#x6539;&#x65F6;&#x95F4;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.4 &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684; &#x8BBF;&#x95EE;&#x65F6;&#x95F4;&#x548C;&#x4FEE;&#x6539;&#x65F6;&#x95F4;</h4>
+<pre class="language-"><code class="lang-bash">func Chtimes<span class="token punctuation">(</span>name string, atime time.Time, mtime time.Time<span class="token punctuation">)</span> error
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+    <span class="token string">&quot;time&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt.Println<span class="token punctuation">(</span>os.Getwd<span class="token punctuation">(</span><span class="token punctuation">))</span>
+
+    path :<span class="token operator">=</span> <span class="token string">&quot;test.txt&quot;</span>
+    os.Chtimes<span class="token punctuation">(</span>path, time.Now<span class="token punctuation">(</span><span class="token punctuation">)</span>, time.Now<span class="token punctuation">(</span><span class="token punctuation">))</span>
+
+    fi, _ :<span class="token operator">=</span> os.Stat<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>fi.ModTime<span class="token punctuation">(</span><span class="token punctuation">))</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os11.go</span>
+/root/go/os <span class="token operator">&lt;</span>nil<span class="token operator">&gt;</span>
+<span class="token number">2020</span>-04-02 <span class="token number">12</span>:12:37.525936298 +0800 CST
+</code></pre>
+<p> &#x4E0B;&#x9762;&#x662F;&#xFF1A;&#x589E;&#x5220;&#x6539;&#x67E5;</p>
+<h4 id="245-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x521B;&#x5EFA;&#x76EE;&#x5F55;"><a name="245-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x521B;&#x5EFA;&#x76EE;&#x5F55;" class="anchor-navigation-ex-anchor" href="#245-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x521B;&#x5EFA;&#x76EE;&#x5F55;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.5 &#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x521B;&#x5EFA;&#x76EE;&#x5F55;</h4>
+<pre class="language-"><code class="lang-bash">func Mkdir<span class="token punctuation">(</span>name string, perm FileMode<span class="token punctuation">)</span> error
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> err :<span class="token operator">=</span> os.Mkdir<span class="token punctuation">(</span><span class="token string">&quot;test&quot;</span>, os.ModeDir<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;success&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os12.go </span>
+success
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os12.go </span>
+<span class="token function">mkdir</span> test: <span class="token function">file</span> exists
+</code></pre>
+<h4 id="246-&#x9012;&#x5F52;&#x521B;&#x5EFA;&#x76EE;&#x5F55;"><a name="246-&#x9012;&#x5F52;&#x521B;&#x5EFA;&#x76EE;&#x5F55;" class="anchor-navigation-ex-anchor" href="#246-&#x9012;&#x5F52;&#x521B;&#x5EFA;&#x76EE;&#x5F55;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.6 &#x9012;&#x5F52;&#x521B;&#x5EFA;&#x76EE;&#x5F55;</h4>
+<pre class="language-"><code class="lang-bash">func MkdirAll<span class="token punctuation">(</span>path string, perm FileMode<span class="token punctuation">)</span> error
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> err :<span class="token operator">=</span> os.MkdirAll<span class="token punctuation">(</span><span class="token string">&quot;test01/test&quot;</span>, os.ModeDir<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;success&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os13.go</span>
+success
+</code></pre>
+<h4 id="247-&#x79FB;&#x9664;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x5355;&#x4E00;&#x6587;&#x4EF6;"><a name="247-&#x79FB;&#x9664;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x5355;&#x4E00;&#x6587;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#247-&#x79FB;&#x9664;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x5355;&#x4E00;&#x6587;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.7 &#x79FB;&#x9664;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;(&#x5355;&#x4E00;&#x6587;&#x4EF6;)</h4>
+<pre class="language-"><code class="lang-bash">func Remove<span class="token punctuation">(</span>name string<span class="token punctuation">)</span> error
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> err :<span class="token operator">=</span> os.Remove<span class="token punctuation">(</span><span class="token string">&quot;test&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;success&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os14.go</span>
+success
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># ls test</span>
+ls: &#x65E0;&#x6CD5;&#x8BBF;&#x95EE;test: &#x6CA1;&#x6709;&#x90A3;&#x4E2A;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os14.go</span>
+remove test: no such <span class="token function">file</span> or directory
+</code></pre>
+<h4 id="248-&#x9012;&#x5F52;&#x5220;&#x9664;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;"><a name="248-&#x9012;&#x5F52;&#x5220;&#x9664;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;" class="anchor-navigation-ex-anchor" href="#248-&#x9012;&#x5F52;&#x5220;&#x9664;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.8 &#x9012;&#x5F52;&#x5220;&#x9664;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;</h4>
+<pre class="language-"><code class="lang-bash">func RemoveAll<span class="token punctuation">(</span>path string<span class="token punctuation">)</span> error
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> err :<span class="token operator">=</span> os.RemoveAll<span class="token punctuation">(</span><span class="token string">&quot;test01&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;success&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os15.go</span>
+success
+</code></pre>
+<h4 id="248-&#x6587;&#x4EF6;&#x91CD;&#x540D;&#x6216;&#x79FB;&#x52A8;"><a name="248-&#x6587;&#x4EF6;&#x91CD;&#x540D;&#x6216;&#x79FB;&#x52A8;" class="anchor-navigation-ex-anchor" href="#248-&#x6587;&#x4EF6;&#x91CD;&#x540D;&#x6216;&#x79FB;&#x52A8;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.8 &#x6587;&#x4EF6;&#x91CD;&#x540D;&#x6216;&#x79FB;&#x52A8;</h4>
+<pre class="language-"><code class="lang-bash">func Rename<span class="token punctuation">(</span>oldpath, newpath string<span class="token punctuation">)</span> error
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    // &#x91CD;&#x547D;&#x540D;
+    err :<span class="token operator">=</span> os.Rename<span class="token punctuation">(</span><span class="token string">&quot;test.txt&quot;</span>, <span class="token string">&quot;test01.js&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    err <span class="token operator">=</span> os.Mkdir<span class="token punctuation">(</span><span class="token string">&quot;test&quot;</span>, os.ModeDir<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    // &#x79FB;&#x52A8;
+    err <span class="token operator">=</span> os.Rename<span class="token punctuation">(</span><span class="token string">&quot;test01.js&quot;</span>, <span class="token string">&quot;test/text01.txt&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os16.go</span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os16.go</span>
+<span class="token function">rename</span> test.txt test01.js: no such <span class="token function">file</span> or directory
+<span class="token function">mkdir</span> test: <span class="token function">file</span> exists
+<span class="token function">rename</span> test01.js test/text01.txt: no such <span class="token function">file</span> or directory
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># ls test/</span>
+text01.txt
+</code></pre>
+<h4 id="249-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5927;&#x5C0F;"><a name="249-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5927;&#x5C0F;" class="anchor-navigation-ex-anchor" href="#249-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5927;&#x5C0F;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.9 &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5927;&#x5C0F;</h4>
+<pre class="language-"><code class="lang-bash">func Truncate<span class="token punctuation">(</span>name string, size int64<span class="token punctuation">)</span> error
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    path :<span class="token operator">=</span> <span class="token string">&quot;test/text01.txt&quot;</span>
+    fi, err :<span class="token operator">=</span> os.Stat<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+        os.Exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    size :<span class="token operator">=</span> fi.Size<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>size<span class="token punctuation">)</span>
+
+    // &#x622A;&#x53D6;&#x957F;&#x5EA6;
+    size <span class="token operator">=</span> int64<span class="token punctuation">(</span>float64<span class="token punctuation">(</span>size<span class="token punctuation">)</span> * <span class="token number">0.5</span><span class="token punctuation">)</span>
+
+    os.Truncate<span class="token punctuation">(</span>path, size<span class="token punctuation">)</span>
+
+    fi, _ <span class="token operator">=</span> os.Stat<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+
+    fmt.Println<span class="token punctuation">(</span>fi.Size<span class="token punctuation">(</span><span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># cat test/text01.txt</span>
+abc
+<span class="token number">123</span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os17.go</span>
+<span class="token operator">&amp;</span><span class="token punctuation">{</span>text01.txt <span class="token number">8</span> <span class="token number">420</span> <span class="token punctuation">{</span><span class="token number">99442120</span> <span class="token number">63721429367</span> 0x570b80<span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token number">64768</span> <span class="token number">3725573</span> <span class="token number">1</span> <span class="token number">33188</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">8</span> <span class="token number">4096</span> <span class="token number">8</span> <span class="token punctuation">{</span><span class="token number">1585832567</span> <span class="token number">99442120</span><span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token number">1585832567</span> <span class="token number">99442120</span><span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token number">1585832567</span> <span class="token number">101442065</span><span class="token punctuation">}</span> <span class="token punctuation">[</span><span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token number">8</span>
+<span class="token number">4</span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># cat test/text01.txt   #123&#x88AB;&#x5220;&#x9664;</span>
+abc
+</code></pre>
+<h4 id="2410-&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;&#xFF0C;&#x662F;&#x5426;&#x6307;&#x5411;&#x540C;&#x4E00;&#x6587;&#x4EF6;"><a name="2410-&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;&#xFF0C;&#x662F;&#x5426;&#x6307;&#x5411;&#x540C;&#x4E00;&#x6587;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#2410-&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;&#xFF0C;&#x662F;&#x5426;&#x6307;&#x5411;&#x540C;&#x4E00;&#x6587;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>2.4.10 &#x6BD4;&#x8F83;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;&#xFF0C;&#x662F;&#x5426;&#x6307;&#x5411;&#x540C;&#x4E00;&#x6587;&#x4EF6;</h4>
+<pre class="language-"><code class="lang-bash">func SameFile<span class="token punctuation">(</span>fi1, fi2 FileInfo<span class="token punctuation">)</span> bool
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    path :<span class="token operator">=</span> <span class="token string">&quot;test/text01.txt&quot;</span>
+
+    fi_1, _ :<span class="token operator">=</span> os.Stat<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+    fi_2, _ :<span class="token operator">=</span> os.Stat<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+
+    fmt.Println<span class="token punctuation">(</span>os.SameFile<span class="token punctuation">(</span>fi_1, fi_2<span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># vim os18.go^C</span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os18.go </span>
+<span class="token boolean">true</span>
+</code></pre>
+<h3 id="25-&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x5BF9;&#x8C61;"><a name="25-&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x5BF9;&#x8C61;" class="anchor-navigation-ex-anchor" href="#25-&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x5BF9;&#x8C61;"><i class="fa fa-link" aria-hidden="true"></i></a>2.5 &#x6587;&#x4EF6;/&#x76EE;&#x5F55;&#x5BF9;&#x8C61;</h3>
+<h4 id="251-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x521B;&#x5EFA;&#x6587;&#x4EF6;-&#x5982;&#x679C;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#xFF0C;&#x6E05;&#x7A7A;&#x539F;&#x6587;&#x4EF6;"><a name="251-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x521B;&#x5EFA;&#x6587;&#x4EF6;-&#x5982;&#x679C;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#xFF0C;&#x6E05;&#x7A7A;&#x539F;&#x6587;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#251-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x521B;&#x5EFA;&#x6587;&#x4EF6;-&#x5982;&#x679C;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#xFF0C;&#x6E05;&#x7A7A;&#x539F;&#x6587;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>2.5.1 &#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x521B;&#x5EFA;&#x6587;&#x4EF6;, &#x5982;&#x679C;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#xFF0C;&#x6E05;&#x7A7A;&#x539F;&#x6587;&#x4EF6;</h4>
+<pre class="language-"><code class="lang-bash">func Create<span class="token punctuation">(</span>name string<span class="token punctuation">)</span> <span class="token punctuation">(</span>file *File, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    file, _ :<span class="token operator">=</span> os.Create<span class="token punctuation">(</span><span class="token string">&quot;./new_file.js&quot;</span><span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>file.Name<span class="token punctuation">(</span><span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os19.go</span>
+./new_file.js
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># ls new_file.js </span>
+new_file.js
+</code></pre>
+<h4 id="252-&#x6253;&#x5F00;&#x6587;&#x4EF6;&#xFF0C;&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;-&#x4EE5;&#x8BFB;&#x53D6;&#x6A21;&#x5F0F;&#x6253;&#x5F00;"><a name="252-&#x6253;&#x5F00;&#x6587;&#x4EF6;&#xFF0C;&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;-&#x4EE5;&#x8BFB;&#x53D6;&#x6A21;&#x5F0F;&#x6253;&#x5F00;" class="anchor-navigation-ex-anchor" href="#252-&#x6253;&#x5F00;&#x6587;&#x4EF6;&#xFF0C;&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;-&#x4EE5;&#x8BFB;&#x53D6;&#x6A21;&#x5F0F;&#x6253;&#x5F00;"><i class="fa fa-link" aria-hidden="true"></i></a>2.5.2 &#x6253;&#x5F00;&#x6587;&#x4EF6;&#xFF0C;&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;, &#x4EE5;&#x8BFB;&#x53D6;&#x6A21;&#x5F0F;&#x6253;&#x5F00;</h4>
+<p>Open&#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x7528;&#x4E8E;&#x8BFB;&#x53D6;&#x3002;&#x5982;&#x679C;&#x64CD;&#x4F5C;&#x6210;&#x529F;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;&#x53EF;&#x7528;&#x4E8E;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#xFF1B;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x5177;&#x6709;O_RDONLY&#x6A21;&#x5F0F;&#x3002;&#x5982;&#x679C;&#x51FA;&#x9519;&#xFF0C;&#x9519;&#x8BEF;&#x5E95;&#x5C42;&#x7C7B;&#x578B;&#x662F;*PathError&#x3002; 
+&#x6240;&#x4EE5;&#xFF0C;Open()&#x53EA;&#x80FD;&#x7528;&#x4E8E;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">func Open<span class="token punctuation">(</span>name string<span class="token punctuation">)</span> <span class="token punctuation">(</span>file *File, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    file, _ :<span class="token operator">=</span> os.Open<span class="token punctuation">(</span><span class="token string">&quot;./new_file.js&quot;</span><span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>file.Name<span class="token punctuation">(</span><span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os20.go</span>
+./new_file.js
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># rm -rf new_file.js </span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os20.go</span>
+panic: runtime error: invalid memory address or nil pointer dereference
+<span class="token punctuation">[</span>signal SIGSEGV: segmentation violation <span class="token assign-left variable">code</span><span class="token operator">=</span>0x1 <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x0 <span class="token assign-left variable">pc</span><span class="token operator">=</span>0x48d6f0<span class="token punctuation">]</span>
+
+goroutine <span class="token number">1</span> <span class="token punctuation">[</span>running<span class="token punctuation">]</span>:
+os.<span class="token punctuation">(</span>*File<span class="token punctuation">)</span>.Name<span class="token punctuation">(</span><span class="token punctuation">..</span>.<span class="token punctuation">)</span>
+    /usr/local/go/src/os/file.go:54
+main.main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    /root/go/os/os20.go:11 +0x50
+<span class="token builtin class-name">exit</span> status <span class="token number">2</span>
+</code></pre>
+<h4 id="253-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x4EE5;&#x6307;&#x5B9A;&#x6A21;&#x5F0F;&#xFF0C;&#x6253;&#x5F00;&#x6587;&#x4EF6;"><a name="253-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x4EE5;&#x6307;&#x5B9A;&#x6A21;&#x5F0F;&#xFF0C;&#x6253;&#x5F00;&#x6587;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#253-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x4EE5;&#x6307;&#x5B9A;&#x6A21;&#x5F0F;&#xFF0C;&#x6253;&#x5F00;&#x6587;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>2.5.3 &#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x4EE5;&#x6307;&#x5B9A;&#x6A21;&#x5F0F;&#xFF0C;&#x6253;&#x5F00;&#x6587;&#x4EF6;</h4>
+<pre class="language-"><code class="lang-bash">func OpenFile<span class="token punctuation">(</span>name string, flag int, perm FileMode<span class="token punctuation">)</span> <span class="token punctuation">(</span>file *File, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    file, _ :<span class="token operator">=</span> os.OpenFile<span class="token punctuation">(</span><span class="token string">&quot;./new_file.js&quot;</span>, os.O_RDONLY, os.ModeAppend<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>file.Name<span class="token punctuation">(</span><span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># cat new_file.js </span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os21.go</span>
+./new_file.js
+</code></pre>
+<h3 id="26-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#x64CD;&#x7EB5;"><a name="26-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#x64CD;&#x7EB5;" class="anchor-navigation-ex-anchor" href="#26-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#x64CD;&#x7EB5;"><i class="fa fa-link" aria-hidden="true"></i></a>2.6 &#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#x64CD;&#x7EB5;</h3>
+<h4 id="261-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;"><a name="261-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;" class="anchor-navigation-ex-anchor" href="#261-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;"><i class="fa fa-link" aria-hidden="true"></i></a>2.6.1 &#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</h4>
+<p>Name</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> Name<span class="token punctuation">(</span><span class="token punctuation">)</span> string
+</code></pre>
+<h4 id="262-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;"><a name="262-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;" class="anchor-navigation-ex-anchor" href="#262-&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;"><i class="fa fa-link" aria-hidden="true"></i></a>2.6.2 &#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x5BF9;&#x8C61;</h4>
+<p>Stat</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> Stat<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>fi FileInfo, err error<span class="token punctuation">)</span>
+</code></pre>
+<h4 id="263-&#x5C06;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x8DEF;&#x5F84;&#x4FEE;&#x6539;&#x4E3A;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x76EE;&#x5F55;&#xFF0C;-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x4E3A;&#x76EE;&#x5F55;-&#x8BE5;&#x63A5;&#x53E3;&#x4E0D;&#x652F;&#x6301;window"><a name="263-&#x5C06;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x8DEF;&#x5F84;&#x4FEE;&#x6539;&#x4E3A;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x76EE;&#x5F55;&#xFF0C;-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x4E3A;&#x76EE;&#x5F55;-&#x8BE5;&#x63A5;&#x53E3;&#x4E0D;&#x652F;&#x6301;window" class="anchor-navigation-ex-anchor" href="#263-&#x5C06;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x8DEF;&#x5F84;&#x4FEE;&#x6539;&#x4E3A;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x76EE;&#x5F55;&#xFF0C;-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x4E3A;&#x76EE;&#x5F55;-&#x8BE5;&#x63A5;&#x53E3;&#x4E0D;&#x652F;&#x6301;window"><i class="fa fa-link" aria-hidden="true"></i></a>2.6.3 &#x5C06;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x8DEF;&#x5F84;&#x4FEE;&#x6539;&#x4E3A;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x76EE;&#x5F55;&#xFF0C; &#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x4E3A;&#x76EE;&#x5F55;, &#x8BE5;&#x63A5;&#x53E3;&#x4E0D;&#x652F;&#x6301;window</h4>
+<p>Chdir</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> Chdir<span class="token punctuation">(</span><span class="token punctuation">)</span> error
+</code></pre>
+<h4 id="264-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x6A21;&#x5F0F;"><a name="264-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#264-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>2.6.4 &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x6A21;&#x5F0F;</h4>
+<p>Chmod</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> Chmod<span class="token punctuation">(</span>mode FileMode<span class="token punctuation">)</span> error
+</code></pre>
+<p>Truncate</p>
+<h4 id="265-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;size"><a name="265-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;size" class="anchor-navigation-ex-anchor" href="#265-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;size"><i class="fa fa-link" aria-hidden="true"></i></a>2.6.5 &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5BF9;&#x8C61;size</h4>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> Truncate<span class="token punctuation">(</span>size int64<span class="token punctuation">)</span> error
+</code></pre>
+<h3 id="27-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;"><a name="27-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;" class="anchor-navigation-ex-anchor" href="#27-&#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;"><i class="fa fa-link" aria-hidden="true"></i></a>2.7 &#x6587;&#x4EF6;&#x5BF9;&#x8C61;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;</h3>
+<h4 id="271-&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x5185;&#x5BB9;-&#x8BFB;&#x5165;&#x957F;&#x5EA6;&#x53D6;&#x51B3;-&#x5BB9;&#x5668;&#x5207;&#x7247;&#x957F;&#x5EA6;"><a name="271-&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x5185;&#x5BB9;-&#x8BFB;&#x5165;&#x957F;&#x5EA6;&#x53D6;&#x51B3;-&#x5BB9;&#x5668;&#x5207;&#x7247;&#x957F;&#x5EA6;" class="anchor-navigation-ex-anchor" href="#271-&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x5185;&#x5BB9;-&#x8BFB;&#x5165;&#x957F;&#x5EA6;&#x53D6;&#x51B3;-&#x5BB9;&#x5668;&#x5207;&#x7247;&#x957F;&#x5EA6;"><i class="fa fa-link" aria-hidden="true"></i></a>2.7.1 &#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x5185;&#x5BB9;, &#x8BFB;&#x5165;&#x957F;&#x5EA6;&#x53D6;&#x51B3; &#x5BB9;&#x5668;&#x5207;&#x7247;&#x957F;&#x5EA6;</h4>
+<p>Read</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> Read<span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span>byte<span class="token punctuation">)</span> <span class="token punctuation">(</span>n int, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    bt :<span class="token operator">=</span> make<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>byte, <span class="token number">10</span><span class="token punctuation">)</span>
+    file, _ :<span class="token operator">=</span> os.Open<span class="token punctuation">(</span><span class="token string">&quot;./new_file.js&quot;</span><span class="token punctuation">)</span>
+
+    file.Read<span class="token punctuation">(</span>bt<span class="token punctuation">)</span>
+    defer file.Close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    fmt.Println<span class="token punctuation">(</span>string<span class="token punctuation">(</span>bt<span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># cat new_file.js </span>
+<span class="token number">12345679890</span>
+nihao,my name is ghostwritten
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os22.go</span>
+<span class="token number">1234567989</span>
+</code></pre>
+<h4 id="272-&#x4ECE;&#x67D0;&#x4F4D;&#x7F6E;&#xFF0C;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x5185;&#x5BB9;"><a name="272-&#x4ECE;&#x67D0;&#x4F4D;&#x7F6E;&#xFF0C;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x5185;&#x5BB9;" class="anchor-navigation-ex-anchor" href="#272-&#x4ECE;&#x67D0;&#x4F4D;&#x7F6E;&#xFF0C;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x5185;&#x5BB9;"><i class="fa fa-link" aria-hidden="true"></i></a>2.7.2 &#x4ECE;&#x67D0;&#x4F4D;&#x7F6E;&#xFF0C;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x5185;&#x5BB9;</h4>
+<p>ReadAt</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> ReadAt<span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span>byte, off int64<span class="token punctuation">)</span> <span class="token punctuation">(</span>n int, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    bt :<span class="token operator">=</span> make<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>byte, <span class="token number">100</span><span class="token punctuation">)</span>
+    file, _ :<span class="token operator">=</span> os.Open<span class="token punctuation">(</span><span class="token string">&quot;test/text01.txt&quot;</span><span class="token punctuation">)</span>
+
+    file.ReadAt<span class="token punctuation">(</span>bt, <span class="token number">2</span><span class="token punctuation">)</span>
+
+    fmt.Println<span class="token punctuation">(</span>string<span class="token punctuation">(</span>bt<span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># cat test/text01.txt </span>
+abcdefgh
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment">#  go run os23.go</span>
+cdefgh
+</code></pre>
+<h4 id="273-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x5199;&#x5165;&#x5185;&#x5BB9;"><a name="273-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x5199;&#x5165;&#x5185;&#x5BB9;" class="anchor-navigation-ex-anchor" href="#273-&#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x5199;&#x5165;&#x5185;&#x5BB9;"><i class="fa fa-link" aria-hidden="true"></i></a>2.7.3 &#xFF08;&#x91CD;&#x70B9;&#xFF09;&#x5199;&#x5165;&#x5185;&#x5BB9;</h4>
+<p>Write</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> Write<span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span>byte<span class="token punctuation">)</span> <span class="token punctuation">(</span>n int, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    file, err :<span class="token operator">=</span> os.OpenFile<span class="token punctuation">(</span><span class="token string">&quot;test/text01.txt&quot;</span>, os.O_RDWR, os.ModeAppend<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;err: &quot;</span>, err<span class="token punctuation">)</span>
+        os.Exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    defer file.Close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> n, err :<span class="token operator">=</span> file.Write<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>byte<span class="token punctuation">(</span><span class="token string">&quot;// new info&quot;</span><span class="token punctuation">))</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os24.go</span>
+<span class="token number">11</span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># cat test/text01.txt </span>
+// new info
+</code></pre>
+<h4 id="274-&#x5199;&#x5165;&#x5B57;&#x7B26;"><a name="274-&#x5199;&#x5165;&#x5B57;&#x7B26;" class="anchor-navigation-ex-anchor" href="#274-&#x5199;&#x5165;&#x5B57;&#x7B26;"><i class="fa fa-link" aria-hidden="true"></i></a>2.7.4 &#x5199;&#x5165;&#x5B57;&#x7B26;</h4>
+<p>WriteString</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> WriteString<span class="token punctuation">(</span>s string<span class="token punctuation">)</span> <span class="token punctuation">(</span>ret int, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    file, err :<span class="token operator">=</span> os.OpenFile<span class="token punctuation">(</span><span class="token string">&quot;test/text01.txt&quot;</span>, os.O_RDWR, os.ModeAppend<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;err: &quot;</span>, err<span class="token punctuation">)</span>
+        os.Exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    defer file.Close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> n, err :<span class="token operator">=</span> file.Write<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>byte<span class="token punctuation">(</span><span class="token string">&quot;// new info&quot;</span><span class="token punctuation">))</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os25.go</span>
+<span class="token number">12</span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># cat test/text01.txt </span>
+// <span class="token builtin class-name">test</span> info
+</code></pre>
+<h4 id="275-&#x4ECE;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;&#xFF0C;&#x5199;&#x5165;"><a name="275-&#x4ECE;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;&#xFF0C;&#x5199;&#x5165;" class="anchor-navigation-ex-anchor" href="#275-&#x4ECE;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;&#xFF0C;&#x5199;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a>2.7.5 &#x4ECE;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;&#xFF0C;&#x5199;&#x5165;</h4>
+<p>WriteAt</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> WriteAt<span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span>byte, off int64<span class="token punctuation">)</span> <span class="token punctuation">(</span>n int, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    file, err :<span class="token operator">=</span> os.OpenFile<span class="token punctuation">(</span><span class="token string">&quot;test/text01.txt&quot;</span>, os.O_RDWR, os.ModeAppend<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;err: &quot;</span>, err<span class="token punctuation">)</span>
+        os.Exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    defer file.Close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> n, err :<span class="token operator">=</span> file.WriteAt<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>byte<span class="token punctuation">(</span><span class="token string">&quot; append &quot;</span><span class="token punctuation">)</span>, <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os26.go</span>
+<span class="token number">8</span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># cat test/text01.txt </span>
+// te append
+</code></pre>
+<h4 id="276-&#x8BBE;&#x7F6E;&#x4E0B;&#x6B21;&#x8BFB;&#x5199;&#x4F4D;&#x7F6E;"><a name="276-&#x8BBE;&#x7F6E;&#x4E0B;&#x6B21;&#x8BFB;&#x5199;&#x4F4D;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#276-&#x8BBE;&#x7F6E;&#x4E0B;&#x6B21;&#x8BFB;&#x5199;&#x4F4D;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>2.7.6 &#x8BBE;&#x7F6E;&#x4E0B;&#x6B21;&#x8BFB;&#x5199;&#x4F4D;&#x7F6E;</h4>
+<p>Seek</p>
+<pre class="language-"><code class="lang-bash">func <span class="token punctuation">(</span>f *File<span class="token punctuation">)</span> Seek<span class="token punctuation">(</span>offset int64, whence int<span class="token punctuation">)</span> <span class="token punctuation">(</span>ret int64, err error<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    f, err :<span class="token operator">=</span> os.OpenFile<span class="token punctuation">(</span><span class="token string">&quot;test/text01.txt&quot;</span>, os.O_RDWR, os.ModeAppend<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;err: &quot;</span>, err<span class="token punctuation">)</span>
+        os.Exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    defer f.Close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    f.Seek<span class="token punctuation">(</span><span class="token number">2</span>, <span class="token number">0</span><span class="token punctuation">)</span>
+    buffer :<span class="token operator">=</span> make<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>byte, <span class="token number">5</span><span class="token punctuation">)</span>
+    // Read &#x540E;&#x6587;&#x4EF6;&#x6307;&#x9488;&#x4E5F;&#x4F1A;&#x504F;&#x79FB;
+
+    n, err :<span class="token operator">=</span> f.Read<span class="token punctuation">(</span>buffer<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>nil<span class="token punctuation">)</span>
+        <span class="token builtin class-name">return</span>
+    <span class="token punctuation">}</span>
+    fmt.Printf<span class="token punctuation">(</span><span class="token string">&quot;n is %d, buffer content is : %s<span class="token entity" title="\n">\n</span>&quot;</span>, n, buffer<span class="token punctuation">)</span>
+    // &#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x6307;&#x9488;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;
+    cur_offset, _ :<span class="token operator">=</span> f.Seek<span class="token punctuation">(</span><span class="token number">0</span>, os.SEEK_CUR<span class="token punctuation">)</span>
+    fmt.Printf<span class="token punctuation">(</span><span class="token string">&quot;current offset is %d<span class="token entity" title="\n">\n</span>&quot;</span>, cur_offset<span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># go run os27.go</span>
+n is <span class="token number">5</span>, buffer content is <span class="token builtin class-name">:</span> <span class="token number">34567</span>
+current offset is <span class="token number">7</span>
+<span class="token punctuation">[</span>root@localhost os<span class="token punctuation">]</span><span class="token comment"># cat test/text01.txt </span>
+1234567890abcdefg
+</code></pre>
+<p>&#x53C2;&#x8003;&#xFF1A;</p>
+<ul>
+<li><p><a href="https://www.cnblogs.com/saryli/p/11691142.html" target="_blank">https://www.cnblogs.com/saryli/p/11691142.html</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/wdliu/p/9239140.html" target="_blank">https://www.cnblogs.com/wdliu/p/9239140.html</a></p>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; ghostwritten &#x6D59;ICP&#x5907;2020032454&#x53F7; 2022 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2022-12-22 14:26:39
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="go-fmt.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: go 包 fmt 打印输出">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"go 包 os 文件操作","level":"1.5.4","depth":2,"previous":{"title":"go 包 fmt 打印输出","level":"1.5.3","depth":2,"path":"Go-Package/go-fmt.md","ref":"Go-Package/go-fmt.md","articles":[]},"dir":"ltr"},"config":{"plugins":["3-ba","accordion","advanced-emoji","anchor-navigation-ex","baidu-tongji","code","change_girls","custom-favicon","donate","expandable-chapters-small","edit-link","flexible-alerts","github-buttons","github","insert-logo","musicxml","prism","prism-themes","pageview-count","-highlight","-search","-lunr","rss","search-plus","splitter","-sharing","sharing-plus","sidebar-style","theme-default","tags","tbfed-pagefooter"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"sidebar-style":{"author":"zongxun","title":"《Go Docs》"},"tbfed-pagefooter":{"copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-holi-theme.css"],"lang":{"shell":"bash"}},"github":{"url":"https://github.com/Ghostwritten"},"baidu-tongji":{"url":"https://hm.baidu.com/hm.js","token":"55e7dfe47f4dc1c018d4042fdfa62565"},"splitter":{},"change_girls":{"time":10,"urls":["https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg","https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg","https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg","https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg","https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg","https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg","https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg","https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg","https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg","https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg","https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg","https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg","https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"]},"accordion":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"donate":{"alipay":"https://github.com/Ghostwritten/go-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://github.com/Ghostwritten/go-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["go"],"title":"Go Docs","description":"This is the best book ever.","author":"Zong Xun","feed_url":"http://smoothies.com.cn/rss","site_url":"https://smoothies.com.cn/go-docs/","managingEditor":"writer@smoothies.com.cn (Zong Xun)","webMaster":"webmaster@smoothies.com.cn (Zong Xun)"},"musicxml":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"assets/imgs/1_girl.ico","pageview-count":{},"prism-themes":{},"github-buttons":{"buttons":[{"user":"Ghostwritten","repo":"go-docs","type":"star","count":true,"size":"small"}]},"custom-favicon":{},"tags":{"placement":"top"},"3-ba":{"configuration":"auto","token":"9ffc0dce8d7079aceab6b0bc18eb626b"},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Danger"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"advanced-emoji":{"embedEmojis":false},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"douban":false,"facebook":true,"weibo":false,"twitter":true,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"Edit","base":"https://github.com/Ghostwritten/go-docs/edit/master/"},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"insert-logo":{"style":"background: none; max-height: 120px; min-height: 120px","url":"https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg"},"search-plus":{}},"theme":"default","author":"宗勋 - zongxun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Go Docs","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Blog":"https://smoothies.com.cn","Kubernetes":"https://smoothies.com.cn/kubernetes-docs/","Go":"https://smoothies.com.cn/go-docs/","Prometheus":"https://smoothies.com.cn/prometheus-docs/","Command":"https://smoothies.com.cn/linux-command-docs/","Shell":"https://smoothies.com.cn/shell-docs/","Linux":"https://smoothies.com.cn/linux-docs/","Gitbook":"https://smoothies.com.cn/gitbook-docs/","Python":"https://smoothies.com.cn/python-docs/","Exam":"https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"}},"gitbook":"*","description":"这是一本关于 [Go](https://go.dev/) 的书籍"},"file":{"path":"Go-Package/go-os.md","mtime":"2022-12-22T06:26:39.086Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-22T10:32:54.750Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-baidu-tongji/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-change_girls/girls.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/osmd.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/musicxml.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/promise.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sidebar-style/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

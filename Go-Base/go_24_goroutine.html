@@ -1,0 +1,1291 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>go 了解 goroutine 运用 · Go Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="宗勋 - zongxun">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-change_girls/girls.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-holi-theme.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sidebar-style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="go_25_channel.html" />
+    
+    
+    <link rel="prev" href="go_23_defer.html" />
+    
+
+    <link href="http://smoothies.com.cn/rss" title="Go Docs" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"Ghostwritten","repo":"go-docs","type":"star","count":true,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn" target="_blank" class="custom-link">Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/kubernetes-docs/" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/go-docs/" target="_blank" class="custom-link">Go</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/prometheus-docs/" target="_blank" class="custom-link">Prometheus</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-command-docs/" target="_blank" class="custom-link">Command</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/shell-docs/" target="_blank" class="custom-link">Shell</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-docs/" target="_blank" class="custom-link">Linux</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/gitbook-docs/" target="_blank" class="custom-link">Gitbook</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/python-docs/" target="_blank" class="custom-link">Python</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://ghostwritten.gitbook.io/kubernetes-exam-in-action/" target="_blank" class="custom-link">Exam</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    序言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Overview.html">
+            
+                <a href="../Overview.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Go-Practice/">
+            
+                <a href="../Go-Practice/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Go Practice
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Go-Practice/go_get_file_size.html">
+            
+                <a href="../Go-Practice/go_get_file_size.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    go 如何获取文件的大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Go-Practice/go_get_URL.html">
+            
+                <a href="../Go-Practice/go_get_URL.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    go 获取 url 实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Go-Practice/go_get_Duplicate_lines.html">
+            
+                <a href="../Go-Practice/go_get_Duplicate_lines.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    go 查找重复的行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Go-Practice/go_dev_command_echo.html">
+            
+                <a href="../Go-Practice/go_dev_command_echo.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    go 编写 echo 命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Go Base
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="go_1_GOPATH_and_GOROOT.html">
+            
+                <a href="go_1_GOPATH_and_GOROOT.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    go goroot 与 gopath 介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="go_2_import.html">
+            
+                <a href="go_2_import.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    go 通过 import 导入包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="go_3_goproxy_configuration.html">
+            
+                <a href="go_3_goproxy_configuration.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    go 代理加速配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="go_4_Modules.html">
+            
+                <a href="go_4_Modules.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    go modules 管理包工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="go_5_type.html">
+            
+                <a href="go_5_type.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    go 基本类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="go_6_const.html">
+            
+                <a href="go_6_const.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    go const 定义常量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="go_7_iota.html">
+            
+                <a href="go_7_iota.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    go 定义常量之 iota
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="go_8_type.html">
+            
+                <a href="go_8_type.html">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    go type 声明变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="go_9_variable.html">
+            
+                <a href="go_9_variable.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    go 定义变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="go_10_operator.html">
+            
+                <a href="go_10_operator.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    go 运算符总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="go_11_pointer_1.html">
+            
+                <a href="go_11_pointer_1.html">
+            
+                    
+                        <b>1.4.11.</b>
+                    
+                    go 指针概念 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="go_11_pointer_2.html">
+            
+                <a href="go_11_pointer_2.html">
+            
+                    
+                        <b>1.4.12.</b>
+                    
+                    go 指针应用实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="go_12_cycle_control.html">
+            
+                <a href="go_12_cycle_control.html">
+            
+                    
+                        <b>1.4.13.</b>
+                    
+                    go 流程控制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="go_13_array.html">
+            
+                <a href="go_13_array.html">
+            
+                    
+                        <b>1.4.14.</b>
+                    
+                    go array 数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="go_14_slice.html">
+            
+                <a href="go_14_slice.html">
+            
+                    
+                        <b>1.4.15.</b>
+                    
+                    go slice 切片引用类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.16" data-path="go_15_map.html">
+            
+                <a href="go_15_map.html">
+            
+                    
+                        <b>1.4.16.</b>
+                    
+                    go map容器引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.17" data-path="go_16_struc.html">
+            
+                <a href="go_16_struc.html">
+            
+                    
+                        <b>1.4.17.</b>
+                    
+                    go struc 结构体
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.18" data-path="go_17_function.html">
+            
+                <a href="go_17_function.html">
+            
+                    
+                        <b>1.4.18.</b>
+                    
+                    go 了解函数运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.19" data-path="go_18_init_function.html">
+            
+                <a href="go_18_init_function.html">
+            
+                    
+                        <b>1.4.19.</b>
+                    
+                    go init 函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.20" data-path="go_19_built_in_function.html">
+            
+                <a href="go_19_built_in_function.html">
+            
+                    
+                        <b>1.4.20.</b>
+                    
+                    go 内置函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.21" data-path="go_20_method.html">
+            
+                <a href="go_20_method.html">
+            
+                    
+                        <b>1.4.21.</b>
+                    
+                    go 了解方法运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.22" data-path="go_21_interface.html">
+            
+                <a href="go_21_interface.html">
+            
+                    
+                        <b>1.4.22.</b>
+                    
+                    go 了解接口运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.23" data-path="go_22_panic_and_recover.html">
+            
+                <a href="go_22_panic_and_recover.html">
+            
+                    
+                        <b>1.4.23.</b>
+                    
+                    go panic 与 recover 异常处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.24" data-path="go_23_defer.html">
+            
+                <a href="go_23_defer.html">
+            
+                    
+                        <b>1.4.24.</b>
+                    
+                    go defer 延迟调用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.25" data-path="go_24_goroutine.html">
+            
+                <a href="go_24_goroutine.html">
+            
+                    
+                        <b>1.4.25.</b>
+                    
+                    go 了解 goroutine 运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.26" data-path="go_25_channel.html">
+            
+                <a href="go_25_channel.html">
+            
+                    
+                        <b>1.4.26.</b>
+                    
+                    go 了解 channel 管道
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.27" data-path="go_26_container.html">
+            
+                <a href="go_26_container.html">
+            
+                    
+                        <b>1.4.27.</b>
+                    
+                    go container 容器数据类型 heap list  ring
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.28" data-path="go_27_cas.html">
+            
+                <a href="go_27_cas.html">
+            
+                    
+                        <b>1.4.28.</b>
+                    
+                    go cas操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Go-Package/">
+            
+                <a href="../Go-Package/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Go Package
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Go-Package/go-pflag.html">
+            
+                <a href="../Go-Package/go-pflag.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    go 库 pflag 命令行参数解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Go-Package/go-viper.html">
+            
+                <a href="../Go-Package/go-viper.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    go 库 viper 配置解析神器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Go-Package/go-fmt.html">
+            
+                <a href="../Go-Package/go-fmt.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    go 包 fmt 打印输出
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Go-Package/go-os.html">
+            
+                <a href="../Go-Package/go-os.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    go 包 os 文件操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >go 了解 goroutine 运用</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#go-&#x4E86;&#x89E3;-goroutine-&#x8FD0;&#x7528;"><b></b>Go &#x4E86;&#x89E3; goroutine &#x8FD0;&#x7528;</a></li><ul><li><span class="title-icon "></span><a href="#1-goroutine-&#x539F;&#x7406;"><b></b>1. goroutine &#x539F;&#x7406;</a></li><li><span class="title-icon "></span><a href="#2-csp&#x5E76;&#x53D1;&#x6A21;&#x578B;"><b></b>2. CSP&#x5E76;&#x53D1;&#x6A21;&#x578B;</a></li><li><span class="title-icon "></span><a href="#3-goroutine-&#x8C03;&#x5EA6;&#x5668;"><b></b>3. Goroutine &#x8C03;&#x5EA6;&#x5668;</a></li><li><span class="title-icon "></span><a href="#4-&#x65B9;&#x6CD5;"><b></b>4. &#x65B9;&#x6CD5;</a></li><li><span class="title-icon "></span><a href="#5-goroutine&#x5F02;&#x5E38;&#x6355;&#x6349;"><b></b>5. goroutine&#x5F02;&#x5E38;&#x6355;&#x6349;</a></li><li><span class="title-icon "></span><a href="#6-&#x540C;&#x6B65;&#x7684;goroutine"><b></b>6. &#x540C;&#x6B65;&#x7684;goroutine(?)</a></li><li><span class="title-icon "></span><a href="#7-goroutine&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x8BAF;"><b></b>7. goroutine&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x8BAF;(?)</a></li></ul></ul></div><a href="#go-&#x4E86;&#x89E3;-goroutine-&#x8FD0;&#x7528;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="go-&#x4E86;&#x89E3;-goroutine-&#x8FD0;&#x7528;"><a name="go-&#x4E86;&#x89E3;-goroutine-&#x8FD0;&#x7528;" class="anchor-navigation-ex-anchor" href="#go-&#x4E86;&#x89E3;-goroutine-&#x8FD0;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>Go &#x4E86;&#x89E3; goroutine &#x8FD0;&#x7528;</h1>
+<p><img src="https://img-blog.csdnimg.cn/43ea5b2f387d4a7e95261d9c30abe69e.png" alt=""></p>
+<h2 id="1-goroutine-&#x539F;&#x7406;"><a name="1-goroutine-&#x539F;&#x7406;" class="anchor-navigation-ex-anchor" href="#1-goroutine-&#x539F;&#x7406;"><i class="fa fa-link" aria-hidden="true"></i></a>1. goroutine &#x539F;&#x7406;</h2>
+<p>&#x5728; Go &#x8BED;&#x8A00;&#x4E2D;&#xFF0C;&#x901A;&#x8FC7;&#x534F;&#x7A0B;&#x548C;&#x7BA1;&#x9053;&#x5B9E;&#x73B0;&#x4E86; <code>Communicating Sequential Processes, CSP</code> &#x6A21;&#x578B;&#xFF0C;&#x4E24;&#x8005;&#x627F;&#x62C5;&#x4E86;&#x901A;&#x4FE1;&#x548C;&#x540C;&#x6B65;&#x4E2D;&#x7684;&#x91CD;&#x8981;&#x89D2;&#x8272;&#x3002;</p>
+<h2 id="2-csp&#x5E76;&#x53D1;&#x6A21;&#x578B;"><a name="2-csp&#x5E76;&#x53D1;&#x6A21;&#x578B;" class="anchor-navigation-ex-anchor" href="#2-csp&#x5E76;&#x53D1;&#x6A21;&#x578B;"><i class="fa fa-link" aria-hidden="true"></i></a>2. CSP&#x5E76;&#x53D1;&#x6A21;&#x578B;</h2>
+<p><code>CSP</code>&#x6A21;&#x578B;&#x662F;&#x4E0A;&#x4E2A;&#x4E16;&#x7EAA;&#x4E03;&#x5341;&#x5E74;&#x4EE3;&#x63D0;&#x51FA;&#x7684;&#xFF0C;&#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x4E24;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x5E76;&#x53D1;&#x5B9E;&#x4F53;&#x901A;&#x8FC7;&#x5171;&#x4EAB;&#x7684;&#x901A;&#x8BAF; channel(&#x7BA1;&#x9053;)&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#x7684;&#x5E76;&#x53D1;&#x6A21;&#x578B;&#x3002; CSP&#x4E2D;channel&#x662F;&#x7B2C;&#x4E00;&#x7C7B;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x4E0D;&#x5173;&#x6CE8;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;&#x800C;&#x5173;&#x6CE8;&#x4E0E;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x65F6;&#x4F7F;&#x7528;&#x7684;channel&#x3002;</p>
+<p><code>Golang</code> &#x5C31;&#x662F;&#x501F;&#x7528;CSP&#x6A21;&#x578B;&#x7684;&#x4E00;&#x4E9B;&#x6982;&#x5FF5;&#x4E3A;&#x4E4B;&#x5B9E;&#x73B0;&#x5E76;&#x53D1;&#x8FDB;&#x884C;&#x7406;&#x8BBA;&#x652F;&#x6301;&#xFF0C;&#x5176;&#x5B9E;&#x4ECE;&#x5B9E;&#x9645;&#x4E0A;&#x51FA;&#x53D1;&#xFF0C;go&#x8BED;&#x8A00;&#x5E76;&#x6CA1;&#x6709;&#xFF0C;&#x5B8C;&#x5168;&#x5B9E;&#x73B0;&#x4E86;CSP&#x6A21;&#x578B;&#x7684;&#x6240;&#x6709;&#x7406;&#x8BBA;&#xFF0C;&#x4EC5;&#x4EC5;&#x662F;&#x501F;&#x7528;&#x4E86; <code>process</code>&#x548C;<code>channel</code>&#x8FD9;&#x4E24;&#x4E2A;&#x6982;&#x5FF5;&#x3002;process&#x662F;&#x5728;go&#x8BED;&#x8A00;&#x4E0A;&#x7684;&#x8868;&#x73B0;&#x5C31;&#x662F; <code>goroutine</code> &#x662F;&#x5B9E;&#x9645;&#x5E76;&#x53D1;&#x6267;&#x884C;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;&#x6BCF;&#x4E2A;&#x5B9E;&#x4F53;&#x4E4B;&#x95F4;&#x662F;&#x901A;&#x8FC7;channel&#x901A;&#x8BAF;&#x6765;&#x5B9E;&#x73B0;&#x6570;&#x636E;&#x5171;&#x4EAB;&#x3002;</p>
+<p>Golang&#x4E2D;&#x4F7F;&#x7528; CSP&#x4E2D; <code>channel</code> &#x8FD9;&#x4E2A;&#x6982;&#x5FF5;&#x3002;channel &#x662F;&#x88AB;&#x5355;&#x72EC;&#x521B;&#x5EFA;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x5728;&#x8FDB;&#x7A0B;&#x4E4B;&#x95F4;&#x4F20;&#x9012;&#xFF0C;&#x5B83;&#x7684;&#x901A;&#x4FE1;&#x6A21;&#x5F0F;&#x7C7B;&#x4F3C;&#x4E8E; boss-worker &#x6A21;&#x5F0F;&#x7684;&#xFF0C;&#x4E00;&#x4E2A;&#x5B9E;&#x4F53;&#x901A;&#x8FC7;&#x5C06;&#x6D88;&#x606F;&#x53D1;&#x9001;&#x5230;channel &#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x53C8;&#x76D1;&#x542C;&#x8FD9;&#x4E2A; channel &#x7684;&#x5B9E;&#x4F53;&#x5904;&#x7406;&#xFF0C;&#x4E24;&#x4E2A;&#x5B9E;&#x4F53;&#x4E4B;&#x95F4;&#x662F;&#x533F;&#x540D;&#x7684;&#xFF0C;&#x8FD9;&#x4E2A;&#x5C31;&#x5B9E;&#x73B0;&#x5B9E;&#x4F53;&#x4E2D;&#x95F4;&#x7684;&#x89E3;&#x8026;&#xFF0C;&#x5176;&#x4E2D; channel &#x662F;&#x540C;&#x6B65;&#x7684;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x88AB;&#x53D1;&#x9001;&#x5230; channel &#x4E2D;&#xFF0C;&#x6700;&#x7EC8;&#x662F;&#x4E00;&#x5B9A;&#x8981;&#x88AB;&#x53E6;&#x5916;&#x7684;&#x5B9E;&#x4F53;&#x6D88;&#x8D39;&#x6389;&#x7684;&#xFF0C;&#x5728;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x4E0A;&#x5176;&#x5B9E;&#x662F;&#x4E00;&#x4E2A;&#x963B;&#x585E;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x3002;</p>
+<p><code>Goroutine</code> &#x662F;&#x5B9E;&#x9645;&#x5E76;&#x53D1;&#x6267;&#x884C;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;&#x5B83;&#x5E95;&#x5C42;&#x662F;&#x4F7F;&#x7528;&#x534F;&#x7A0B;(coroutine)&#x5B9E;&#x73B0;&#x5E76;&#x53D1;&#xFF0C;coroutine&#x662F;&#x4E00;&#x79CD;&#x8FD0;&#x884C;&#x5728;&#x7528;&#x6237;&#x6001;&#x7684;&#x7528;&#x6237;&#x7EBF;&#x7A0B;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E; greenthread&#xFF0C;go&#x5E95;&#x5C42;&#x9009;&#x62E9;&#x4F7F;&#x7528;coroutine&#x7684;&#x51FA;&#x53D1;&#x70B9;&#x662F;&#x56E0;&#x4E3A;&#xFF0C;&#x5B83;&#x5177;&#x6709;&#x4EE5;&#x4E0B;&#x7279;&#x70B9;&#xFF1A;</p>
+<ol>
+<li>&#x7528;&#x6237;&#x7A7A;&#x95F4; &#x907F;&#x514D;&#x4E86;&#x5185;&#x6838;&#x6001;&#x548C;&#x7528;&#x6237;&#x6001;&#x7684;&#x5207;&#x6362;&#x5BFC;&#x81F4;&#x7684;&#x6210;&#x672C;</li>
+<li>&#x53EF;&#x4EE5;&#x7531;&#x8BED;&#x8A00;&#x548C;&#x6846;&#x67B6;&#x5C42;&#x8FDB;&#x884C;&#x8C03;&#x5EA6;</li>
+<li>&#x66F4;&#x5C0F;&#x7684;&#x6808;&#x7A7A;&#x95F4;&#x5141;&#x8BB8;&#x521B;&#x5EFA;&#x5927;&#x91CF;&#x7684;&#x5B9E;&#x4F8B;</li>
+</ol>
+<h2 id="3-goroutine-&#x8C03;&#x5EA6;&#x5668;"><a name="3-goroutine-&#x8C03;&#x5EA6;&#x5668;" class="anchor-navigation-ex-anchor" href="#3-goroutine-&#x8C03;&#x5EA6;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>3. Goroutine &#x8C03;&#x5EA6;&#x5668;</h2>
+<p>golang&#x4F7F;&#x7528;goroutine&#x505A;&#x4E3A;&#x6700;&#x5C0F;&#x7684;&#x6267;&#x884C;&#x5355;&#x4F4D;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E2A;&#x6267;&#x884C;&#x5355;&#x4F4D;&#x8FD8;&#x662F;&#x5728;&#x7528;&#x6237;&#x7A7A;&#x95F4;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x6700;&#x540E;&#x88AB;&#x5904;&#x7406;&#x5668;&#x6267;&#x884C;&#x7684;&#x8FD8;&#x662F;&#x5185;&#x6838;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x3002;
+<strong>&#x7528;&#x6237;&#x7EBF;&#x7A0B;&#x548C;&#x5185;&#x6838;&#x7EBF;&#x7A0B;&#x7684;&#x8C03;&#x5EA6;&#x65B9;&#x6CD5;&#x6709;&#xFF1A;</strong>
+&#x591A;&#x4E2A;&#x7528;&#x6237;&#x7EBF;&#x7A0B;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x5185;&#x6838;&#x7EBF;&#x7A0B;
+<img src="https://img-blog.csdnimg.cn/20200307144705223.png" alt="">
+&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x7EBF;&#x7A0B;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x5185;&#x6838;&#x7EBF;&#x7A0B;
+<img src="https://img-blog.csdnimg.cn/20200307144732806.png" alt="">
+&#x7528;&#x6237;&#x7EBF;&#x7A0B;&#x548C;&#x5185;&#x6838;&#x7EBF;&#x7A0B;&#x662F;&#x591A;&#x5BF9;&#x591A;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;
+<img src="https://img-blog.csdnimg.cn/20200307144821540.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpeGloYWhhbGVsZWhlaGU=,size_16,color_FFFFFF,t_70" alt="">
+golang &#x901A;&#x8FC7;&#x4E3A;goroutine&#x63D0;&#x4F9B;&#x8BED;&#x8A00;&#x5C42;&#x9762;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x6765;&#x5B9E;&#x73B0;&#x4E86;&#x9AD8;&#x6548;&#x7387;&#x7684;<code>M:N</code>&#x7EBF;&#x7A0B;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;
+<img src="https://img-blog.csdnimg.cn/20200307145532594.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpeGloYWhhbGVsZWhlaGU=,size_16,color_FFFFFF,t_70" alt="">
+&#x652F;&#x6491;&#x6574;&#x4E2A;&#x8C03;&#x5EA6;&#x5668;&#x7684;&#x4E3B;&#x8981;&#x6709;4&#x4E2A;&#x91CD;&#x8981;&#x7ED3;&#x6784;&#xFF0C;&#x5206;&#x522B;&#x662F;<code>M&#x3001;G&#x3001;P&#x3001;Sched</code>&#xFF0C;&#x524D;&#x4E09;&#x4E2A;&#x5B9A;&#x4E49;&#x5728;<code>runtime.h</code>&#x4E2D;&#xFF0C;Sched&#x5B9A;&#x4E49;&#x5728;<code>proc.c</code>&#x4E2D;</p>
+<ul>
+<li>M&#xFF1A;&#x662F;&#x5185;&#x6838;&#x7EBF;&#x7A0B;</li>
+<li>P : &#x662F;&#x8C03;&#x5EA6;&#x534F;&#x8C03;&#xFF0C;&#x7528;&#x4E8E;&#x534F;&#x8C03;M&#x548C;G&#x7684;&#x6267;&#x884C;&#xFF0C;&#x5185;&#x6838;&#x7EBF;&#x7A0B;&#x53EA;&#x6709;&#x62FF;&#x5230;&#x4E86;P&#x624D;&#x80FD;&#x5BF9;goroutine&#x7EE7;&#x7EED;&#x8C03;&#x5EA6;&#x6267;&#x884C;&#xFF0C;&#x4E00;&#x822C;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x9650;&#x5B9A;P&#x7684;&#x4E2A;&#x6570;&#x6765;&#x63A7;&#x5236;golang&#x7684;&#x5E76;&#x53D1;&#x5EA6;&#xFF0C;P&#x7684;&#x6570;&#x91CF;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;GOMAXPROCS()&#x6765;&#x8BBE;&#x7F6E;&#xFF0C;&#x5B83;&#x5176;&#x5B9E;&#x4E5F;&#x5C31;&#x4EE3;&#x8868;&#x4E86;&#x771F;&#x6B63;&#x7684;&#x5E76;&#x53D1;&#x5EA6;&#xFF0C;&#x5373;&#x6709;&#x591A;&#x5C11;&#x4E2A;goroutine&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x8FD0;&#x884C;&#x3002;
+&#x56FE;&#x4E2D;&#x7070;&#x8272;&#x7684;&#x90A3;&#x4E9B;goroutine&#x5E76;&#x6CA1;&#x6709;&#x8FD0;&#x884C;&#xFF0C;&#x800C;&#x662F;&#x51FA;&#x4E8E;ready&#x7684;&#x5C31;&#x7EEA;&#x6001;&#xFF0C;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x88AB;&#x8C03;&#x5EA6;&#x3002;P&#x7EF4;&#x62A4;&#x7740;&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#xFF08;&#x79F0;&#x4E4B;&#x4E3A;runqueue&#xFF09;&#xFF0C;
+Go&#x8BED;&#x8A00;&#x91CC;&#xFF0C;&#x542F;&#x52A8;&#x4E00;&#x4E2A;goroutine&#x5F88;&#x5BB9;&#x6613;&#xFF1A;go function &#x5C31;&#x884C;&#xFF0C;&#x6240;&#x4EE5;&#x6BCF;&#x6709;&#x4E00;&#x4E2A;go&#x8BED;&#x53E5;&#x88AB;&#x6267;&#x884C;&#xFF0C;runqueue&#x961F;&#x5217;&#x5C31;&#x5728;&#x5176;&#x672B;&#x5C3E;&#x52A0;&#x5165;&#x4E00;&#x4E2A;
+goroutine&#xFF0C;&#x5728;&#x4E0B;&#x4E00;&#x4E2A;&#x8C03;&#x5EA6;&#x70B9;&#xFF0C;&#x5C31;&#x4ECE;runqueue&#x4E2D;&#x53D6;&#x51FA;&#xFF08;&#x5982;&#x4F55;&#x51B3;&#x5B9A;&#x53D6;&#x54EA;&#x4E2A;goroutine&#xFF1F;&#xFF09;&#x4E00;&#x4E2A;goroutine&#x6267;&#x884C;&#x3002;</li>
+<li>G : &#x662F;&#x5F85;&#x6267;&#x884C;&#x7684;goroutine&#xFF0C;&#x5305;&#x542B;&#x8FD9;&#x4E2A;goroutine&#x7684;&#x6808;&#x7A7A;&#x95F4;</li>
+<li><p>Gn : &#x7070;&#x8272;&#x80CC;&#x666F;&#x7684;Gn &#x662F;&#x5DF2;&#x7ECF;&#x6302;&#x8D77;&#x7684;goroutine&#xFF0C;&#x5B83;&#x4EEC;&#x88AB;&#x6DFB;&#x52A0;&#x5230;&#x4E86;&#x6267;&#x884C;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x7F51;&#x7EDC;IO&#x7684;goroutine&#xFF0C;&#x5F53;P&#x901A;&#x8FC7; epoll&#x67E5;&#x8BE2;&#x5230;&#x7279;&#x5B9A;&#x7684;fd&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x91CD;&#x65B0;&#x8C03;&#x5EA6;&#x8D77;&#x5BF9;&#x5E94;&#x7684;&#xFF0C;&#x6B63;&#x5728;&#x6302;&#x8D77;&#x7684;goroutine&#x3002;</p>
+<p>Golang&#x4E3A;&#x4E86;&#x8C03;&#x5EA6;&#x7684;&#x516C;&#x5E73;&#x6027;&#xFF0C;&#x5728;&#x8C03;&#x5EA6;&#x5668;&#x52A0;&#x5165;&#x4E86;steal working &#x7B97;&#x6CD5; &#xFF0C;&#x5728;&#x4E00;&#x4E2A;P&#x81EA;&#x5DF1;&#x7684;&#x6267;&#x884C;&#x961F;&#x5217;&#xFF0C;&#x5904;&#x7406;&#x5B8C;&#x4E4B;&#x540E;&#xFF0C;&#x5B83;&#x4F1A;&#x5148;&#x5230;&#x5168;&#x5C40;&#x7684;&#x6267;&#x884C;&#x961F;&#x5217;&#x4E2D;&#x5077;G&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7684;&#x8BDD;&#xFF0C;&#x518D;&#x4F1A;&#x5230;&#x5176;&#x4ED6;P&#x7684;&#x6267;&#x884C;&#x961F;&#x5217;&#x4E2D;&#x62A2;G&#x6765;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;</p>
+</li>
+</ul>
+<p>&#x5F53;&#x4E00;&#x4E2A;OS&#x7EBF;&#x7A0B;M0&#x9677;&#x5165;&#x963B;&#x585E;&#x65F6;&#xFF08;&#x5982;&#x4E0B;&#x56FE;)&#xFF0C;P&#x8F6C;&#x800C;&#x5728;&#x8FD0;&#x884C;M1&#xFF0C;&#x56FE;&#x4E2D;&#x7684;M1&#x53EF;&#x80FD;&#x662F;&#x6B63;&#x88AB;&#x521B;&#x5EFA;&#xFF0C;&#x6216;&#x8005;&#x4ECE;&#x7EBF;&#x7A0B;&#x7F13;&#x5B58;&#x4E2D;&#x53D6;&#x51FA;&#x3002;
+<img src="https://img-blog.csdnimg.cn/202003071521378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpeGloYWhhbGVsZWhlaGU=,size_16,color_FFFFFF,t_70" alt="">
+ &#x5F53;MO&#x8FD4;&#x56DE;&#x65F6;&#xFF0C;&#x5B83;&#x5FC5;&#x987B;&#x5C1D;&#x8BD5;&#x53D6;&#x5F97;&#x4E00;&#x4E2A;P&#x6765;&#x8FD0;&#x884C;goroutine&#xFF0C;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5B83;&#x4F1A;&#x4ECE;&#x5176;&#x4ED6;&#x7684;OS&#x7EBF;&#x7A0B;&#x90A3;&#x91CC;&#x62FF;&#x4E00;&#x4E2A;P&#x8FC7;&#x6765;&#xFF0C;
+&#x5982;&#x679C;&#x6CA1;&#x6709;&#x62FF;&#x5230;&#x7684;&#x8BDD;&#xFF0C;&#x5B83;&#x5C31;&#x628A;goroutine&#x653E;&#x5728;&#x4E00;&#x4E2A;global runqueue&#x91CC;&#xFF0C;&#x7136;&#x540E;&#x81EA;&#x5DF1;&#x7761;&#x7720;&#xFF08;&#x653E;&#x5165;&#x7EBF;&#x7A0B;&#x7F13;&#x5B58;&#x91CC;&#xFF09;&#x3002;&#x6240;&#x6709;&#x7684;P&#x4E5F;&#x4F1A;&#x5468;&#x671F;&#x6027;&#x7684;&#x68C0;&#x67E5;global runqueue&#x5E76;&#x8FD0;&#x884C;&#x5176;&#x4E2D;&#x7684;goroutine&#xFF0C;&#x5426;&#x5219;global runqueue&#x4E0A;&#x7684;goroutine&#x6C38;&#x8FDC;&#x65E0;&#x6CD5;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x53E6;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x662F;P&#x6240;&#x5206;&#x914D;&#x7684;&#x4EFB;&#x52A1;G&#x5F88;&#x5FEB;&#x5C31;&#x6267;&#x884C;&#x5B8C;&#x4E86;&#xFF08;&#x5206;&#x914D;&#x4E0D;&#x5747;&#xFF09;&#xFF0C;&#x8FD9;&#x5C31;&#x5BFC;&#x81F4;&#x4E86;&#x8FD9;&#x4E2A;&#x5904;&#x7406;&#x5668;P&#x5F88;&#x5FD9;&#xFF0C;&#x4F46;&#x662F;&#x5176;&#x4ED6;&#x7684;P&#x8FD8;&#x6709;&#x4EFB;&#x52A1;&#xFF0C;&#x6B64;&#x65F6;&#x5982;&#x679C;global runqueue&#x6CA1;&#x6709;&#x4EFB;&#x52A1;G&#x4E86;&#xFF0C;&#x90A3;&#x4E48;P&#x4E0D;&#x5F97;&#x4E0D;&#x4ECE;&#x5176;&#x4ED6;&#x7684;P&#x91CC;&#x62FF;&#x4E00;&#x4E9B;G&#x6765;&#x6267;&#x884C;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x5982;&#x679C;P&#x4ECE;&#x5176;&#x4ED6;&#x7684;P&#x90A3;&#x91CC;&#x8981;&#x62FF;&#x4EFB;&#x52A1;&#x7684;&#x8BDD;&#xFF0C;&#x4E00;&#x822C;&#x5C31;&#x62FF;run queue&#x7684;&#x4E00;&#x534A;&#xFF0C;&#x8FD9;&#x5C31;&#x786E;&#x4FDD;&#x4E86;&#x6BCF;&#x4E2A;OS&#x7EBF;&#x7A0B;&#x90FD;&#x80FD;&#x5145;&#x5206;&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;
+<img src="https://img-blog.csdnimg.cn/20200307152311236.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpeGloYWhhbGVsZWhlaGU=,size_16,color_FFFFFF,t_70" alt="">
+&#x53C2;&#x8003;&#x5730;&#x5740;&#xFF1A;<a href="http://morsmachine.dk/go-scheduler" target="_blank">http://morsmachine.dk/go-scheduler</a></p>
+<h2 id="4-&#x65B9;&#x6CD5;"><a name="4-&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#4-&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>4. &#x65B9;&#x6CD5;</h2>
+<p>&#x8BBE;&#x7F6E;goroutine&#x8FD0;&#x884C;&#x7684;CPU&#x6570;&#x91CF;&#xFF0C;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;go&#x5DF2;&#x7ECF;&#x9ED8;&#x8BA4;&#x5DF2;&#x7ECF;&#x8BBE;&#x7F6E;&#x4E86;&#x3002;</p>
+<pre class="language-"><code class="lang-go">num <span class="token operator">:=</span> runtime<span class="token punctuation">.</span><span class="token function">NumCPU</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token comment">//&#x83B7;&#x53D6;&#x4E3B;&#x673A;&#x7684;&#x903B;&#x8F91;CPU&#x4E2A;&#x6570;</span>
+runtime<span class="token punctuation">.</span><span class="token function">GOMAXPROCS</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>    <span class="token comment">//&#x8BBE;&#x7F6E;&#x53EF;&#x540C;&#x65F6;&#x6267;&#x884C;&#x7684;&#x6700;&#x5927;CPU&#x6570;</span>
+</code></pre>
+<pre class="language-"><code class="lang-go">$ cat go1<span class="token punctuation">.</span><span class="token keyword">go</span> 
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;time&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">cal</span><span class="token punctuation">(</span>a <span class="token builtin">int</span> <span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+    c <span class="token operator">:=</span> a<span class="token operator">+</span>b
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%d + %d = %d\n&quot;</span><span class="token punctuation">,</span>a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>c<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span><span class="token number">0</span> <span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">10</span> <span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">{</span>
+        <span class="token keyword">go</span> <span class="token function">cal</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span> 
+<span class="token punctuation">[</span>root@localhost goroutine<span class="token punctuation">]</span># <span class="token keyword">go</span> run go1<span class="token punctuation">.</span><span class="token keyword">go</span> 
+<span class="token number">0</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token number">1</span> <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token number">2</span> <span class="token operator">+</span> <span class="token number">3</span> <span class="token operator">=</span> <span class="token number">5</span>
+<span class="token number">3</span> <span class="token operator">+</span> <span class="token number">4</span> <span class="token operator">=</span> <span class="token number">7</span>
+<span class="token number">4</span> <span class="token operator">+</span> <span class="token number">5</span> <span class="token operator">=</span> <span class="token number">9</span>
+<span class="token number">8</span> <span class="token operator">+</span> <span class="token number">9</span> <span class="token operator">=</span> <span class="token number">17</span>
+<span class="token number">9</span> <span class="token operator">+</span> <span class="token number">10</span> <span class="token operator">=</span> <span class="token number">19</span>
+<span class="token number">5</span> <span class="token operator">+</span> <span class="token number">6</span> <span class="token operator">=</span> <span class="token number">11</span>
+<span class="token number">6</span> <span class="token operator">+</span> <span class="token number">7</span> <span class="token operator">=</span> <span class="token number">13</span>
+<span class="token number">7</span> <span class="token operator">+</span> <span class="token number">8</span> <span class="token operator">=</span> <span class="token number">15</span>
+</code></pre>
+<h2 id="5-goroutine&#x5F02;&#x5E38;&#x6355;&#x6349;"><a name="5-goroutine&#x5F02;&#x5E38;&#x6355;&#x6349;" class="anchor-navigation-ex-anchor" href="#5-goroutine&#x5F02;&#x5E38;&#x6355;&#x6349;"><i class="fa fa-link" aria-hidden="true"></i></a>5. goroutine&#x5F02;&#x5E38;&#x6355;&#x6349;</h2>
+<p>&#x5F53;&#x542F;&#x52A8;&#x591A;&#x4E2A;goroutine&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;goroutine&#x5F02;&#x5E38;&#x4E86;&#xFF0C;&#x5E76;&#x4E14;&#x6211;&#x4EEC;&#x5E76;&#x6CA1;&#x6709;&#x5BF9;&#x8FDB;&#x884C;&#x5F02;&#x5E38;&#x5904;&#x7406;&#xFF0C;&#x90A3;&#x4E48;&#x6574;&#x4E2A;&#x7A0B;&#x5E8F;&#x90FD;&#x4F1A;&#x7EC8;&#x6B62;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5728;&#x7F16;&#x5199;&#x7A0B;&#x5E8F;&#x65F6;&#x5019;&#x6700;&#x597D;&#x6BCF;&#x4E2A;goroutine&#x6240;&#x8FD0;&#x884C;&#x7684;&#x51FD;&#x6570;&#x90FD;&#x505A;&#x5F02;&#x5E38;&#x5904;&#x7406;&#xFF0C;&#x5F02;&#x5E38;&#x5904;&#x7406;&#x91C7;&#x7528;<code>recover</code></p>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;time&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">addele</span><span class="token punctuation">(</span>a <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span> <span class="token punctuation">,</span>i <span class="token builtin">int</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+    <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token comment">//&#x533F;&#x540D;&#x51FD;&#x6570;&#x6355;&#x83B7;&#x9519;&#x8BEF;</span>
+        err <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;add ele fail&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>i
+   fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Arry <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span><span class="token number">0</span> <span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">10</span> <span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">{</span>
+        <span class="token keyword">go</span> <span class="token function">addele</span><span class="token punctuation">(</span>Arry<span class="token punctuation">,</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//&#x7ED3;&#x679C;</span>
+add ele fail
+<span class="token punctuation">[</span><span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token number">0</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token number">0</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token number">0</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">]</span>
+add ele fail
+add ele fail
+add ele fail
+add ele fail
+add ele fail
+</code></pre>
+<h2 id="6-&#x540C;&#x6B65;&#x7684;goroutine"><a name="6-&#x540C;&#x6B65;&#x7684;goroutine" class="anchor-navigation-ex-anchor" href="#6-&#x540C;&#x6B65;&#x7684;goroutine"><i class="fa fa-link" aria-hidden="true"></i></a>6. &#x540C;&#x6B65;&#x7684;goroutine(?)</h2>
+<p>&#x7531;&#x4E8E;goroutine&#x662F;&#x5F02;&#x6B65;&#x6267;&#x884C;&#x7684;&#xFF0C;&#x90A3;&#x5F88;&#x6709;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x4E3B;&#x7A0B;&#x5E8F;&#x9000;&#x51FA;&#x65F6;&#x8FD8;&#x6709;goroutine&#x6CA1;&#x6709;&#x6267;&#x884C;&#x5B8C;&#xFF0C;&#x6B64;&#x65F6;goroutine&#x4E5F;&#x4F1A;&#x8DDF;&#x7740;&#x9000;&#x51FA;&#x3002;&#x6B64;&#x65F6;&#x5982;&#x679C;&#x60F3;&#x7B49;&#x5230;&#x6240;&#x6709;goroutine&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x624D;&#x9000;&#x51FA;&#xFF0C;go&#x63D0;&#x4F9B;&#x4E86;<code>sync</code>&#x5305;&#x548C;<code>channel</code>&#x6765;&#x89E3;&#x51B3;&#x540C;&#x6B65;&#x95EE;&#x9898;&#xFF0C;&#x5F53;&#x7136;&#x5982;&#x679C;&#x4F60;&#x80FD;&#x9884;&#x6D4B;&#x6BCF;&#x4E2A;goroutine&#x6267;&#x884C;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x4F60;&#x8FD8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>time.Sleep</code>&#x65B9;&#x5F0F;&#x7B49;&#x5F85;&#x6240;&#x6709;&#x7684;groutine&#x6267;&#x884C;&#x5B8C;&#x6210;&#x4EE5;&#x540E;&#x5728;&#x9000;&#x51FA;&#x7A0B;&#x5E8F;(&#x5982;&#x4E0A;&#x9762;&#x7684;&#x5217;&#x5B50;)&#x3002;</p>
+<p>&#x793A;&#x4F8B;&#x4E00;&#xFF1A;&#x4F7F;&#x7528;sync&#x5305;&#x540C;&#x6B65;goroutine
+sync&#x5927;&#x81F4;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;
+<code>WaitGroup</code> &#x7B49;&#x5F85;&#x4E00;&#x7EC4;<code>goroutinue</code>&#x6267;&#x884C;&#x5B8C;&#x6BD5;. &#x4E3B;&#x7A0B;&#x5E8F;&#x8C03;&#x7528; <code>Add</code> &#x6DFB;&#x52A0;&#x7B49;&#x5F85;&#x7684;goroutinue&#x6570;&#x91CF;. &#x6BCF;&#x4E2A;goroutinue&#x5728;&#x6267;&#x884C;&#x7ED3;&#x675F;&#x65F6;&#x8C03;&#x7528; <code>Done</code> &#xFF0C;&#x6B64;&#x65F6;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x6570;&#x91CF;&#x51CF;1.&#xFF0C;&#x4E3B;&#x7A0B;&#x5E8F;&#x901A;&#x8FC7;<code>Wait&#x963B;&#x585E;</code>&#xFF0C;&#x76F4;&#x5230;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E3A;0.</p>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;sync&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">cal</span><span class="token punctuation">(</span>a <span class="token builtin">int</span> <span class="token punctuation">,</span> b <span class="token builtin">int</span> <span class="token punctuation">,</span>n <span class="token operator">*</span>sync<span class="token punctuation">.</span>WaitGroup<span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+    c <span class="token operator">:=</span> a<span class="token operator">+</span>b
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%d + %d = %d\n&quot;</span><span class="token punctuation">,</span>a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>c<span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> n<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//goroutinue&#x5B8C;&#x6210;&#x540E;, WaitGroup&#x7684;&#x8BA1;&#x6570;-1</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> go_sync sync<span class="token punctuation">.</span>WaitGroup <span class="token comment">//&#x58F0;&#x660E;&#x4E00;&#x4E2A;WaitGroup&#x53D8;&#x91CF;</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span><span class="token number">0</span> <span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">10</span> <span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">{</span>
+        go_sync<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// WaitGroup&#x7684;&#x8BA1;&#x6570;&#x52A0;1</span>
+        <span class="token keyword">go</span> <span class="token function">cal</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>go_sync<span class="token punctuation">)</span>  
+    <span class="token punctuation">}</span>
+    go_sync<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//&#x7B49;&#x5F85;&#x6240;&#x6709;goroutine&#x6267;&#x884C;&#x5B8C;&#x6BD5;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//&#x7ED3;&#x679C;</span>
+<span class="token number">9</span> <span class="token operator">+</span> <span class="token number">10</span> <span class="token operator">=</span> <span class="token number">19</span>
+<span class="token number">0</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token number">1</span> <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token number">2</span> <span class="token operator">+</span> <span class="token number">3</span> <span class="token operator">=</span> <span class="token number">5</span>
+<span class="token number">3</span> <span class="token operator">+</span> <span class="token number">4</span> <span class="token operator">=</span> <span class="token number">7</span>
+<span class="token number">4</span> <span class="token operator">+</span> <span class="token number">5</span> <span class="token operator">=</span> <span class="token number">9</span>
+<span class="token number">5</span> <span class="token operator">+</span> <span class="token number">6</span> <span class="token operator">=</span> <span class="token number">11</span>
+<span class="token number">6</span> <span class="token operator">+</span> <span class="token number">7</span> <span class="token operator">=</span> <span class="token number">13</span>
+<span class="token number">7</span> <span class="token operator">+</span> <span class="token number">8</span> <span class="token operator">=</span> <span class="token number">15</span>
+<span class="token number">8</span> <span class="token operator">+</span> <span class="token number">9</span> <span class="token operator">=</span> <span class="token number">17</span>
+</code></pre>
+<p>&#x793A;&#x4F8B;&#x4E8C;&#xFF1A;&#x901A;&#x8FC7;channel&#x5B9E;&#x73B0;goroutine&#x4E4B;&#x95F4;&#x7684;&#x540C;&#x6B65;&#x3002;</p>
+<p>&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#xFF1A;&#x901A;&#x8FC7;channel&#x80FD;&#x5728;&#x591A;&#x4E2A;groutine&#x4E4B;&#x95F4;&#x901A;&#x8BAF;&#xFF0C;&#x5F53;&#x4E00;&#x4E2A;goroutine&#x5B8C;&#x6210;&#x65F6;&#x5019;&#x5411;channel&#x53D1;&#x9001;&#x9000;&#x51FA;&#x4FE1;&#x53F7;,&#x7B49;&#x6240;&#x6709;goroutine&#x9000;&#x51FA;&#x65F6;&#x5019;&#xFF0C;&#x5229;&#x7528;for&#x5FAA;&#x73AF;channe&#x53BB;channel&#x4E2D;&#x7684;&#x4FE1;&#x53F7;&#xFF0C;&#x82E5;&#x53D6;&#x4E0D;&#x5230;&#x6570;&#x636E;&#x4F1A;&#x963B;&#x585E;&#x539F;&#x7406;&#xFF0C;&#x7B49;&#x5F85;&#x6240;&#x6709;goroutine&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#xFF0C;&#x4F7F;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;&#x6709;&#x4E2A;&#x524D;&#x63D0;&#x662F;&#x4F60;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x4E86;&#x4F60;&#x542F;&#x52A8;&#x4E86;&#x591A;&#x5C11;&#x4E2A;goroutine&#x3002;</p>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;time&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">cal</span><span class="token punctuation">(</span>a <span class="token builtin">int</span> <span class="token punctuation">,</span> b <span class="token builtin">int</span> <span class="token punctuation">,</span>Exitchan <span class="token keyword">chan</span> <span class="token builtin">bool</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+    c <span class="token operator">:=</span> a<span class="token operator">+</span>b
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%d + %d = %d\n&quot;</span><span class="token punctuation">,</span>a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>c<span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span>
+    Exitchan <span class="token operator">&lt;-</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    Exitchan <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">bool</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span>  <span class="token comment">//&#x58F0;&#x660E;&#x5E76;&#x5206;&#x914D;&#x7BA1;&#x9053;&#x5185;&#x5B58;</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span><span class="token number">0</span> <span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">10</span> <span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">{</span>
+        <span class="token keyword">go</span> <span class="token function">cal</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>Exitchan<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> j <span class="token operator">:=</span><span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">{</span>   
+         <span class="token operator">&lt;-</span> Exitchan  <span class="token comment">//&#x53D6;&#x4FE1;&#x53F7;&#x6570;&#x636E;&#xFF0C;&#x5982;&#x679C;&#x53D6;&#x4E0D;&#x5230;&#x5219;&#x4F1A;&#x963B;&#x585E;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>Exitchan<span class="token punctuation">)</span> <span class="token comment">// &#x5173;&#x95ED;&#x7BA1;&#x9053;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="7-goroutine&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x8BAF;"><a name="7-goroutine&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x8BAF;" class="anchor-navigation-ex-anchor" href="#7-goroutine&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x8BAF;"><i class="fa fa-link" aria-hidden="true"></i></a>7. goroutine&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x8BAF;(?)</h2>
+<p>goroutine&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x534F;&#x7A0B;&#xFF0C;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#x4E0D;&#x53D7;&#x5185;&#x6838;&#x8C03;&#x5EA6;&#xFF0C;&#x800C;&#x53D7;go&#x8C03;&#x5EA6;&#x5668;&#x7BA1;&#x7406;&#x7684;&#x7EBF;&#x7A0B;&#x3002;goroutine&#x4E4B;&#x95F4;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;channel&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#x6216;&#x8005;&#x8BF4;&#x662F;&#x6570;&#x636E;&#x5171;&#x4EAB;&#xFF0C;&#x5F53;&#x7136;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x6765;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x5171;&#x4EAB;&#x3002;</p>
+<p>&#x793A;&#x4F8B;&#xFF1A;&#x4F7F;&#x7528;channel&#x6A21;&#x62DF;&#x6D88;&#x8D39;&#x8005;&#x548C;&#x751F;&#x4EA7;&#x8005;&#x6A21;&#x5F0F;</p>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;sync&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">Productor</span><span class="token punctuation">(</span>mychan <span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">,</span>data <span class="token builtin">int</span><span class="token punctuation">,</span>wait <span class="token operator">*</span>sync<span class="token punctuation">.</span>WaitGroup<span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+    mychan <span class="token operator">&lt;-</span> data
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;product data&#xFF1A;&quot;</span><span class="token punctuation">,</span>data<span class="token punctuation">)</span>
+    wait<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">Consumer</span><span class="token punctuation">(</span>mychan <span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">,</span>wait <span class="token operator">*</span>sync<span class="token punctuation">.</span>WaitGroup<span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+     a <span class="token operator">:=</span> <span class="token operator">&lt;-</span> mychan
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;consumer data&#xFF1A;&quot;</span><span class="token punctuation">,</span>a<span class="token punctuation">)</span>
+     wait<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    datachan <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>   <span class="token comment">//&#x901A;&#x8BAF;&#x6570;&#x636E;&#x7BA1;&#x9053;</span>
+    <span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        <span class="token keyword">go</span> <span class="token function">Productor</span><span class="token punctuation">(</span>datachan<span class="token punctuation">,</span> i<span class="token punctuation">,</span><span class="token operator">&amp;</span>wg<span class="token punctuation">)</span> <span class="token comment">//&#x751F;&#x4EA7;&#x6570;&#x636E;</span>
+        wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> j <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> j<span class="token operator">++</span> <span class="token punctuation">{</span>
+        <span class="token keyword">go</span> <span class="token function">Consumer</span><span class="token punctuation">(</span>datachan<span class="token punctuation">,</span><span class="token operator">&amp;</span>wg<span class="token punctuation">)</span>  <span class="token comment">//&#x6D88;&#x8D39;&#x6570;&#x636E;</span>
+        wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//&#x7ED3;&#x679C;</span>
+consumer data&#xFF1A; <span class="token number">4</span>
+product data&#xFF1A; <span class="token number">5</span>
+product data&#xFF1A; <span class="token number">6</span>
+product data&#xFF1A; <span class="token number">7</span>
+product data&#xFF1A; <span class="token number">8</span>
+product data&#xFF1A; <span class="token number">9</span>
+consumer data&#xFF1A; <span class="token number">1</span>
+consumer data&#xFF1A; <span class="token number">5</span>
+consumer data&#xFF1A; <span class="token number">6</span>
+consumer data&#xFF1A; <span class="token number">7</span>
+consumer data&#xFF1A; <span class="token number">8</span>
+consumer data&#xFF1A; <span class="token number">9</span>
+product data&#xFF1A; <span class="token number">2</span>
+consumer data&#xFF1A; <span class="token number">2</span>
+product data&#xFF1A; <span class="token number">3</span>
+consumer data&#xFF1A; <span class="token number">3</span>
+product data&#xFF1A; <span class="token number">4</span>
+consumer data&#xFF1A; <span class="token number">0</span>
+product data&#xFF1A; <span class="token number">0</span>
+product data&#xFF1A; <span class="token number">1</span>
+</code></pre>
+<p>&#x53C2;&#x8003;&#xFF1A;</p>
+<ul>
+<li><a href="https://www.cnblogs.com/wdliu/p/9272220.html" target="_blank">https://www.cnblogs.com/wdliu/p/9272220.html</a></li>
+</ul>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; ghostwritten &#x6D59;ICP&#x5907;2020032454&#x53F7; 2022 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2022-12-22 13:23:35
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="go_23_defer.html" class="navigation navigation-prev " aria-label="Previous page: go defer 延迟调用">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="go_25_channel.html" class="navigation navigation-next " aria-label="Next page: go 了解 channel 管道">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"go 了解 goroutine 运用","level":"1.4.25","depth":2,"next":{"title":"go 了解 channel 管道","level":"1.4.26","depth":2,"path":"Go-Base/go_25_channel.md","ref":"Go-Base/go_25_channel.md","articles":[]},"previous":{"title":"go defer 延迟调用","level":"1.4.24","depth":2,"path":"Go-Base/go_23_defer.md","ref":"Go-Base/go_23_defer.md","articles":[]},"dir":"ltr"},"config":{"plugins":["3-ba","accordion","advanced-emoji","anchor-navigation-ex","baidu-tongji","code","change_girls","custom-favicon","donate","expandable-chapters-small","edit-link","flexible-alerts","github-buttons","github","insert-logo","musicxml","prism","prism-themes","pageview-count","-highlight","-search","-lunr","rss","search-plus","splitter","-sharing","sharing-plus","sidebar-style","theme-default","tags","tbfed-pagefooter"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"sidebar-style":{"author":"zongxun","title":"《Go Docs》"},"tbfed-pagefooter":{"copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-holi-theme.css"],"lang":{"shell":"bash"}},"github":{"url":"https://github.com/Ghostwritten"},"baidu-tongji":{"url":"https://hm.baidu.com/hm.js","token":"55e7dfe47f4dc1c018d4042fdfa62565"},"splitter":{},"change_girls":{"time":10,"urls":["https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg","https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg","https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg","https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg","https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg","https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg","https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg","https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg","https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg","https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg","https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg","https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg","https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"]},"accordion":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"donate":{"alipay":"https://github.com/Ghostwritten/go-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://github.com/Ghostwritten/go-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["go"],"title":"Go Docs","description":"This is the best book ever.","author":"Zong Xun","feed_url":"http://smoothies.com.cn/rss","site_url":"https://smoothies.com.cn/go-docs/","managingEditor":"writer@smoothies.com.cn (Zong Xun)","webMaster":"webmaster@smoothies.com.cn (Zong Xun)"},"musicxml":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"assets/imgs/1_girl.ico","pageview-count":{},"prism-themes":{},"github-buttons":{"buttons":[{"user":"Ghostwritten","repo":"go-docs","type":"star","count":true,"size":"small"}]},"custom-favicon":{},"tags":{"placement":"top"},"3-ba":{"configuration":"auto","token":"9ffc0dce8d7079aceab6b0bc18eb626b"},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Danger"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"advanced-emoji":{"embedEmojis":false},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"douban":false,"facebook":true,"weibo":false,"twitter":true,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"Edit","base":"https://github.com/Ghostwritten/go-docs/edit/master/"},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"insert-logo":{"style":"background: none; max-height: 120px; min-height: 120px","url":"https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg"},"search-plus":{}},"theme":"default","author":"宗勋 - zongxun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Go Docs","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Blog":"https://smoothies.com.cn","Kubernetes":"https://smoothies.com.cn/kubernetes-docs/","Go":"https://smoothies.com.cn/go-docs/","Prometheus":"https://smoothies.com.cn/prometheus-docs/","Command":"https://smoothies.com.cn/linux-command-docs/","Shell":"https://smoothies.com.cn/shell-docs/","Linux":"https://smoothies.com.cn/linux-docs/","Gitbook":"https://smoothies.com.cn/gitbook-docs/","Python":"https://smoothies.com.cn/python-docs/","Exam":"https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"}},"gitbook":"*","description":"这是一本关于 [Go](https://go.dev/) 的书籍"},"file":{"path":"Go-Base/go_24_goroutine.md","mtime":"2022-12-22T05:23:35.827Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-22T10:32:54.750Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-baidu-tongji/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-change_girls/girls.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/osmd.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/musicxml.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/promise.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sidebar-style/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

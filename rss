@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Go Docs]]></title>
+        <description><![CDATA[This is the best book ever.]]></description>
+        <link>https://smoothies.com.cn/go-docs/</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Thu, 22 Dec 2022 10:33:22 GMT</lastBuildDate>
+        <atom:link href="http://smoothies.com.cn/rss" rel="self" type="application/rss+xml"/>
+        <author><![CDATA[Zong Xun]]></author>
+        <managingEditor><![CDATA[writer@smoothies.com.cn (Zong Xun)]]></managingEditor>
+        <webMaster><![CDATA[webmaster@smoothies.com.cn (Zong Xun)]]></webMaster>
+        <category><![CDATA[go]]></category>
+        <item>
+            <title><![CDATA[序言]]></title>
+            <description><![CDATA[这是一本关于集合 go 的书。]]></description>
+            <link>https://smoothies.com.cn/go-docs/</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Summary]]></title>
+            <link>https://smoothies.com.cn/go-docs/Overview.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Overview.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go Practice]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Practice/README.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Practice/README.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 如何获取文件的大小]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Practice/go_get_file_size.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Practice/go_get_file_size.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 获取 URL 实战]]></title>
+            <description><![CDATA[goroutine是一种函数的并发执行方式，而channel是用来在goroutine之间进行参数传递。main函数本身也运行在一个goroutine中，而go function则表示创建一个新的goroutine，并在这个新的goroutine中执行这个函数。]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Practice/go_get_URL.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Practice/go_get_URL.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 查找重复的行]]></title>
+            <description><![CDATA[第一种：os.stdin]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Practice/go_get_Duplicate_lines.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Practice/go_get_Duplicate_lines.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 编写 echo 命令]]></title>
+            <description><![CDATA[第一种]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Practice/go_dev_command_echo.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Practice/go_dev_command_echo.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 快速入门]]></title>
+            <description><![CDATA[在这里插入图片描述]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/README.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/README.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go GOROOT 与 GOPATH 介绍]]></title>
+            <description><![CDATA[GOROOT：Go 语言安装根目录的路径，也就是 GO 语言的安装路径。
+GOPATH：若干工作区目录的路径。是我们自己定义的工作空间。
+GOBIN：GO 程序生成的可执行文件（executable file）的路径。]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_1_GOPATH_and_GOROOT.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_1_GOPATH_and_GOROOT.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 通过 import 导入包]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_2_import.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_2_import.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 代理加速配置]]></title>
+            <description><![CDATA[在这里插入图片描述]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_3_goproxy_configuration.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_3_goproxy_configuration.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go Modules 管理包工具]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_4_Modules.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_4_Modules.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[go 基本类型]]></title>
+            <description><![CDATA[在这里插入图片描述]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_5_type.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_5_type.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go const 定义常量]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_6_const.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_6_const.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 定义常量之 iota]]></title>
+            <description><![CDATA[在这里插入图片描述]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_7_iota.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_7_iota.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go type 声明变量]]></title>
+            <description><![CDATA[新类型声明格式：(是类型的组合)]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_8_type.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_8_type.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 定义变量]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_9_variable.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_9_variable.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 运算符总结]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_10_operator.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_10_operator.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 指针概念【1】]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_11_pointer_1.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_11_pointer_1.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 指针应用实践]]></title>
+            <description><![CDATA[在这里插入图片描述]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_11_pointer_2.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_11_pointer_2.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 流程控制]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_12_cycle_control.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_12_cycle_control.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go array 数组]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_13_array.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_13_array.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go slice 切片引用类型]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_14_slice.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_14_slice.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go map容器引用]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_15_map.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_15_map.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go struc 结构体]]></title>
+            <description><![CDATA[在这里插入图片描述]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_16_struc.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_16_struc.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 了解函数运用]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_17_function.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_17_function.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go init 函数]]></title>
+            <description><![CDATA[golang中有个神奇的函数init,该函数会在所有程序执行开始前被调用，每个包可以包含多个init函数，所有被编辑器识别到的init函数都会在main函数执行前被调用。通常被用来注册一个程序需要使用的依赖，如mysql注册，配置文件加载等。]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_18_init_function.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_18_init_function.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 内置函数]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_19_built_in_function.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_19_built_in_function.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 了解方法运用]]></title>
+            <description><![CDATA[在这里插入图片描述]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_20_method.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_20_method.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 了解接口运用]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_21_interface.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_21_interface.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go panic 与 recover 异常处理]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_22_panic_and_recover.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_22_panic_and_recover.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go defer 延迟调用]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_23_defer.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_23_defer.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 了解 goroutine 运用]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_24_goroutine.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_24_goroutine.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 了解 channel 管道]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_25_channel.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_25_channel.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go container 容器数据类型：heap、list 、ring]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_26_container.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_26_container.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go CAS操作]]></title>
+            <description><![CDATA[go中的Cas操作与java中类似，都是借用了CPU提供的原子性指令来实现。CAS操作修改共享变量时候不需要对共享变量加锁，而是通过类似乐观锁的方式进行检查，本质还是不断的占用CPU 资源换取加锁带来的开销（比如上下文切换开销）。下面一个例子使用CAS来实现计数器]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Base/go_27_cas.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Base/go_27_cas.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go Package]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Package/README.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Package/README.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 库 pflag 命令行参数解析]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Package/go-pflag.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Package/go-pflag.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 库 viper 配置解析神器]]></title>
+            <description><![CDATA[在这里插入图片描述]]></description>
+            <link>https://smoothies.com.cn/go-docs/Go-Package/go-viper.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Package/go-viper.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 包 fmt 打印输出]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Package/go-fmt.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Package/go-fmt.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[Go 包 os 文件操作]]></title>
+            <link>https://smoothies.com.cn/go-docs/Go-Package/go-os.html</link>
+            <guid isPermaLink="true">https://smoothies.com.cn/go-docs/Go-Package/go-os.html</guid>
+            <dc:creator><![CDATA[Zong Xun]]></dc:creator>
+        </item>
+    </channel>
+</rss>

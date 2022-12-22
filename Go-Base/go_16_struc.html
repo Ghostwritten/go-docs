@@ -1,0 +1,2103 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>go struc 结构体 · Go Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="宗勋 - zongxun">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-change_girls/girls.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-holi-theme.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sidebar-style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="go_17_function.html" />
+    
+    
+    <link rel="prev" href="go_15_map.html" />
+    
+
+    <link href="http://smoothies.com.cn/rss" title="Go Docs" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"Ghostwritten","repo":"go-docs","type":"star","count":true,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn" target="_blank" class="custom-link">Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/kubernetes-docs/" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/go-docs/" target="_blank" class="custom-link">Go</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/prometheus-docs/" target="_blank" class="custom-link">Prometheus</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-command-docs/" target="_blank" class="custom-link">Command</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/shell-docs/" target="_blank" class="custom-link">Shell</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-docs/" target="_blank" class="custom-link">Linux</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/gitbook-docs/" target="_blank" class="custom-link">Gitbook</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/python-docs/" target="_blank" class="custom-link">Python</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://ghostwritten.gitbook.io/kubernetes-exam-in-action/" target="_blank" class="custom-link">Exam</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    序言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Overview.html">
+            
+                <a href="../Overview.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Go-Practice/">
+            
+                <a href="../Go-Practice/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Go Practice
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Go-Practice/go_get_file_size.html">
+            
+                <a href="../Go-Practice/go_get_file_size.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    go 如何获取文件的大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Go-Practice/go_get_URL.html">
+            
+                <a href="../Go-Practice/go_get_URL.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    go 获取 url 实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Go-Practice/go_get_Duplicate_lines.html">
+            
+                <a href="../Go-Practice/go_get_Duplicate_lines.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    go 查找重复的行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Go-Practice/go_dev_command_echo.html">
+            
+                <a href="../Go-Practice/go_dev_command_echo.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    go 编写 echo 命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Go Base
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="go_1_GOPATH_and_GOROOT.html">
+            
+                <a href="go_1_GOPATH_and_GOROOT.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    go goroot 与 gopath 介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="go_2_import.html">
+            
+                <a href="go_2_import.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    go 通过 import 导入包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="go_3_goproxy_configuration.html">
+            
+                <a href="go_3_goproxy_configuration.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    go 代理加速配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="go_4_Modules.html">
+            
+                <a href="go_4_Modules.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    go modules 管理包工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="go_5_type.html">
+            
+                <a href="go_5_type.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    go 基本类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="go_6_const.html">
+            
+                <a href="go_6_const.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    go const 定义常量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="go_7_iota.html">
+            
+                <a href="go_7_iota.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    go 定义常量之 iota
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="go_8_type.html">
+            
+                <a href="go_8_type.html">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    go type 声明变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="go_9_variable.html">
+            
+                <a href="go_9_variable.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    go 定义变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="go_10_operator.html">
+            
+                <a href="go_10_operator.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    go 运算符总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="go_11_pointer_1.html">
+            
+                <a href="go_11_pointer_1.html">
+            
+                    
+                        <b>1.4.11.</b>
+                    
+                    go 指针概念 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="go_11_pointer_2.html">
+            
+                <a href="go_11_pointer_2.html">
+            
+                    
+                        <b>1.4.12.</b>
+                    
+                    go 指针应用实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="go_12_cycle_control.html">
+            
+                <a href="go_12_cycle_control.html">
+            
+                    
+                        <b>1.4.13.</b>
+                    
+                    go 流程控制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="go_13_array.html">
+            
+                <a href="go_13_array.html">
+            
+                    
+                        <b>1.4.14.</b>
+                    
+                    go array 数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="go_14_slice.html">
+            
+                <a href="go_14_slice.html">
+            
+                    
+                        <b>1.4.15.</b>
+                    
+                    go slice 切片引用类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.16" data-path="go_15_map.html">
+            
+                <a href="go_15_map.html">
+            
+                    
+                        <b>1.4.16.</b>
+                    
+                    go map容器引用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.17" data-path="go_16_struc.html">
+            
+                <a href="go_16_struc.html">
+            
+                    
+                        <b>1.4.17.</b>
+                    
+                    go struc 结构体
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.18" data-path="go_17_function.html">
+            
+                <a href="go_17_function.html">
+            
+                    
+                        <b>1.4.18.</b>
+                    
+                    go 了解函数运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.19" data-path="go_18_init_function.html">
+            
+                <a href="go_18_init_function.html">
+            
+                    
+                        <b>1.4.19.</b>
+                    
+                    go init 函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.20" data-path="go_19_built_in_function.html">
+            
+                <a href="go_19_built_in_function.html">
+            
+                    
+                        <b>1.4.20.</b>
+                    
+                    go 内置函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.21" data-path="go_20_method.html">
+            
+                <a href="go_20_method.html">
+            
+                    
+                        <b>1.4.21.</b>
+                    
+                    go 了解方法运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.22" data-path="go_21_interface.html">
+            
+                <a href="go_21_interface.html">
+            
+                    
+                        <b>1.4.22.</b>
+                    
+                    go 了解接口运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.23" data-path="go_22_panic_and_recover.html">
+            
+                <a href="go_22_panic_and_recover.html">
+            
+                    
+                        <b>1.4.23.</b>
+                    
+                    go panic 与 recover 异常处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.24" data-path="go_23_defer.html">
+            
+                <a href="go_23_defer.html">
+            
+                    
+                        <b>1.4.24.</b>
+                    
+                    go defer 延迟调用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.25" data-path="go_24_goroutine.html">
+            
+                <a href="go_24_goroutine.html">
+            
+                    
+                        <b>1.4.25.</b>
+                    
+                    go 了解 goroutine 运用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.26" data-path="go_25_channel.html">
+            
+                <a href="go_25_channel.html">
+            
+                    
+                        <b>1.4.26.</b>
+                    
+                    go 了解 channel 管道
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.27" data-path="go_26_container.html">
+            
+                <a href="go_26_container.html">
+            
+                    
+                        <b>1.4.27.</b>
+                    
+                    go container 容器数据类型 heap list  ring
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.28" data-path="go_27_cas.html">
+            
+                <a href="go_27_cas.html">
+            
+                    
+                        <b>1.4.28.</b>
+                    
+                    go cas操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Go-Package/">
+            
+                <a href="../Go-Package/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Go Package
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Go-Package/go-pflag.html">
+            
+                <a href="../Go-Package/go-pflag.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    go 库 pflag 命令行参数解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Go-Package/go-viper.html">
+            
+                <a href="../Go-Package/go-viper.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    go 库 viper 配置解析神器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Go-Package/go-fmt.html">
+            
+                <a href="../Go-Package/go-fmt.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    go 包 fmt 打印输出
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Go-Package/go-os.html">
+            
+                <a href="../Go-Package/go-os.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    go 包 os 文件操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >go struc 结构体</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#go-struc-&#x7ED3;&#x6784;&#x4F53;"><b></b>Go struc &#x7ED3;&#x6784;&#x4F53;</a></li><ul><li><span class="title-icon "></span><a href="#1-struct&#x7C7B;&#x578B;"><b></b>1. struct&#x7C7B;&#x578B;</a></li><li><span class="title-icon "></span><a href="#2-struct-&#x7279;&#x70B9;"><b></b>2. struct &#x7279;&#x70B9;</a></li><ul><li><span class="title-icon "></span><a href="#21-&#x7279;&#x6027;"><b></b>2.1 &#x7279;&#x6027;</a></li></ul><li><span class="title-icon "></span><a href="#3-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x58F0;&#x660E;"><b></b>3. &#x7ED3;&#x6784;&#x4F53;&#x7684;&#x58F0;&#x660E;</a></li><li><span class="title-icon "></span><a href="#4-&#x521B;&#x5EFA;&#x547D;&#x540D;&#x7684;&#x7ED3;&#x6784;&#x4F53;"><b></b>4. &#x521B;&#x5EFA;&#x547D;&#x540D;&#x7684;&#x7ED3;&#x6784;&#x4F53;</a></li><li><span class="title-icon "></span><a href="#5-&#x521B;&#x5EFA;&#x533F;&#x540D;&#x7ED3;&#x6784;&#x4F53;"><b></b>5. &#x521B;&#x5EFA;&#x533F;&#x540D;&#x7ED3;&#x6784;&#x4F53;</a></li><li><span class="title-icon "></span><a href="#6-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x96F6;&#x503C;&#xFF08;zero-value&#xFF09;"><b></b>6. &#x7ED3;&#x6784;&#x4F53;&#x7684;&#x96F6;&#x503C;&#xFF08;Zero Value&#xFF09;</a></li><li><span class="title-icon "></span><a href="#7-&#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x5B57;&#x6BB5;"><b></b>7. &#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x5B57;&#x6BB5;</a></li><li><span class="title-icon "></span><a href="#8-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x6307;&#x9488;"><b></b>8. &#x7ED3;&#x6784;&#x4F53;&#x7684;&#x6307;&#x9488;</a></li><li><span class="title-icon "></span><a href="#9-&#x533F;&#x540D;&#x5B57;&#x6BB5;"><b></b>9. &#x533F;&#x540D;&#x5B57;&#x6BB5;</a></li><li><span class="title-icon "></span><a href="#10-&#x5D4C;&#x5957;&#x7ED3;&#x6784;&#x4F53;&#xFF08;nested-structs&#xFF09;"><b></b>10. &#x5D4C;&#x5957;&#x7ED3;&#x6784;&#x4F53;&#xFF08;Nested Structs&#xFF09;</a></li><li><span class="title-icon "></span><a href="#11-&#x63D0;&#x5347;&#x5B57;&#x6BB5;&#xFF08;promoted-fields&#xFF09;"><b></b>11. &#x63D0;&#x5347;&#x5B57;&#x6BB5;&#xFF08;Promoted Fields&#xFF09;</a></li><li><span class="title-icon "></span><a href="#12-&#x5BFC;&#x51FA;&#x7ED3;&#x6784;&#x4F53;&#x548C;&#x5B57;&#x6BB5;"><b></b>12. &#x5BFC;&#x51FA;&#x7ED3;&#x6784;&#x4F53;&#x548C;&#x5B57;&#x6BB5;</a></li><li><span class="title-icon "></span><a href="#13-&#x7ED3;&#x6784;&#x4F53;&#x76F8;&#x7B49;&#x6027;&#xFF08;structs-equality&#xFF09;"><b></b>13. &#x7ED3;&#x6784;&#x4F53;&#x76F8;&#x7B49;&#x6027;&#xFF08;Structs Equality&#xFF09;</a></li><li><span class="title-icon "></span><a href="#14-struct&#x4E0E;tag&#x5E94;&#x7528;"><b></b>14. struct&#x4E0E;tag&#x5E94;&#x7528;</a></li><ul><li><span class="title-icon "></span><a href="#141-struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;tag&#xFF09;&#x8BF4;&#x660E;"><b></b>14.1 struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;Tag&#xFF09;&#x8BF4;&#x660E;</a></li><li><span class="title-icon "></span><a href="#142-struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;tag&#xFF09;&#x83B7;&#x53D6;"><b></b>14.2 struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;Tag&#xFF09;&#x83B7;&#x53D6;</a></li></ul><li><span class="title-icon "></span><a href="#15-struct&#x4E0E;&#x65B9;&#x6CD5;"><b></b>15. struct&#x4E0E;&#x65B9;&#x6CD5;</a></li><li><span class="title-icon "></span><a href="#16--struct&#x4E0E;&#x51FD;&#x6570;"><b></b>16.  struct&#x4E0E;&#x51FD;&#x6570;</a></li><li><span class="title-icon "></span><a href="#17-&#x904D;&#x5386;&#x94FE;&#x8868;"><b></b>17. &#x904D;&#x5386;&#x94FE;&#x8868;</a></li><li><span class="title-icon "></span><a href="#18-&#x5185;&#x5B58;&#x5BF9;&#x9F50;&#x5F71;&#x54CD;struct&#x7684;&#x5927;&#x5C0F;"><b></b>18. &#x5185;&#x5B58;&#x5BF9;&#x9F50;&#x5F71;&#x54CD;struct&#x7684;&#x5927;&#x5C0F;</a></li><li><span class="title-icon "></span><a href="#19-&#x4F7F;&#x7528;&#x6CE8;&#x610F;&#xFF1A;"><b></b>19. &#x4F7F;&#x7528;&#x6CE8;&#x610F;&#xFF1A;</a></li><ul><li><span class="title-icon "></span><a href="#191-struct&#x7684;&#x8D4B;&#x503C;"><b></b>19.1 struct&#x7684;&#x8D4B;&#x503C;</a></li></ul></ul></ul></div><a href="#go-struc-&#x7ED3;&#x6784;&#x4F53;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="go-struc-&#x7ED3;&#x6784;&#x4F53;"><a name="go-struc-&#x7ED3;&#x6784;&#x4F53;" class="anchor-navigation-ex-anchor" href="#go-struc-&#x7ED3;&#x6784;&#x4F53;"><i class="fa fa-link" aria-hidden="true"></i></a>Go struc &#x7ED3;&#x6784;&#x4F53;</h1>
+<p><img src="https://img-blog.csdnimg.cn/1252efbaf6f943c881140bd0698be3c7.png" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<h2 id="1-struct&#x7C7B;&#x578B;"><a name="1-struct&#x7C7B;&#x578B;" class="anchor-navigation-ex-anchor" href="#1-struct&#x7C7B;&#x578B;"><i class="fa fa-link" aria-hidden="true"></i></a>1. struct&#x7C7B;&#x578B;</h2>
+<p>&#x53EF;&#x5C06;&#x7C7B;&#x578B;&#x5206;&#x4E3A;&#x547D;&#x540D;&#x548C;&#x672A;&#x547D;&#x540D;&#x4E24;&#x5927;&#x7C7B;&#xFF1A;</p>
+<ul>
+<li>&#x547D;&#x540D;&#x7C7B;&#x578B;&#x5305;&#x62EC; bool&#x3001;int&#x3001;string &#x7B49;</li>
+<li>array&#x3001;slice&#x3001;map &#x7B49;&#x548C;&#x5177;&#x4F53;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x3001;&#x957F;&#x5EA6;&#x7B49;&#x6709;&#x5173;&#xFF0C;&#x5C5E;&#x4E8E;&#x672A;&#x547D;&#x540D;&#x7C7B;&#x578B;&#x3002;</li>
+</ul>
+<p>&#x5177;&#x6709;&#x76F8;&#x540C;&#x58F0;&#x660E;&#x7684;&#x672A;&#x547D;&#x540D;&#x7C7B;&#x578B;&#x88AB;&#x89C6;&#x4E3A;&#x540C;&#x4E00;&#x7C7B;&#x578B;</p>
+<ol>
+<li>&#x5177;&#x6709;&#x76F8;&#x540C;&#x57FA;&#x7C7B;&#x578B;&#x7684;&#x6307;&#x9488;&#x3002;</li>
+<li>&#x5177;&#x6709;&#x76F8;&#x540C;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x548C;&#x957F;&#x5EA6;&#x7684; array&#x3002;</li>
+<li>&#x5177;&#x6709;&#x76F8;&#x540C;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x7684; slice&#x3002;</li>
+<li>&#x5177;&#x6709;&#x76F8;&#x540C;&#x952E;&#x503C;&#x7C7B;&#x578B;&#x7684; map&#x3002;</li>
+<li>&#x5177;&#x6709;&#x76F8;&#x540C;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x548C;&#x4F20;&#x9001;&#x65B9;&#x5411;&#x7684; channel&#x3002;</li>
+<li>&#x5177;&#x6709;&#x76F8;&#x540C;&#x5B57;&#x6BB5;&#x5E8F;&#x5217; (&#x5B57;&#x6BB5;&#x540D;&#x3001;&#x7C7B;&#x578B;&#x3001;&#x6807;&#x7B7E;&#x3001;&#x987A;&#x5E8F;) &#x7684;&#x533F;&#x540D; struct&#x3002; &#x7B7E;&#x540D;&#x76F8;&#x540C; (&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x4E0D;&#x5305;&#x62EC;&#x53C2;&#x6570;&#x540D;&#x79F0;) &#x7684;function&#x3002;</li>
+<li>&#x65B9;&#x6CD5;&#x96C6;&#x76F8;&#x540C; ( &#x65B9;&#x6CD5;&#x540D;&#x3001;&#x65B9;&#x6CD5;&#x7B7E;&#x540D;&#x76F8;&#x540C;&#xFF0C;&#x548C;&#x6B21;&#x5E8F;&#x65E0;&#x5173;) &#x7684; interface&#x3002;</li>
+</ol>
+<h2 id="2-struct-&#x7279;&#x70B9;"><a name="2-struct-&#x7279;&#x70B9;" class="anchor-navigation-ex-anchor" href="#2-struct-&#x7279;&#x70B9;"><i class="fa fa-link" aria-hidden="true"></i></a>2. struct &#x7279;&#x70B9;</h2>
+<ol>
+<li>&#x7528;&#x6765;&#x81EA;&#x5B9A;&#x4E49;&#x590D;&#x6742;&#x6570;&#x636E;&#x7ED3;&#x6784;</li>
+<li>struct&#x91CC;&#x9762;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x591A;&#x4E2A;&#x5B57;&#x6BB5;&#xFF08;&#x5C5E;&#x6027;&#xFF09;</li>
+<li>struct&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x65B9;&#x6CD5;&#xFF0C;&#x6CE8;&#x610F;&#x548C;&#x51FD;&#x6570;&#x7684;&#x533A;&#x5206;</li>
+<li>struct&#x7C7B;&#x578B;&#x662F;&#x503C;&#x7C7B;&#x578B;</li>
+<li>struct&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x5D4C;&#x5957;</li>
+<li>Go&#x8BED;&#x8A00;&#x6CA1;&#x6709;class&#x7C7B;&#x578B;&#xFF0C;&#x53EA;&#x6709;struct&#x7C7B;&#x578B;</li>
+<li>&#x7ED3;&#x6784;&#x4F53;&#x662F;&#x7528;&#x6237;&#x5355;&#x72EC;&#x5B9A;&#x4E49;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4E0D;&#x80FD;&#x548C;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x5F3A;&#x5236;&#x8F6C;&#x6362;</li>
+<li>golang&#x4E2D;&#x7684;struct&#x6CA1;&#x6709;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x4E00;&#x822C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5DE5;&#x5382;&#x6A21;&#x5F0F;&#x6765;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4E3A;struct&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#xFF0C;&#x5199;&#x4E0A;&#x4E00;&#x4E2A;tag&#x3002;&#x8FD9;&#x4E2A;tag&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x7684;&#x673A;&#x5236;&#x83B7;&#x53D6;&#x5230;&#xFF0C;&#x6700;&#x5E38;&#x7528;&#x7684;&#x573A;&#x666F;&#x5C31;&#x662F;json&#x5E8F;&#x5217;&#x5316;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x3002;</li>
+</ol>
+<h3 id="21-&#x7279;&#x6027;"><a name="21-&#x7279;&#x6027;" class="anchor-navigation-ex-anchor" href="#21-&#x7279;&#x6027;"><i class="fa fa-link" aria-hidden="true"></i></a>2.1 &#x7279;&#x6027;</h3>
+<p> <strong>&#x503C;&#x4F20;&#x9012;</strong>
+&#x7ED3;&#x6784;&#x4F53;&#x4E0E;&#x6570;&#x7EC4;&#x4E00;&#x6837;&#xFF0C;&#x662F;&#x590D;&#x5408;&#x7C7B;&#x578B;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x4F5C;&#x4E3A;&#x5B9E;&#x53C2;&#x4F20;&#x9012;&#x7ED9;&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x8FD8;&#x662F;&#x8D4B;&#x503C;&#x7ED9;&#x5176;&#x4ED6;&#x53D8;&#x91CF;&#xFF0C;&#x90FD;&#x662F;&#x503C;&#x4F20;&#x9012;&#xFF0C;&#x5373;&#x590D;&#x4E00;&#x4E2A;&#x526F;&#x672C;&#x3002;
+<strong>&#x6CA1;&#x6709;&#x7EE7;&#x627F;</strong>
+Go&#x8BED;&#x8A00;&#x662F;&#x652F;&#x6301;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7F16;&#x7A0B;&#x7684;&#xFF0C;&#x4F46;&#x5374;&#x6CA1;&#x6709;&#x7EE7;&#x627F;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5728;&#x7ED3;&#x6784;&#x4F53;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7EC4;&#x5408;&#x5176;&#x4ED6;&#x7ED3;&#x6784;&#x4F53;&#x6765;&#x6784;&#x5EFA;&#x66F4;&#x590D;&#x6742;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x3002;
+<strong>&#x7ED3;&#x6784;&#x4F53;&#x4E0D;&#x80FD;&#x5305;&#x542B;&#x81EA;&#x5DF1;</strong>
+&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x5305;&#x542B;&#x81EA;&#x8EAB;&#xFF0C;&#x6BD4;&#x5982;Member&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x4E0D;&#x80FD;&#x662F;Member&#x7C7B;&#x578B;&#xFF0C;&#x4F46;&#x5374;&#x53EF;&#x80FD;&#x662F;*Member&#x3002;</p>
+<p>&#x5F15;&#x7528;&#x6307;&#x9488;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x7528;new&#x6216;make&#xFF1F;
+<a href="https://www.flysnow.org/2017/10/23/go-new-vs-make.html" target="_blank">Go&#x8BED;&#x8A00;&#x4E2D;new&#x548C;make&#x7684;&#x533A;&#x522B;</a></p>
+<h2 id="3-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x58F0;&#x660E;"><a name="3-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x58F0;&#x660E;" class="anchor-navigation-ex-anchor" href="#3-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x58F0;&#x660E;"><i class="fa fa-link" aria-hidden="true"></i></a>3. &#x7ED3;&#x6784;&#x4F53;&#x7684;&#x58F0;&#x660E;</h2>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    firstName string
+    lastName  string
+    age       int
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x91CC;&#xFF0C;&#x58F0;&#x660E;&#x4E86;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#x7C7B;&#x578B; Employee&#xFF0C;&#x5B83;&#x6709; firstName&#x3001;lastName &#x548C; age &#x4E09;&#x4E2A;&#x5B57;&#x6BB5;&#x3002;&#x901A;&#x8FC7;&#x628A;&#x76F8;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x5B57;&#x6BB5;&#x58F0;&#x660E;&#x5728;&#x540C;&#x4E00;&#x884C;&#xFF0C;&#x7ED3;&#x6784;&#x4F53;&#x53EF;&#x4EE5;&#x53D8;&#x5F97;&#x66F4;&#x52A0;&#x7D27;&#x51D1;&#x3002;&#x5728;&#x4E0A;&#x9762;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x4E2D;&#xFF0C;firstName &#x548C; lastName &#x5C5E;&#x4E8E;&#x76F8;&#x540C;&#x7684; string &#x7C7B;&#x578B;&#xFF0C;&#x4E8E;&#x662F;&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#x53EF;&#x4EE5;&#x91CD;&#x5199;&#x4E3A;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    firstName, lastName string
+    age, salary         int
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x7684;&#x7ED3;&#x6784;&#x4F53; Employee &#x79F0;&#x4E3A; <strong>&#x547D;&#x540D;&#x7684;&#x7ED3;&#x6784;&#x4F53;</strong>&#xFF08;Named Structure&#xFF09;&#x3002;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E86;&#x540D;&#x4E3A; Employee &#x7684;&#x65B0;&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x5B83;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x521B;&#x5EFA; Employee &#x7C7B;&#x578B;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x53D8;&#x91CF;&#x3002;</p>
+<p>&#x58F0;&#x660E;&#x7ED3;&#x6784;&#x4F53;&#x65F6;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x65B0;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x7C7B;&#x578B;&#x79F0;&#x4E3A; <strong>&#x533F;&#x540D;&#x7ED3;&#x6784;&#x4F53;</strong>&#xFF08;Anonymous Structure&#xFF09;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">var employee struct <span class="token punctuation">{</span>
+    firstName, lastName string
+    age int
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="4-&#x521B;&#x5EFA;&#x547D;&#x540D;&#x7684;&#x7ED3;&#x6784;&#x4F53;"><a name="4-&#x521B;&#x5EFA;&#x547D;&#x540D;&#x7684;&#x7ED3;&#x6784;&#x4F53;" class="anchor-navigation-ex-anchor" href="#4-&#x521B;&#x5EFA;&#x547D;&#x540D;&#x7684;&#x7ED3;&#x6784;&#x4F53;"><i class="fa fa-link" aria-hidden="true"></i></a>4. &#x521B;&#x5EFA;&#x547D;&#x540D;&#x7684;&#x7ED3;&#x6784;&#x4F53;</h2>
+<p>&#x65B9;&#x6CD5;&#x6709;&#x51E0;&#x79CD;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">package main
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token builtin class-name">type</span> Test struct <span class="token punctuation">{</span>
+    int
+    string
+<span class="token punctuation">}</span>
+var a Test
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    b :<span class="token operator">=</span> new<span class="token punctuation">(</span>Test<span class="token punctuation">)</span> //&#x540C; var b *Test <span class="token operator">=</span> new<span class="token punctuation">(</span>Test<span class="token punctuation">)</span>
+    c :<span class="token operator">=</span> Test<span class="token punctuation">{</span><span class="token number">1</span>, <span class="token string">&quot;c&quot;</span><span class="token punctuation">}</span>
+    d :<span class="token operator">=</span> Test<span class="token punctuation">{</span><span class="token punctuation">}</span>
+    e :<span class="token operator">=</span> <span class="token operator">&amp;</span>Test<span class="token punctuation">{</span><span class="token punctuation">}</span>
+    f :<span class="token operator">=</span> <span class="token operator">&amp;</span>Test<span class="token punctuation">{</span><span class="token number">2</span>, <span class="token string">&quot;f&quot;</span><span class="token punctuation">}</span> //&#x540C; var d *Test <span class="token operator">=</span> <span class="token operator">&amp;</span>Test<span class="token punctuation">{</span><span class="token number">2</span>, <span class="token string">&quot;f&quot;</span><span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span>a, b, c, d, e, f<span class="token punctuation">)</span>
+    // &#x6CE8;: a b c d &#x8FD4;&#x56DE; Test &#x7C7B;&#x578B;&#x53D8;&#x91CF;&#xFF1B;e f &#x8FD4;&#x56DE; *Test &#x7C7B;&#x578B;&#x53D8;&#x91CF;&#xFF1B;&#x82E5;&#x65E0;&#x521D;&#x59CB;&#x5316;&#x503C;&#xFF0C;&#x5219;&#x9ED8;&#x8BA4;&#x4E3A;&#x96F6;&#x503C;
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># ls</span>
+stru1.go  stru2.go  stru3.go
+<span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru3.go</span>
+<span class="token punctuation">{</span><span class="token number">0</span> <span class="token punctuation">}</span> <span class="token operator">&amp;</span><span class="token punctuation">{</span><span class="token number">0</span> <span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token number">1</span> c<span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token number">0</span> <span class="token punctuation">}</span> <span class="token operator">&amp;</span><span class="token punctuation">{</span><span class="token number">0</span> <span class="token punctuation">}</span> <span class="token operator">&amp;</span><span class="token punctuation">{</span><span class="token number">2</span> f<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x521D;&#x59CB;&#x5316;&#x503C;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x4E24;&#x79CD;:</p>
+<ul>
+<li>a. &#x6709;&#x5E8F;: typeName{value1, value2, &#x2026;} &#x5FC5;&#x987B;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;</li>
+<li>b. &#x65E0;&#x5E8F;: typeName{field1:value1, field2:value2, &#x2026;} &#x53EF;&#x521D;&#x59CB;&#x5316;&#x90E8;&#x5206;&#x503C;</li>
+</ul>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    firstName, lastName string
+    age, salary         int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    //creating structure using field names
+    emp1 :<span class="token operator">=</span> Employee<span class="token punctuation">{</span>
+        firstName: <span class="token string">&quot;Sam&quot;</span>,
+        age:       <span class="token number">25</span>,
+        salary:    <span class="token number">500</span>,
+        lastName:  <span class="token string">&quot;Anderson&quot;</span>,
+    <span class="token punctuation">}</span>
+
+    //creating structure without using field names
+    emp2 :<span class="token operator">=</span> Employee<span class="token punctuation">{</span><span class="token string">&quot;Thomas&quot;</span>, <span class="token string">&quot;Paul&quot;</span>, <span class="token number">29</span>, <span class="token number">800</span><span class="token punctuation">}</span>
+
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Employee 1&quot;</span>, emp1<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Employee 2&quot;</span>, emp2<span class="token punctuation">)</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">&#x8BE5;&#x7A0B;&#x5E8F;&#x5C06;&#x8F93;&#x51FA;&#xFF1A;
+
+Employee <span class="token number">1</span> <span class="token punctuation">{</span>Sam Anderson <span class="token number">25</span> <span class="token number">500</span><span class="token punctuation">}</span>
+Employee <span class="token number">2</span> <span class="token punctuation">{</span>Thomas Paul <span class="token number">29</span> <span class="token number">800</span><span class="token punctuation">}</span>
+</code></pre>
+<h2 id="5-&#x521B;&#x5EFA;&#x533F;&#x540D;&#x7ED3;&#x6784;&#x4F53;"><a name="5-&#x521B;&#x5EFA;&#x533F;&#x540D;&#x7ED3;&#x6784;&#x4F53;" class="anchor-navigation-ex-anchor" href="#5-&#x521B;&#x5EFA;&#x533F;&#x540D;&#x7ED3;&#x6784;&#x4F53;"><i class="fa fa-link" aria-hidden="true"></i></a>5. &#x521B;&#x5EFA;&#x533F;&#x540D;&#x7ED3;&#x6784;&#x4F53;</h2>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    emp3 :<span class="token operator">=</span> struct <span class="token punctuation">{</span>
+        firstName, lastName string
+        age, salary         int
+    <span class="token punctuation">}</span><span class="token punctuation">{</span>
+        firstName: <span class="token string">&quot;Andreah&quot;</span>,
+        lastName:  <span class="token string">&quot;Nikola&quot;</span>,
+        age:       <span class="token number">31</span>,
+        salary:    <span class="token number">5000</span>,
+    <span class="token punctuation">}</span>
+
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Employee 3&quot;</span>, emp3<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8BE5;&#x7A0B;&#x5E8F;&#x4F1A;&#x8F93;&#x51FA;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">Employee <span class="token number">3</span> <span class="token punctuation">{</span>Andreah Nikola <span class="token number">31</span> <span class="token number">5000</span><span class="token punctuation">}</span>
+</code></pre>
+<h2 id="6-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x96F6;&#x503C;&#xFF08;zero-value&#xFF09;"><a name="6-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x96F6;&#x503C;&#xFF08;zero-value&#xFF09;" class="anchor-navigation-ex-anchor" href="#6-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x96F6;&#x503C;&#xFF08;zero-value&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>6. &#x7ED3;&#x6784;&#x4F53;&#x7684;&#x96F6;&#x503C;&#xFF08;Zero Value&#xFF09;</h2>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    firstName, lastName string
+    age, salary         int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var emp4 Employee //zero valued structure
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Employee 4&quot;</span>, emp4<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8BE5;&#x7A0B;&#x5E8F;&#x5B9A;&#x4E49;&#x4E86; emp4&#xFF0C;&#x5374;&#x6CA1;&#x6709;&#x521D;&#x59CB;&#x5316;&#x4EFB;&#x4F55;&#x503C;&#x3002;&#x56E0;&#x6B64; firstName &#x548C; lastName &#x8D4B;&#x503C;&#x4E3A; string &#x7684;&#x96F6;&#x503C;&#xFF08;&quot;&quot;&#xFF09;&#x3002;&#x800C; age &#x548C; salary &#x8D4B;&#x503C;&#x4E3A; int &#x7684;&#x96F6;&#x503C;&#xFF08;0&#xFF09;&#x3002;&#x8BE5;&#x7A0B;&#x5E8F;&#x4F1A;&#x8F93;&#x51FA;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">Employee <span class="token number">4</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token number">0</span><span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5F53;&#x7136;&#x8FD8;&#x53EF;&#x4EE5;&#x4E3A;&#x67D0;&#x4E9B;&#x5B57;&#x6BB5;&#x6307;&#x5B9A;&#x521D;&#x59CB;&#x503C;&#xFF0C;&#x800C;&#x5FFD;&#x7565;&#x5176;&#x4ED6;&#x5B57;&#x6BB5;&#x3002;&#x8FD9;&#x6837;&#xFF0C;&#x5FFD;&#x7565;&#x7684;&#x5B57;&#x6BB5;&#x540D;&#x4F1A;&#x8D4B;&#x503C;&#x4E3A;&#x96F6;&#x503C;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    firstName, lastName string
+    age, salary         int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    emp5 :<span class="token operator">=</span> Employee<span class="token punctuation">{</span>
+        firstName: <span class="token string">&quot;John&quot;</span>,
+        lastName:  <span class="token string">&quot;Paul&quot;</span>,
+    <span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Employee 5&quot;</span>, emp5<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7A0B;&#x5E8F;&#x4E2D;&#x7684;&#x7B2C; 14 &#x884C;&#x548C;&#x7B2C; 15 &#x884C;&#xFF0C;&#x6211;&#x4EEC;&#x521D;&#x59CB;&#x5316;&#x4E86; firstName &#x548C; lastName&#xFF0C;&#x800C; age &#x548C; salary &#x6CA1;&#x6709;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;&#x56E0;&#x6B64; age &#x548C; salary &#x8D4B;&#x503C;&#x4E3A;&#x96F6;&#x503C;&#x3002;&#x8BE5;&#x7A0B;&#x5E8F;&#x4F1A;&#x8F93;&#x51FA;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">Employee <span class="token number">5</span> <span class="token punctuation">{</span>John Paul <span class="token number">0</span> <span class="token number">0</span><span class="token punctuation">}</span>
+</code></pre>
+<h2 id="7-&#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x5B57;&#x6BB5;"><a name="7-&#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x5B57;&#x6BB5;" class="anchor-navigation-ex-anchor" href="#7-&#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x5B57;&#x6BB5;"><i class="fa fa-link" aria-hidden="true"></i></a>7. &#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x5B57;&#x6BB5;</h2>
+<p>&#x70B9;&#x53F7;&#x64CD;&#x4F5C;&#x7B26; . &#x7528;&#x4E8E;&#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x5B57;&#x6BB5;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    firstName, lastName string
+    age, salary         int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    emp6 :<span class="token operator">=</span> Employee<span class="token punctuation">{</span><span class="token string">&quot;Sam&quot;</span>, <span class="token string">&quot;Anderson&quot;</span>, <span class="token number">55</span>, <span class="token number">6000</span><span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;First Name:&quot;</span>, emp6.firstName<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Last Name:&quot;</span>, emp6.lastName<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Age:&quot;</span>, emp6.age<span class="token punctuation">)</span>
+    fmt.Printf<span class="token punctuation">(</span><span class="token string">&quot;Salary: $%d&quot;</span>, emp6.salary<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x7EBF;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;[5]</p>
+<p>&#x4E0A;&#x9762;&#x7A0B;&#x5E8F;&#x4E2D;&#x7684; emp6.firstName &#x8BBF;&#x95EE;&#x4E86;&#x7ED3;&#x6784;&#x4F53; emp6 &#x7684;&#x5B57;&#x6BB5; firstName&#x3002;&#x8BE5;&#x7A0B;&#x5E8F;&#x8F93;&#x51FA;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">First Name: Sam
+Last Name: Anderson
+Age: <span class="token number">55</span>
+Salary: <span class="token variable">$6000</span>
+</code></pre>
+<p>&#x8FD8;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x96F6;&#x503C;&#x7684; struct&#xFF0C;&#x4EE5;&#x540E;&#x518D;&#x7ED9;&#x5404;&#x4E2A;&#x5B57;&#x6BB5;&#x8D4B;&#x503C;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    firstName, lastName string
+    age, salary         int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var emp7 Employee
+    emp7.firstName <span class="token operator">=</span> <span class="token string">&quot;Jack&quot;</span>
+    emp7.lastName <span class="token operator">=</span> <span class="token string">&quot;Adams&quot;</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Employee 7:&quot;</span>, emp7<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x7EBF;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;[6]</p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x4E86; emp7&#xFF0C;&#x63A5;&#x7740;&#x7ED9; firstName &#x548C; lastName &#x8D4B;&#x503C;&#x3002;&#x8BE5;&#x7A0B;&#x5E8F;&#x4F1A;&#x8F93;&#x51FA;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">Employee <span class="token number">7</span>: <span class="token punctuation">{</span>Jack Adams <span class="token number">0</span> <span class="token number">0</span><span class="token punctuation">}</span>
+</code></pre>
+<h2 id="8-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x6307;&#x9488;"><a name="8-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x6307;&#x9488;" class="anchor-navigation-ex-anchor" href="#8-&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x6307;&#x9488;"><i class="fa fa-link" aria-hidden="true"></i></a>8. &#x7ED3;&#x6784;&#x4F53;&#x7684;&#x6307;&#x9488;</h2>
+<p>&#x8FD8;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x6307;&#x5411;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x6307;&#x9488;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    firstName, lastName string
+    age, salary         int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    emp8 :<span class="token operator">=</span> <span class="token operator">&amp;</span>Employee<span class="token punctuation">{</span><span class="token string">&quot;Sam&quot;</span>, <span class="token string">&quot;Anderson&quot;</span>, <span class="token number">55</span>, <span class="token number">6000</span><span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;First Name:&quot;</span>, <span class="token punctuation">(</span>*emp8<span class="token punctuation">)</span>.firstName<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Age:&quot;</span>, <span class="token punctuation">(</span>*emp8<span class="token punctuation">)</span>.age<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x7EBF;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;[7]</p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;emp8 &#x662F;&#x4E00;&#x4E2A;&#x6307;&#x5411;&#x7ED3;&#x6784;&#x4F53; Employee &#x7684;&#x6307;&#x9488;&#x3002;(*emp8).firstName &#x8868;&#x793A;&#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53; emp8 &#x7684; firstName &#x5B57;&#x6BB5;&#x3002;&#x8BE5;&#x7A0B;&#x5E8F;&#x4F1A;&#x8F93;&#x51FA;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">First Name: Sam
+Age: <span class="token number">55</span>
+</code></pre>
+<p>Go &#x8BED;&#x8A00;&#x5141;&#x8BB8;&#x6211;&#x4EEC;&#x5728;&#x8BBF;&#x95EE; firstName &#x5B57;&#x6BB5;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; emp8.firstName &#x6765;&#x4EE3;&#x66FF;&#x663E;&#x5F0F;&#x7684;&#x89E3;&#x5F15;&#x7528; (*emp8).firstName&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    firstName, lastName string
+    age, salary         int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    emp8 :<span class="token operator">=</span> <span class="token operator">&amp;</span>Employee<span class="token punctuation">{</span><span class="token string">&quot;Sam&quot;</span>, <span class="token string">&quot;Anderson&quot;</span>, <span class="token number">55</span>, <span class="token number">6000</span><span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;First Name:&quot;</span>, emp8.firstName<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Age:&quot;</span>, emp8.age<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x7EBF;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;[8]</p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; emp8.firstName &#x6765;&#x8BBF;&#x95EE; firstName &#x5B57;&#x6BB5;&#xFF0C;&#x8BE5;&#x7A0B;&#x5E8F;&#x4F1A;&#x8F93;&#x51FA;&#xFF1A;</p>
+<p>First Name: Sam
+Age: 55</p>
+<h2 id="9-&#x533F;&#x540D;&#x5B57;&#x6BB5;"><a name="9-&#x533F;&#x540D;&#x5B57;&#x6BB5;" class="anchor-navigation-ex-anchor" href="#9-&#x533F;&#x540D;&#x5B57;&#x6BB5;"><i class="fa fa-link" aria-hidden="true"></i></a>9. &#x533F;&#x540D;&#x5B57;&#x6BB5;</h2>
+<p><strong>&#x58F0;&#x660E;&#x4E00;&#x4E2A; struct1 &#x53EF;&#x4EE5;&#x5305;&#x542B;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684; struct2 &#x6216;&#x8005;go&#x8BED;&#x8A00;&#x4E2D;&#x5185;&#x7F6E;&#x7C7B;&#x578B;&#x4F5C;&#x4E3A;&#x5185;&#x7F6E;&#x5B57;&#x6BB5;&#xFF0C;&#x79F0;&#x4E3A;&#x533F;&#x540D;&#x5B57;&#x6BB5;</strong>&#xFF0C;&#x5373;&#x53EA;&#x5199;&#x4E86; typeName&#xFF0C;&#x65E0; varName&#xFF0C;&#x4F46;&#x662F; <code>typeName</code> &#x4E0D;&#x80FD;&#x91CD;&#x590D;&#x3002;
+&#x533F;&#x540D;&#x5B57;&#x6BB5;&#x4E0E;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7A0B;&#x5E8F;&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x7EE7;&#x627F;&#x58F0;&#x660E;&#x53CA;&#x521D;&#x59CB;&#x5316;:</p>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    string
+    int
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x63A5;&#x4E0B;&#x6765;&#x4F7F;&#x7528;&#x533F;&#x540D;&#x5B57;&#x6BB5;&#x6765;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    string
+    int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    p :<span class="token operator">=</span> Person<span class="token punctuation">{</span><span class="token string">&quot;Naveen&quot;</span>, <span class="token number">50</span><span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x7EBF;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;[9]</p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x7ED3;&#x6784;&#x4F53; Person &#x6709;&#x4E24;&#x4E2A;&#x533F;&#x540D;&#x5B57;&#x6BB5;&#x3002;p := Person{&quot;Naveen&quot;, 50} &#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A; Person &#x7C7B;&#x578B;&#x7684;&#x53D8;&#x91CF;&#x3002;&#x8BE5;&#x7A0B;&#x5E8F;&#x8F93;&#x51FA; <code>{Naveen 50}</code>&#x3002;</p>
+<p>&#x867D;&#x7136;&#x533F;&#x540D;&#x5B57;&#x6BB5;&#x6CA1;&#x6709;&#x540D;&#x79F0;&#xFF0C;&#x4F46;&#x5176;&#x5B9E;&#x533F;&#x540D;&#x5B57;&#x6BB5;&#x7684;&#x540D;&#x79F0;&#x5C31;&#x9ED8;&#x8BA4;&#x4E3A;&#x5B83;&#x7684;&#x7C7B;&#x578B;&#x3002;&#x6BD4;&#x5982;&#x5728;&#x4E0A;&#x9762;&#x7684; Person &#x7ED3;&#x6784;&#x4F53;&#x91CC;&#xFF0C;&#x867D;&#x8BF4;&#x5B57;&#x6BB5;&#x662F;&#x533F;&#x540D;&#x7684;&#xFF0C;&#x4F46; Go &#x9ED8;&#x8BA4;&#x8FD9;&#x4E9B;&#x5B57;&#x6BB5;&#x540D;&#x662F;&#x5B83;&#x4EEC;&#x5404;&#x81EA;&#x7684;&#x7C7B;&#x578B;&#x3002;&#x6240;&#x4EE5; Person &#x7ED3;&#x6784;&#x4F53;&#x6709;&#x4E24;&#x4E2A;&#x540D;&#x4E3A; string &#x548C; int &#x7684;&#x5B57;&#x6BB5;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    string
+    int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var p1 Person
+    p1.string <span class="token operator">=</span> <span class="token string">&quot;naveen&quot;</span>
+    p1.int <span class="token operator">=</span> <span class="token number">50</span>
+    fmt.Println<span class="token punctuation">(</span>p1<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x7EBF;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;[10]</p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7A0B;&#x5E8F;&#x7684;&#x7B2C; 14 &#x884C;&#x548C;&#x7B2C; 15 &#x884C;&#xFF0C;&#x6211;&#x4EEC;&#x8BBF;&#x95EE;&#x4E86; Person &#x7ED3;&#x6784;&#x4F53;&#x7684;&#x533F;&#x540D;&#x5B57;&#x6BB5;&#xFF0C;&#x6211;&#x4EEC;&#x628A;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#x4F5C;&#x4E3A;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x5206;&#x522B;&#x4E3A; &quot;string&quot; &#x548C; &quot;int&quot;&#x3002;&#x4E0A;&#x9762;&#x7A0B;&#x5E8F;&#x7684;&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">{</span>naveen <span class="token number">50</span><span class="token punctuation">}</span>
+</code></pre>
+<h2 id="10-&#x5D4C;&#x5957;&#x7ED3;&#x6784;&#x4F53;&#xFF08;nested-structs&#xFF09;"><a name="10-&#x5D4C;&#x5957;&#x7ED3;&#x6784;&#x4F53;&#xFF08;nested-structs&#xFF09;" class="anchor-navigation-ex-anchor" href="#10-&#x5D4C;&#x5957;&#x7ED3;&#x6784;&#x4F53;&#xFF08;nested-structs&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>10. &#x5D4C;&#x5957;&#x7ED3;&#x6784;&#x4F53;&#xFF08;Nested Structs&#xFF09;</h2>
+<p>&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x5B57;&#x6BB5;&#x6709;&#x53EF;&#x80FD;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#x3002;&#x8FD9;&#x6837;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x79F0;&#x4E3A;&#x5D4C;&#x5957;&#x7ED3;&#x6784;&#x4F53;&#x3002;</p>
+<h4 id="&#x7B2C;&#x4E00;&#x793A;&#x4F8B;"><a name="&#x7B2C;&#x4E00;&#x793A;&#x4F8B;" class="anchor-navigation-ex-anchor" href="#&#x7B2C;&#x4E00;&#x793A;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7B2C;&#x4E00;&#x793A;&#x4F8B;</h4>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Address struct <span class="token punctuation">{</span>
+    city, state string
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    name string
+    age int
+    address Address
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var p Person
+    p.name <span class="token operator">=</span> <span class="token string">&quot;Naveen&quot;</span>
+    p.age <span class="token operator">=</span> <span class="token number">50</span>
+    p.address <span class="token operator">=</span> Address <span class="token punctuation">{</span>
+        city: <span class="token string">&quot;Chicago&quot;</span>,
+        state: <span class="token string">&quot;Illinois&quot;</span>,
+    <span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Name:&quot;</span>, p.name<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Age:&quot;</span>,p.age<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;City:&quot;</span>,p.address.city<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;State:&quot;</span>,p.address.state<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x7EBF;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;[11]</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x7ED3;&#x6784;&#x4F53; Person &#x6709;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5; address&#xFF0C;&#x800C; address &#x4E5F;&#x662F;&#x7ED3;&#x6784;&#x4F53;&#x3002;&#x8BE5;&#x7A0B;&#x5E8F;&#x8F93;&#x51FA;&#xFF1A;</p>
+<h4 id="&#x7B2C;&#x4E8C;&#x793A;&#x4F8B;"><a name="&#x7B2C;&#x4E8C;&#x793A;&#x4F8B;" class="anchor-navigation-ex-anchor" href="#&#x7B2C;&#x4E8C;&#x793A;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7B2C;&#x4E8C;&#x793A;&#x4F8B;</h4>
+<pre class="language-"><code class="lang-bash">Name: Naveen
+Age: <span class="token number">50</span>
+City: Chicago
+State: Illinois
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    name string
+    age  int
+    addr string
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    Person //&#x533F;&#x540D;&#x5B57;&#x6BB5;
+    salary int
+    int           //&#x7528;&#x5185;&#x7F6E;&#x7C7B;&#x578B;&#x4F5C;&#x4E3A;&#x533F;&#x540D;&#x5B57;&#x6BB5;
+    addr   string //&#x7C7B;&#x4F3C;&#x4E8E;&#x91CD;&#x8F7D;
+<span class="token punctuation">}</span>
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    em1 :<span class="token operator">=</span> Employee<span class="token punctuation">{</span>Person<span class="token punctuation">{</span><span class="token string">&quot;rain&quot;</span>, <span class="token number">23</span>, <span class="token string">&quot;qingyangqu&quot;</span><span class="token punctuation">}</span>, <span class="token number">5000</span>, <span class="token number">100</span>, <span class="token string">&quot;gaoxingqu&quot;</span><span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span>em1<span class="token punctuation">)</span>
+    // var em2 Person <span class="token operator">=</span> em1
+    // Error: cannot use em1 <span class="token punctuation">(</span>type Employee<span class="token punctuation">)</span> as <span class="token builtin class-name">type</span> Person <span class="token keyword">in</span> assignment &#xFF08;&#x6CA1;&#x6709;&#x7EE7;&#x627F;&#xFF0C; &#x7136;&#x4E5F;&#x4E0D;&#x4F1A;&#x6709;&#x591A;&#x6001;&#xFF09;
+    var em2 Person <span class="token operator">=</span> em1.Person // &#x540C;&#x7C7B;&#x578B;&#x62F7;&#x8D1D;&#x3002;
+    fmt.Println<span class="token punctuation">(</span>em2<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru6.go </span>
+<span class="token punctuation">{</span><span class="token punctuation">{</span>rain <span class="token number">23</span> qingyangqu<span class="token punctuation">}</span> <span class="token number">5000</span> <span class="token number">100</span> gaoxingqu<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>rain <span class="token number">23</span> qingyangqu<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="&#x7B2C;&#x4E09;&#x793A;&#x4F8B;"><a name="&#x7B2C;&#x4E09;&#x793A;&#x4F8B;" class="anchor-navigation-ex-anchor" href="#&#x7B2C;&#x4E09;&#x793A;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7B2C;&#x4E09;&#x793A;&#x4F8B;</h4>
+<pre class="language-"><code class="lang-bash">package main
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    name string
+    age  int
+    addr string
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> Employee struct <span class="token punctuation">{</span>
+    Person //&#x533F;&#x540D;&#x5B57;&#x6BB5;
+    salary int
+    int           //&#x7528;&#x5185;&#x7F6E;&#x7C7B;&#x578B;&#x4F5C;&#x4E3A;&#x533F;&#x540D;&#x5B57;&#x6BB5;
+    addr   string //&#x7C7B;&#x4F3C;&#x4E8E;&#x91CD;&#x8F7D;
+<span class="token punctuation">}</span>
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    /*
+       var em1 Employee <span class="token operator">=</span> Employee<span class="token punctuation">{</span><span class="token punctuation">}</span>
+       em1.Person <span class="token operator">=</span> Person<span class="token punctuation">{</span><span class="token string">&quot;rain&quot;</span>, <span class="token number">23</span>, <span class="token string">&quot;&#x5E1D;&#x90FD;&quot;</span><span class="token punctuation">}</span>
+       em1.salary <span class="token operator">=</span> <span class="token number">5000</span>
+       em1.int <span class="token operator">=</span> <span class="token number">100</span> //&#x4F7F;&#x7528;&#x65F6;&#x6CE8;&#x610F;&#x5176;&#x610F;&#x4E49;&#xFF0C;&#x6B64;&#x5904;&#x65E0;
+       em1.addr <span class="token operator">=</span> <span class="token string">&quot;&#x5317;&#x4EAC;&quot;</span>
+    */
+    //em1 :<span class="token operator">=</span> Employee<span class="token punctuation">{</span>Person<span class="token punctuation">{</span><span class="token string">&quot;rain&quot;</span>, <span class="token number">23</span>, <span class="token string">&quot;&#x5E1D;&#x90FD;&quot;</span><span class="token punctuation">}</span>, <span class="token number">5000</span>, <span class="token number">100</span>, <span class="token string">&quot;&#x5317;&#x4EAC;&quot;</span><span class="token punctuation">}</span>
+    //&#x521D;&#x59CB;&#x5316;&#x65B9;&#x5F0F;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x4F46;&#x662F;&#x7ED3;&#x679C;&#x4E00;&#x6837;
+    em1 :<span class="token operator">=</span> Employee<span class="token punctuation">{</span>Person: Person<span class="token punctuation">{</span><span class="token string">&quot;Murphy&quot;</span>, <span class="token number">23</span>, <span class="token string">&quot;&#x5E1D;&#x90FD;&quot;</span><span class="token punctuation">}</span>, salary: <span class="token number">5000</span>, int: <span class="token number">100</span>, addr: <span class="token string">&quot;&#x5317;&#x4EAC;&quot;</span><span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span>em1<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;live addr(em1.addr) = &quot;</span>, em1.addr<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;work addr(em1.Person.addr) = &quot;</span>, em1.Person.addr<span class="token punctuation">)</span>
+    em1.int <span class="token operator">=</span> <span class="token number">200</span> //&#x4FEE;&#x6539;&#x533F;&#x540D;&#x5B57;&#x6BB5;&#x7684;&#x503C;
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru7.go</span>
+<span class="token punctuation">\</span><span class="token punctuation">{</span><span class="token punctuation">{</span>Murphy <span class="token number">23</span> &#x5E1D;&#x90FD;<span class="token punctuation">}</span> <span class="token number">5000</span> <span class="token number">100</span> &#x5317;&#x4EAC;<span class="token punctuation">}</span>
+live addr<span class="token punctuation">(</span>em1.addr<span class="token punctuation">)</span> <span class="token operator">=</span>  &#x5317;&#x4EAC;
+work addr<span class="token punctuation">(</span>em1.Person.addr<span class="token punctuation">)</span> <span class="token operator">=</span>  &#x5E1D;&#x90FD;
+</code></pre>
+<p>&#x7A7A;&#x7ED3;&#x6784; &#x201C;&#x8282;&#x7701;&#x201D; &#x5185;&#x5B58;&#xFF0C; &#x5982;&#x7528;&#x6765;&#x5B9E;&#x73B0; set &#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x6216;&#x8005;&#x5B9E;&#x73B0;&#x6CA1;&#x6709; &#x201C;&#x72B6;&#x6001;&#x201D; &#x53EA;&#x6709;&#x65B9;&#x6CD5;&#x7684; &#x201C;&#x9759;&#x6001;&#x7C7B;&#x201D;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var null struct<span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token builtin class-name">set</span> :<span class="token operator">=</span> make<span class="token punctuation">(</span>map<span class="token punctuation">[</span>string<span class="token punctuation">]</span>struct<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    set<span class="token punctuation">[</span><span class="token string">&quot;a&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> null
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4E0D;&#x80FD;&#x540C;&#x65F6;&#x5D4C;&#x5165;&#x67D0;&#x4E00;&#x7C7B;&#x578B;&#x548C;&#x5176;&#x6307;&#x9488;&#x7C7B;&#x578B;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x540D;&#x5B57;&#x76F8;&#x540C;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+<span class="token builtin class-name">type</span> Resource struct <span class="token punctuation">{</span>
+    <span class="token function">id</span> int
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> User struct <span class="token punctuation">{</span>
+    *Resource
+    // Resource // Error: duplicate field Resource
+    name string
+<span class="token punctuation">}</span>
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    u :<span class="token operator">=</span> User<span class="token punctuation">{</span>
+        <span class="token operator">&amp;</span>Resource<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span>,
+        <span class="token string">&quot;Administrator&quot;</span>,
+    <span class="token punctuation">}</span>
+    println<span class="token punctuation">(</span>u.id<span class="token punctuation">)</span>
+    println<span class="token punctuation">(</span>u.Resource.id<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru8.go</span>
+<span class="token number">1</span>
+<span class="token number">1</span>
+</code></pre>
+<h2 id="11-&#x63D0;&#x5347;&#x5B57;&#x6BB5;&#xFF08;promoted-fields&#xFF09;"><a name="11-&#x63D0;&#x5347;&#x5B57;&#x6BB5;&#xFF08;promoted-fields&#xFF09;" class="anchor-navigation-ex-anchor" href="#11-&#x63D0;&#x5347;&#x5B57;&#x6BB5;&#xFF08;promoted-fields&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>11. &#x63D0;&#x5347;&#x5B57;&#x6BB5;&#xFF08;Promoted Fields&#xFF09;</h2>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">type</span> Address struct <span class="token punctuation">{</span>
+    city, state string
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    name string
+    age  int
+    Address
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x4E2D;&#xFF0C;<code>Person</code> &#x7ED3;&#x6784;&#x4F53;&#x6709;&#x4E00;&#x4E2A;&#x533F;&#x540D;&#x5B57;&#x6BB5; <code>Address</code>&#xFF0C;&#x800C; <code>Address</code> &#x662F;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#x3002;&#x73B0;&#x5728;&#x7ED3;&#x6784;&#x4F53; <code>Address</code> &#x6709; <code>city</code> &#x548C; <code>state</code> &#x4E24;&#x4E2A;&#x5B57;&#x6BB5;&#xFF0C;&#x8BBF;&#x95EE;&#x8FD9;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;&#x5C31;&#x50CF;&#x5728; <code>Person</code> &#x91CC;&#x76F4;&#x63A5;&#x58F0;&#x660E;&#x7684;&#x4E00;&#x6837;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x79F0;&#x4E4B;&#x4E3A;<code>&#x63D0;&#x5347;&#x5B57;&#x6BB5;</code>&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> Address struct <span class="token punctuation">{</span>
+    city, state string
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    name string
+    age  int
+    Address
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var p Person
+    p.name <span class="token operator">=</span> <span class="token string">&quot;Naveen&quot;</span>
+    p.age <span class="token operator">=</span> <span class="token number">50</span>
+    p.Address <span class="token operator">=</span> Address<span class="token punctuation">{</span>
+        city:  <span class="token string">&quot;Chicago&quot;</span>,
+        state: <span class="token string">&quot;Illinois&quot;</span>,
+    <span class="token punctuation">}</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Name:&quot;</span>, p.name<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Age:&quot;</span>, p.age<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;City:&quot;</span>, p.city<span class="token punctuation">)</span> //city is promoted field
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;State:&quot;</span>, p.state<span class="token punctuation">)</span> //state is promoted field
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x7B2C; 26 &#x884C;&#x548C;&#x7B2C; 27 &#x884C;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86;&#x8BED;&#x6CD5; p.city &#x548C; p.state&#xFF0C;&#x8BBF;&#x95EE;&#x63D0;&#x5347;&#x5B57;&#x6BB5; city &#x548C; state &#x5C31;&#x50CF;&#x5B83;&#x4EEC;&#x662F;&#x5728;&#x7ED3;&#x6784;&#x4F53; p &#x4E2D;&#x58F0;&#x660E;&#x7684;&#x4E00;&#x6837;&#x3002;&#x8BE5;&#x7A0B;&#x5E8F;&#x4F1A;&#x8F93;&#x51FA;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">Name: Naveen
+Age: <span class="token number">50</span>
+City: Chicago
+State: Illinois
+</code></pre>
+<h2 id="12-&#x5BFC;&#x51FA;&#x7ED3;&#x6784;&#x4F53;&#x548C;&#x5B57;&#x6BB5;"><a name="12-&#x5BFC;&#x51FA;&#x7ED3;&#x6784;&#x4F53;&#x548C;&#x5B57;&#x6BB5;" class="anchor-navigation-ex-anchor" href="#12-&#x5BFC;&#x51FA;&#x7ED3;&#x6784;&#x4F53;&#x548C;&#x5B57;&#x6BB5;"><i class="fa fa-link" aria-hidden="true"></i></a>12. &#x5BFC;&#x51FA;&#x7ED3;&#x6784;&#x4F53;&#x548C;&#x5B57;&#x6BB5;</h2>
+<p>&#x5982;&#x679C;&#x7ED3;&#x6784;&#x4F53;&#x540D;&#x79F0;&#x4EE5;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#x5F00;&#x5934;&#xFF0C;&#x5219;&#x5B83;&#x662F;&#x5176;&#x4ED6;&#x5305;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x7684;&#x5BFC;&#x51FA;&#x7C7B;&#x578B;&#xFF08;Exported Type&#xFF09;&#x3002;&#x540C;&#x6837;&#xFF0C;&#x5982;&#x679C;&#x7ED3;&#x6784;&#x4F53;&#x91CC;&#x7684;&#x5B57;&#x6BB5;&#x9996;&#x5B57;&#x6BCD;&#x5927;&#x5199;&#xFF0C;&#x5B83;&#x4E5F;&#x80FD;&#x88AB;&#x5176;&#x4ED6;&#x5305;&#x8BBF;&#x95EE;&#x5230;&#x3002;</p>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x5305;&#xFF0C;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x6765;&#x66F4;&#x597D;&#x5730;&#x53BB;&#x7406;&#x89E3;&#x5B83;&#x3002;</p>
+<p>&#x5728;&#x4F60;&#x7684; Go &#x5DE5;&#x4F5C;&#x533A;&#x7684; src &#x76EE;&#x5F55;&#x4E2D;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <code>structs</code> &#x7684;&#x6587;&#x4EF6;&#x5939;&#x3002;&#x53E6;&#x5916;&#x5728; <code>structs</code> &#x4E2D;&#x518D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x76EE;&#x5F55; <code>computer</code>&#x3002;</p>
+<p>&#x5728; computer &#x76EE;&#x5F55;&#x4E2D;&#xFF0C;&#x5728;&#x540D;&#x4E3A; <code>spec.go</code> &#x7684;&#x6587;&#x4EF6;&#x4E2D;&#x4FDD;&#x5B58;&#x4E0B;&#x9762;&#x7684;&#x7A0B;&#x5E8F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package computer
+
+<span class="token builtin class-name">type</span> Spec struct <span class="token punctuation">{</span> //exported struct
+    Maker string //exported field
+    model string //unexported field
+    Price int //exported field
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x4E2D;&#xFF0C;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A; <code>computer</code> &#x5305;&#xFF0C;&#x91CC;&#x9762;&#x6709;&#x4E00;&#x4E2A;&#x5BFC;&#x51FA;&#x7ED3;&#x6784;&#x4F53;&#x7C7B;&#x578B; <code>Spec</code>&#x3002;<code>Spec</code> &#x6709;&#x4E24;&#x4E2A;&#x5BFC;&#x51FA;&#x5B57;&#x6BB5; <code>Maker</code> &#x548C; <code>Price</code>&#xFF0C;&#x548C;&#x4E00;&#x4E2A;&#x672A;&#x5BFC;&#x51FA;&#x7684;&#x5B57;&#x6BB5; <code>model</code>&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x4F1A;&#x5728; main &#x5305;&#x4E2D;&#x5BFC;&#x5165;&#x8FD9;&#x4E2A;&#x5305;&#xFF0C;&#x5E76;&#x4F7F;&#x7528; Spec &#x7ED3;&#x6784;&#x4F53;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token string">&quot;structs/computer&quot;</span>
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var spec computer.Spec
+    spec.Maker <span class="token operator">=</span> <span class="token string">&quot;apple&quot;</span>
+    spec.Price <span class="token operator">=</span> <span class="token number">50000</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Spec:&quot;</span>, spec<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5305;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">src
+   structs
+        computer
+            spec.go
+        main.go
+</code></pre>
+<p>&#x5728;&#x4E0A;&#x8FF0;&#x7A0B;&#x5E8F;&#x7684;&#x7B2C; 3 &#x884C;&#xFF0C;&#x6211;&#x4EEC;&#x5BFC;&#x5165;&#x4E86; computer &#x5305;&#x3002;&#x5728;&#x7B2C; 8 &#x884C;&#x548C;&#x7B2C; 9 &#x884C;&#xFF0C;&#x6211;&#x4EEC;&#x8BBF;&#x95EE;&#x4E86;&#x7ED3;&#x6784;&#x4F53; Spec &#x7684;&#x4E24;&#x4E2A;&#x5BFC;&#x51FA;&#x5B57;&#x6BB5; Maker &#x548C; Price&#x3002;&#x6267;&#x884C;&#x547D;&#x4EE4; <code>go install structs</code> &#x548C; <code>workspacepath/bin/structs</code>&#xFF0C;&#x8FD0;&#x884C;&#x8BE5;&#x7A0B;&#x5E8F;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8BD5;&#x56FE;&#x8BBF;&#x95EE;&#x672A;&#x5BFC;&#x51FA;&#x7684;&#x5B57;&#x6BB5; model&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x62A5;&#x9519;&#x3002;&#x5C06; main.go &#x7684;&#x5185;&#x5BB9;&#x66FF;&#x6362;&#x4E3A;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token string">&quot;structs/computer&quot;</span>
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var spec computer.Spec
+    spec.Maker <span class="token operator">=</span> <span class="token string">&quot;apple&quot;</span>
+    spec.Price <span class="token operator">=</span> <span class="token number">50000</span>
+    spec.model <span class="token operator">=</span> <span class="token string">&quot;Mac Mini&quot;</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;Spec:&quot;</span>, spec<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7A0B;&#x5E8F;&#x7684;&#x7B2C; 10 &#x884C;&#xFF0C;&#x6211;&#x4EEC;&#x8BD5;&#x56FE;&#x8BBF;&#x95EE;&#x672A;&#x5BFC;&#x51FA;&#x7684;&#x5B57;&#x6BB5; model&#x3002;&#x5982;&#x679C;&#x8FD0;&#x884C;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x4EA7;&#x751F;&#x9519;&#x8BEF;&#xFF1A;<code>spec.model undefined (cannot refer to unexported field or method model)&#x3002;</code></p>
+<h2 id="13-&#x7ED3;&#x6784;&#x4F53;&#x76F8;&#x7B49;&#x6027;&#xFF08;structs-equality&#xFF09;"><a name="13-&#x7ED3;&#x6784;&#x4F53;&#x76F8;&#x7B49;&#x6027;&#xFF08;structs-equality&#xFF09;" class="anchor-navigation-ex-anchor" href="#13-&#x7ED3;&#x6784;&#x4F53;&#x76F8;&#x7B49;&#x6027;&#xFF08;structs-equality&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>13. &#x7ED3;&#x6784;&#x4F53;&#x76F8;&#x7B49;&#x6027;&#xFF08;Structs Equality&#xFF09;</h2>
+<p>&#x7ED3;&#x6784;&#x4F53;&#x662F;&#x503C;&#x7C7B;&#x578B;&#x3002;&#x5982;&#x679C;&#x5B83;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#x90FD;&#x662F;&#x53EF;&#x6BD4;&#x8F83;&#x7684;&#xFF0C;&#x5219;&#x8BE5;&#x7ED3;&#x6784;&#x4F53;&#x4E5F;&#x662F;&#x53EF;&#x6BD4;&#x8F83;&#x7684;&#x3002;&#x5982;&#x679C;&#x4E24;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#x53D8;&#x91CF;&#x7684;&#x5BF9;&#x5E94;&#x5B57;&#x6BB5;&#x76F8;&#x7B49;&#xFF0C;&#x5219;&#x8FD9;&#x4E24;&#x4E2A;&#x53D8;&#x91CF;&#x4E5F;&#x662F;&#x76F8;&#x7B49;&#x7684;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> name struct <span class="token punctuation">{</span>
+    firstName string
+    lastName string
+<span class="token punctuation">}</span>
+
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    name1 :<span class="token operator">=</span> name<span class="token punctuation">{</span><span class="token string">&quot;Steve&quot;</span>, <span class="token string">&quot;Jobs&quot;</span><span class="token punctuation">}</span>
+    name2 :<span class="token operator">=</span> name<span class="token punctuation">{</span><span class="token string">&quot;Steve&quot;</span>, <span class="token string">&quot;Jobs&quot;</span><span class="token punctuation">}</span>
+    <span class="token keyword">if</span> name1 <span class="token operator">==</span> name2 <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;name1 and name2 are equal&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;name1 and name2 are not equal&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    name3 :<span class="token operator">=</span> name<span class="token punctuation">{</span>firstName:<span class="token string">&quot;Steve&quot;</span>, lastName:<span class="token string">&quot;Jobs&quot;</span><span class="token punctuation">}</span>
+    name4 :<span class="token operator">=</span> name<span class="token punctuation">{</span><span class="token punctuation">}</span>
+    name4.firstName <span class="token operator">=</span> <span class="token string">&quot;Steve&quot;</span>
+    <span class="token keyword">if</span> name3 <span class="token operator">==</span> name4 <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;name3 and name4 are equal&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;name3 and name4 are not equal&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x7EBF;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;[13]</p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x7ED3;&#x6784;&#x4F53;&#x7C7B;&#x578B; name &#x5305;&#x542B;&#x4E24;&#x4E2A; string &#x7C7B;&#x578B;&#x3002;&#x7531;&#x4E8E;&#x5B57;&#x7B26;&#x4E32;&#x662F;&#x53EF;&#x6BD4;&#x8F83;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A; name &#x7C7B;&#x578B;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x53D8;&#x91CF;&#x3002;</p>
+<p>&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x4E2D; name1 &#x548C; name2 &#x76F8;&#x7B49;&#xFF0C;&#x800C; name3 &#x548C; name4 &#x4E0D;&#x76F8;&#x7B49;&#x3002;&#x8BE5;&#x7A0B;&#x5E8F;&#x4F1A;&#x8F93;&#x51FA;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">name1 and name2 are equal
+name3 and name4 are not equal
+</code></pre>
+<p>&#x5982;&#x679C;&#x7ED3;&#x6784;&#x4F53;&#x5305;&#x542B;&#x4E0D;&#x53EF;&#x6BD4;&#x8F83;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;&#x5219;&#x7ED3;&#x6784;&#x4F53;&#x53D8;&#x91CF;&#x4E5F;&#x4E0D;&#x53EF;&#x6BD4;&#x8F83;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> image struct <span class="token punctuation">{</span>
+    data map<span class="token punctuation">[</span>int<span class="token punctuation">]</span>int
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    image1 :<span class="token operator">=</span> image<span class="token punctuation">{</span>data: map<span class="token punctuation">[</span>int<span class="token punctuation">]</span>int<span class="token punctuation">{</span>
+        <span class="token number">0</span>: <span class="token number">155</span>,
+    <span class="token punctuation">}</span><span class="token punctuation">}</span>
+    image2 :<span class="token operator">=</span> image<span class="token punctuation">{</span>data: map<span class="token punctuation">[</span>int<span class="token punctuation">]</span>int<span class="token punctuation">{</span>
+        <span class="token number">0</span>: <span class="token number">155</span>,
+    <span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token keyword">if</span> image1 <span class="token operator">==</span> image2 <span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;image1 and image2 are equal&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x7EBF;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;[14]</p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x7ED3;&#x6784;&#x4F53;&#x7C7B;&#x578B; image &#x5305;&#x542B;&#x4E00;&#x4E2A; map &#x7C7B;&#x578B;&#x7684;&#x5B57;&#x6BB5;&#x3002;&#x7531;&#x4E8E; map &#x7C7B;&#x578B;&#x662F;&#x4E0D;&#x53EF;&#x6BD4;&#x8F83;&#x7684;&#xFF0C;&#x56E0;&#x6B64; image1 &#x548C; image2 &#x4E5F;&#x4E0D;&#x53EF;&#x6BD4;&#x8F83;&#x3002;&#x5982;&#x679C;&#x8FD0;&#x884C;&#x8BE5;&#x7A0B;&#x5E8F;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x62A5;&#x9519;&#xFF1A;<code>main.go:18: invalid operation: image1 == image2 (struct containing map[int]int cannot be compared)</code></p>
+<h2 id="14-struct&#x4E0E;tag&#x5E94;&#x7528;"><a name="14-struct&#x4E0E;tag&#x5E94;&#x7528;" class="anchor-navigation-ex-anchor" href="#14-struct&#x4E0E;tag&#x5E94;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>14. struct&#x4E0E;tag&#x5E94;&#x7528;</h2>
+<p>&#x5728;&#x5904;&#x7406;json&#x683C;&#x5F0F;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7ECF;&#x5E38;&#x4F1A;&#x770B;&#x5230;&#x58F0;&#x660E;struct&#x7ED3;&#x6784;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C5E;&#x6027;&#x7684;&#x53F3;&#x4FA7;&#x8FD8;&#x6709;&#x5C0F;&#x7C73;&#x70B9;&#x62EC;&#x8D77;&#x6765;&#x7684;&#x5185;&#x5BB9;&#x3002;&#x5F62;&#x5982;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">type</span> User struct <span class="token punctuation">{</span>
+    UserId   int    <span class="token variable"><span class="token variable">`</span>json:<span class="token string">&quot;user_id&quot;</span> bson:<span class="token string">&quot;user_id&quot;</span><span class="token variable">`</span></span>
+    UserName string <span class="token variable"><span class="token variable">`</span>json:<span class="token string">&quot;user_name&quot;</span> bson:<span class="token string">&quot;user_name&quot;</span><span class="token variable">`</span></span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x5C0F;&#x7C73;&#x70B9;&#x91CC;&#x7684;&#x5185;&#x5BB9;&#x662F;&#x7528;&#x6765;&#x5E72;&#x4EC0;&#x4E48;&#x7684;&#x5462;&#xFF1F;</p>
+<h3 id="141-struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;tag&#xFF09;&#x8BF4;&#x660E;"><a name="141-struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;tag&#xFF09;&#x8BF4;&#x660E;" class="anchor-navigation-ex-anchor" href="#141-struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;tag&#xFF09;&#x8BF4;&#x660E;"><i class="fa fa-link" aria-hidden="true"></i></a>14.1 struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;Tag&#xFF09;&#x8BF4;&#x660E;</h3>
+<p>&#x8981;&#x6BD4;&#x8F83;&#x8BE6;&#x7EC6;&#x7684;&#x4E86;&#x89E3;&#x8FD9;&#x4E2A;&#xFF0C;&#x8981;&#x5148;&#x4E86;&#x89E3;&#x4E00;&#x4E0B;golang&#x7684;&#x57FA;&#x7840;&#xFF0C;<strong>&#x5728;golang&#x4E2D;&#xFF0C;&#x547D;&#x540D;&#x90FD;&#x662F;&#x63A8;&#x8350;&#x90FD;&#x662F;&#x7528;&#x9A7C;&#x5CF0;&#x65B9;&#x5F0F;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x9996;&#x5B57;&#x6BCD;&#x5927;&#x5C0F;&#x5199;&#x6709;&#x7279;&#x6B8A;&#x7684;&#x8BED;&#x6CD5;&#x542B;&#x4E49;&#xFF1A;&#x5305;&#x5916;&#x65E0;&#x6CD5;&#x5F15;&#x7528;</strong>&#x3002;&#x4F46;&#x662F;&#x7531;&#x7ECF;&#x5E38;&#x9700;&#x8981;&#x548C;&#x5176;&#x5B83;&#x7684;&#x7CFB;&#x7EDF;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x4EA4;&#x4E92;&#xFF0C;&#x4F8B;&#x5982;&#x8F6C;&#x6210;json&#x683C;&#x5F0F;&#xFF0C;&#x5B58;&#x50A8;&#x5230;mongodb&#x554A;&#x7B49;&#x7B49;&#x3002;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5982;&#x679C;&#x7528;&#x5C5E;&#x6027;&#x540D;&#x6765;&#x4F5C;&#x4E3A;&#x952E;&#x503C;&#x53EF;&#x80FD;&#x4E0D;&#x4E00;&#x5B9A;&#x4F1A;&#x7B26;&#x5408;&#x9879;&#x76EE;&#x8981;&#x6C42;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x5462;&#x5C31;&#x591A;&#x4E86;&#x5C0F;&#x7C73;&#x70B9;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5728;golang&#x4E2D;&#x53EB;&#x6807;&#x7B7E;&#xFF08;Tag&#xFF09;&#xFF0C;&#x5728;&#x8F6C;&#x6362;&#x6210;&#x5176;&#x5B83;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;&#x5176;&#x4E2D;&#x7279;&#x5B9A;&#x7684;&#x5B57;&#x6BB5;&#x4F5C;&#x4E3A;&#x952E;&#x503C;&#x3002;&#x4F8B;&#x5982;&#x4E0A;&#x4F8B;&#x5728;&#x8F6C;&#x6210;json&#x683C;&#x5F0F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">package main
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token builtin class-name">type</span> User struct <span class="token punctuation">{</span>
+    UserId   int
+    UserName string
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> UserTag struct <span class="token punctuation">{</span>
+    UserId   int    <span class="token variable"><span class="token variable">`</span>json:<span class="token string">&quot;user_id&quot;</span> bson:<span class="token string">&quot;user_id&quot;</span><span class="token variable">`</span></span>
+    UserName string <span class="token variable"><span class="token variable">`</span>json:<span class="token string">&quot;user_name&quot;</span> bson:<span class="token string">&quot;user_name&quot;</span><span class="token variable">`</span></span>
+<span class="token punctuation">}</span>
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    u :<span class="token operator">=</span> <span class="token operator">&amp;</span>User<span class="token punctuation">{</span>UserId: <span class="token number">1</span>, UserName: <span class="token string">&quot;Murphy&quot;</span><span class="token punctuation">}</span>
+    j, _ :<span class="token operator">=</span> json.Marshal<span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+    fmt.Printf<span class="token punctuation">(</span><span class="token string">&quot;struct User echo : %v<span class="token entity" title="\n">\n</span>&quot;</span>, string<span class="token punctuation">(</span>j<span class="token punctuation">))</span>
+    u_tag :<span class="token operator">=</span> <span class="token operator">&amp;</span>UserTag<span class="token punctuation">{</span>UserId: <span class="token number">1</span>, UserName: <span class="token string">&quot;Murphy&quot;</span><span class="token punctuation">}</span>
+    j_tag, _ :<span class="token operator">=</span> json.Marshal<span class="token punctuation">(</span>u_tag<span class="token punctuation">)</span>
+    fmt.Printf<span class="token punctuation">(</span><span class="token string">&quot;struct UserTag echo : %v<span class="token entity" title="\n">\n</span>&quot;</span>, string<span class="token punctuation">(</span>j_tag<span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru9.go</span>
+struct User <span class="token builtin class-name">echo</span> <span class="token builtin class-name">:</span> <span class="token punctuation">{</span><span class="token string">&quot;UserId&quot;</span>:1,<span class="token string">&quot;UserName&quot;</span><span class="token builtin class-name">:</span><span class="token string">&quot;Murphy&quot;</span><span class="token punctuation">}</span>
+struct UserTag <span class="token builtin class-name">echo</span> <span class="token builtin class-name">:</span> <span class="token punctuation">{</span><span class="token string">&quot;user_id&quot;</span>:1,<span class="token string">&quot;user_name&quot;</span><span class="token builtin class-name">:</span><span class="token string">&quot;Murphy&quot;</span><span class="token punctuation">}</span>
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x76F4;&#x63A5;&#x7528;struct&#x7684;&#x5C5E;&#x6027;&#x540D;&#x505A;&#x952E;&#x503C;&#x3002;
+&#x5176;&#x4E2D;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;bson&#x7684;&#x58F0;&#x660E;&#xFF0C;&#x8FD9;&#x4E2A;&#x662F;&#x7528;&#x5728;&#x5C06;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5230;mongodb&#x4F7F;&#x7528;&#x7684;&#x3002;
+&#x6807;&#x7B7E;&#x662F;&#x7C7B;&#x578B;&#x7684;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#x3002;</p>
+<h3 id="142-struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;tag&#xFF09;&#x83B7;&#x53D6;"><a name="142-struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;tag&#xFF09;&#x83B7;&#x53D6;" class="anchor-navigation-ex-anchor" href="#142-struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;tag&#xFF09;&#x83B7;&#x53D6;"><i class="fa fa-link" aria-hidden="true"></i></a>14.2 struct&#x6210;&#x5458;&#x53D8;&#x91CF;&#x6807;&#x7B7E;&#xFF08;Tag&#xFF09;&#x83B7;&#x53D6;</h3>
+<p>&#x90A3;&#x4E48;&#x5F53;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x5C01;&#x88C5;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;&#xFF0C;&#x9700;&#x8981;&#x7528;&#x5230;Tag&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x65F6;&#xFF0C;&#x548B;&#x6837;&#x53BB;&#x83B7;&#x53D6;&#x5462;&#xFF1F;&#x8FD9;&#x8FB9;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x53CD;&#x5C04;&#x5305;&#xFF08;reflect&#xFF09;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x83B7;&#x53D6;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">t :<span class="token operator">=</span> reflect.TypeOf<span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+
+field :<span class="token operator">=</span> t.Elem<span class="token punctuation">(</span><span class="token punctuation">)</span>.Field<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+fmt.Println<span class="token punctuation">(</span>field.Tag.Get<span class="token punctuation">(</span><span class="token string">&quot;json&quot;</span><span class="token punctuation">))</span>
+
+fmt.Println<span class="token punctuation">(</span>field.Tag.Get<span class="token punctuation">(</span><span class="token string">&quot;bson&quot;</span><span class="token punctuation">))</span>
+</code></pre>
+<p>&#x5B9E;&#x4F8B;</p>
+<pre class="language-"><code class="lang-bash">package main
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;reflect&quot;</span>
+<span class="token punctuation">)</span>
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin class-name">type</span> User struct <span class="token punctuation">{</span>
+        //&#x591A;&#x4E2A;Key&#x4F7F;&#x7528;&#x7A7A;&#x683C;&#x8FDB;&#x884C;&#x5206;&#x5F00;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;Get&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x4E0D;&#x540C;Key&#x7684;&#x503C;&#x3002;
+        UserId   int    <span class="token variable"><span class="token variable">`</span>json:<span class="token string">&quot;user_json_id&quot;</span> xml:<span class="token string">&quot;user_xml_id&quot;</span><span class="token variable">`</span></span>
+        UserName string <span class="token variable"><span class="token variable">`</span>json:<span class="token string">&quot;user_json_name&quot;</span> xml:<span class="token string">&quot;user_xml_name&quot;</span><span class="token variable">`</span></span>
+    <span class="token punctuation">}</span>
+    // &#x8F93;&#x51FA;json&#x683C;&#x5F0F;
+    u :<span class="token operator">=</span> <span class="token operator">&amp;</span>User<span class="token punctuation">{</span>UserId: <span class="token number">1</span>, UserName: <span class="token string">&quot;tony&quot;</span><span class="token punctuation">}</span>
+    j, _ :<span class="token operator">=</span> json.Marshal<span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>string<span class="token punctuation">(</span>j<span class="token punctuation">))</span>
+    // &#x83B7;&#x53D6;tag&#x4E2D;&#x7684;&#x5185;&#x5BB9;
+    t :<span class="token operator">=</span> reflect.TypeOf<span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>t<span class="token punctuation">)</span>
+    field0 :<span class="token operator">=</span> t.Elem<span class="token punctuation">(</span><span class="token punctuation">)</span>.Field<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>field0.Tag.Get<span class="token punctuation">(</span><span class="token string">&quot;json&quot;</span><span class="token punctuation">))</span>
+    fmt.Println<span class="token punctuation">(</span>field0.Tag.Get<span class="token punctuation">(</span><span class="token string">&quot;xml&quot;</span><span class="token punctuation">))</span>
+    field1 :<span class="token operator">=</span> t.Elem<span class="token punctuation">(</span><span class="token punctuation">)</span>.Field<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>field1.Tag.Get<span class="token punctuation">(</span><span class="token string">&quot;json&quot;</span><span class="token punctuation">))</span>
+    fmt.Println<span class="token punctuation">(</span>field1.Tag.Get<span class="token punctuation">(</span><span class="token string">&quot;xml&quot;</span><span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru10.go</span>
+<span class="token punctuation">{</span><span class="token string">&quot;user_json_id&quot;</span>:1,<span class="token string">&quot;user_json_name&quot;</span><span class="token builtin class-name">:</span><span class="token string">&quot;tony&quot;</span><span class="token punctuation">}</span>
+*main.User
+user_json_id
+user_xml_id
+user_json_name
+user_xml_name
+</code></pre>
+<h2 id="15-struct&#x4E0E;&#x65B9;&#x6CD5;"><a name="15-struct&#x4E0E;&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#15-struct&#x4E0E;&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>15. struct&#x4E0E;&#x65B9;&#x6CD5;</h2>
+<p>&#x5B9E;&#x4F8B;1&#x5B9A;&#x4E49;&#x5176;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token builtin class-name">type</span> Member struct <span class="token punctuation">{</span> 
+     Name string
+<span class="token punctuation">}</span>
+
+func <span class="token punctuation">(</span>m Member<span class="token punctuation">)</span>setName<span class="token punctuation">(</span>name string<span class="token punctuation">)</span><span class="token punctuation">{</span>//&#x7ED1;&#x5B9A;&#x5230;Member&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x65B9;&#x6CD5;
+    m.Name <span class="token operator">=</span> name
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     m :<span class="token operator">=</span> Member<span class="token punctuation">{</span><span class="token punctuation">}</span>
+     m.setName<span class="token punctuation">(</span><span class="token string">&quot;&#x5C0F;&#x660E;&quot;</span><span class="token punctuation">)</span>
+     fmt.Println<span class="token punctuation">(</span>m.Name<span class="token punctuation">)</span>//&#x8F93;&#x51FA;&#x4E3A;&#x7A7A;
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru13.go</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token builtin class-name">type</span> Member struct <span class="token punctuation">{</span> 
+     Name string
+<span class="token punctuation">}</span>
+
+func <span class="token punctuation">(</span>m *Member<span class="token punctuation">)</span>setName<span class="token punctuation">(</span>name string<span class="token punctuation">)</span><span class="token punctuation">{</span>//&#x7ED1;&#x5B9A;&#x5230;Member&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x65B9;&#x6CD5;
+    m.Name <span class="token operator">=</span> name
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     m :<span class="token operator">=</span> Member<span class="token punctuation">{</span><span class="token punctuation">}</span>
+     m.setName<span class="token punctuation">(</span><span class="token string">&quot;&#x5C0F;&#x660E;&quot;</span><span class="token punctuation">)</span>
+     fmt.Println<span class="token punctuation">(</span>m.Name<span class="token punctuation">)</span>//&#x8F93;&#x51FA;&#x4E3A;&#x7A7A;
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru13.go</span>
+&#x5C0F;&#x660E;
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x5F88;&#x5947;&#x602A;&#xFF0C;&#x4E0D;&#x662F;&#x8C03;&#x7528;setName()&#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E86;&#x5B57;&#x6BB5;Name&#x7684;&#x503C;&#x4E86;&#x5417;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD8;&#x662F;&#x8F93;&#x51FA;&#x4E3A;&#x7A7A;&#x5462;&#xFF1F;
+&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#xFF0C;&#x7ED3;&#x6784;&#x4F53;&#x662F;&#x503C;&#x4F20;&#x9012;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x8C03;&#x7528;setName&#x65F6;&#xFF0C;&#x65B9;&#x6CD5;&#x63A5;&#x6536;&#x5668;&#x63A5;&#x6536;&#x5230;&#x662F;&#x53EA;&#x662F;&#x7ED3;&#x6784;&#x4F53;&#x53D8;&#x91CF;&#x7684;&#x4E00;&#x4E2A;&#x526F;&#x672C;&#xFF0C;&#x901A;&#x8FC7;&#x526F;&#x672C;&#x5BF9;&#x503C;&#x8FDB;&#x884C;&#x4FEE;&#x590D;&#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;&#x8C03;&#x7528;&#x8005;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x65B9;&#x6CD5;&#x63A5;&#x6536;&#x5668;&#x5B9A;&#x4E49;&#x4E3A;&#x6307;&#x9488;&#x53D8;&#x91CF;&#xFF0C;&#x5C31;&#x53EF;&#x8FBE;&#x5230;&#x4FEE;&#x6539;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x76EE;&#x7684;&#x4E86;&#x3002;</p>
+<p>&#x5B9E;&#x4F8B;2&#x81EA;&#x5B9A;&#x4E49;&#x65B9;&#x6CD5;&#x521D;&#x59CB;&#x5316;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    Name string
+    Age int
+<span class="token punctuation">}</span>
+
+func <span class="token punctuation">(</span>self *Person<span class="token punctuation">)</span> init<span class="token punctuation">(</span>name string ,age int<span class="token punctuation">)</span><span class="token punctuation">{</span>
+     self.Name <span class="token operator">=</span> name
+     self.Age <span class="token operator">=</span> age
+<span class="token punctuation">}</span>
+
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var person1 <span class="token operator">=</span> new<span class="token punctuation">(</span>Person<span class="token punctuation">)</span>
+    person1.init<span class="token punctuation">(</span><span class="token string">&quot;wd&quot;</span>,22<span class="token punctuation">)</span>
+    //<span class="token punctuation">(</span><span class="token operator">&amp;</span>person1<span class="token punctuation">)</span>.init<span class="token punctuation">(</span><span class="token string">&quot;wd&quot;</span>,22<span class="token punctuation">)</span>
+    fmt.Println<span class="token punctuation">(</span>person1<span class="token punctuation">)</span>//<span class="token operator">&amp;</span><span class="token punctuation">{</span>wd <span class="token number">22</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5B9E;&#x4F8B;3 &#x65B9;&#x6CD5;&#x8FD4;&#x56DE;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    Name string
+    Age int
+<span class="token punctuation">}</span>
+
+func <span class="token punctuation">(</span>p Person<span class="token punctuation">)</span> Getname<span class="token punctuation">(</span><span class="token punctuation">)</span> string<span class="token punctuation">{</span> //p&#x4EE3;&#x8868;&#x7ED3;&#x6784;&#x4F53;&#x672C;&#x8EAB;&#x7684;&#x5B9E;&#x5217;&#xFF0C;&#x7C7B;&#x4F3C;python&#x4E2D;&#x7684;self,&#x8FD9;&#x91CC;p&#x53EF;&#x4EE5;&#x5199;&#x4E3A;self
+    fmt.Println<span class="token punctuation">(</span>p.Name<span class="token punctuation">)</span>
+    <span class="token builtin class-name">return</span> p.Name
+
+
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var person1 <span class="token operator">=</span> new<span class="token punctuation">(</span>Person<span class="token punctuation">)</span>
+    person1.Age <span class="token operator">=</span> <span class="token number">22</span>
+    person1.Name <span class="token operator">=</span> <span class="token string">&quot;wd&quot;</span>
+    person1.Getname<span class="token punctuation">(</span><span class="token punctuation">)</span>// wd
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5B9E;&#x4F8B;4&#x5B9E;&#x73B0;&#x7ED3;&#x6784;&#x4F53;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;
+&#x5982;&#x679C;&#x5B9E;&#x73B0;&#x4E86;&#x7ED3;&#x6784;&#x4F53;&#x4E2D;&#x7684;String&#x65B9;&#x6CD5;&#xFF0C;&#x5728;&#x4F7F;&#x7528;fmt&#x6253;&#x5370;&#x65F6;&#x5019;&#x4F1A;&#x8C03;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E0E;python&#x4E2D;&#x7684;<strong>str</strong>&#x65B9;&#x6CD5;.</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token builtin class-name">type</span> Person struct <span class="token punctuation">{</span>
+    Name string
+    Age int
+<span class="token punctuation">}</span>
+
+func <span class="token punctuation">(</span>self *Person<span class="token punctuation">)</span> String<span class="token punctuation">(</span><span class="token punctuation">)</span> string<span class="token punctuation">{</span>
+    <span class="token builtin class-name">return</span> self.Name
+
+<span class="token punctuation">}</span>
+
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var person1 <span class="token operator">=</span> new<span class="token punctuation">(</span>Person<span class="token punctuation">)</span>
+    person1.Name <span class="token operator">=</span> <span class="token string">&quot;wd&quot;</span>
+    person1.Age <span class="token operator">=</span> <span class="token number">22</span>
+    fmt.Println<span class="token punctuation">(</span>person1<span class="token punctuation">)</span>// wd
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="16--struct&#x4E0E;&#x51FD;&#x6570;"><a name="16--struct&#x4E0E;&#x51FD;&#x6570;" class="anchor-navigation-ex-anchor" href="#16--struct&#x4E0E;&#x51FD;&#x6570;"><i class="fa fa-link" aria-hidden="true"></i></a>16.  struct&#x4E0E;&#x51FD;&#x6570;</h2>
+<p>&#x81EA;&#x5B9A;&#x4E49;&#x6784;&#x9020;&#x51FD;&#x6570;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token builtin class-name">type</span> Student struct <span class="token punctuation">{</span>
+    name string
+    age int
+    Class string
+<span class="token punctuation">}</span>
+
+func Newstu<span class="token punctuation">(</span>name1 string,age1 int,class1 string<span class="token punctuation">)</span> *Student <span class="token punctuation">{</span>
+    <span class="token builtin class-name">return</span> <span class="token operator">&amp;</span>Student<span class="token punctuation">{</span>name:name1,age:age1,Class:class1<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   stu1 :<span class="token operator">=</span> Newstu<span class="token punctuation">(</span><span class="token string">&quot;wd&quot;</span>,22,<span class="token string">&quot;math&quot;</span><span class="token punctuation">)</span>
+   fmt.Println<span class="token punctuation">(</span>stu1.name<span class="token punctuation">)</span> // wd
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="17-&#x904D;&#x5386;&#x94FE;&#x8868;"><a name="17-&#x904D;&#x5386;&#x94FE;&#x8868;" class="anchor-navigation-ex-anchor" href="#17-&#x904D;&#x5386;&#x94FE;&#x8868;"><i class="fa fa-link" aria-hidden="true"></i></a>17. &#x904D;&#x5386;&#x94FE;&#x8868;</h2>
+<p>&#x94FE;&#x8868;&#x7684;&#x904D;&#x5386;&#x662F;&#x901A;&#x8FC7;&#x79FB;&#x52A8;&#x6307;&#x9488;&#x8FDB;&#x884C;&#x904D;&#x5386;&#xFF0C;&#x5F53;&#x6307;&#x9488;&#x5230;&#x6700;&#x597D;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x65F6;&#xFF0C;&#x5176;next&#x6307;&#x9488;&#x4E3A;nil</p>
+<pre class="language-"><code class="lang-bash">package main
+
+<span class="token function">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token builtin class-name">type</span> Node struct <span class="token punctuation">{</span>
+    data  int
+    next  *Node
+<span class="token punctuation">}</span>
+
+func Shownode<span class="token punctuation">(</span>p *Node<span class="token punctuation">)</span><span class="token punctuation">{</span>   //&#x904D;&#x5386;
+    <span class="token keyword">for</span> p <span class="token operator">!=</span> nil<span class="token punctuation">{</span>
+        fmt.Println<span class="token punctuation">(</span>*p<span class="token punctuation">)</span>
+        <span class="token assign-left variable">p</span><span class="token operator">=</span>p.next  //&#x79FB;&#x52A8;&#x6307;&#x9488;
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var <span class="token function">head</span> <span class="token operator">=</span> new<span class="token punctuation">(</span>Node<span class="token punctuation">)</span>
+    head.data <span class="token operator">=</span> <span class="token number">1</span>
+    var node1 <span class="token operator">=</span> new<span class="token punctuation">(</span>Node<span class="token punctuation">)</span>
+    node1.data <span class="token operator">=</span> <span class="token number">2</span>
+
+    head.next <span class="token operator">=</span> node1
+    var node2 <span class="token operator">=</span> new<span class="token punctuation">(</span>Node<span class="token punctuation">)</span>
+    node2.data <span class="token operator">=</span> <span class="token number">3</span>
+
+    node1.next <span class="token operator">=</span> node2
+    Shownode<span class="token punctuation">(</span>head<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+//<span class="token punctuation">{</span><span class="token number">1</span> 0xc42000e1e0<span class="token punctuation">}</span>
+//<span class="token punctuation">{</span><span class="token number">2</span> 0xc42000e1f0<span class="token punctuation">}</span>
+//<span class="token punctuation">{</span><span class="token number">3</span> <span class="token operator">&lt;</span>nil<span class="token operator">&gt;</span><span class="token punctuation">}</span>
+</code></pre>
+<h2 id="18-&#x5185;&#x5B58;&#x5BF9;&#x9F50;&#x5F71;&#x54CD;struct&#x7684;&#x5927;&#x5C0F;"><a name="18-&#x5185;&#x5B58;&#x5BF9;&#x9F50;&#x5F71;&#x54CD;struct&#x7684;&#x5927;&#x5C0F;" class="anchor-navigation-ex-anchor" href="#18-&#x5185;&#x5B58;&#x5BF9;&#x9F50;&#x5F71;&#x54CD;struct&#x7684;&#x5927;&#x5C0F;"><i class="fa fa-link" aria-hidden="true"></i></a>18. &#x5185;&#x5B58;&#x5BF9;&#x9F50;&#x5F71;&#x54CD;struct&#x7684;&#x5927;&#x5C0F;</h2>
+<p>&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;struct&#xFF0C;&#x8FD9;&#x4E2A;struct&#x6709;3&#x4E2A;&#x5B57;&#x6BB5;&#xFF0C;&#x5B83;&#x4EEC;&#x7684;&#x7C7B;&#x578B;&#x6709;byte,int32&#x4EE5;&#x53CA;int64,&#x4F46;&#x662F;&#x8FD9;&#x4E09;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x987A;&#x5E8F;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4EFB;&#x610F;&#x6392;&#x5217;&#xFF0C;&#x90A3;&#x4E48;&#x6839;&#x636E;&#x987A;&#x5E8F;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x4E00;&#x5171;&#x6709;6&#x79CD;&#x7EC4;&#x5408;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">type</span> user1 struct <span class="token punctuation">{</span>
+    b byte
+    i int32
+    j int64
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user2 struct <span class="token punctuation">{</span>
+    b byte
+    j int64
+    i int32
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user3 struct <span class="token punctuation">{</span>
+    i int32
+    b byte
+    j int64
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user4 struct <span class="token punctuation">{</span>
+    i int32
+    j int64
+    b byte
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user5 struct <span class="token punctuation">{</span>
+    j int64
+    b byte
+    i int32
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user6 struct <span class="token punctuation">{</span>
+    j int64
+    i int32
+    b byte
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x6839;&#x636E;&#x8FD9;6&#x79CD;&#x7EC4;&#x5408;&#xFF0C;&#x5B9A;&#x4E49;&#x4E86;6&#x4E2A;struct&#xFF0C;&#x5206;&#x522B;&#x4F4D;user1&#xFF0C;user2&#xFF0C;&#x2026;&#xFF0C;user6&#xFF0C;&#x90A3;&#x4E48;&#x73B0;&#x5728;&#x5927;&#x5BB6;&#x731C;&#x6D4B;&#x4E00;&#x4E0B;&#xFF0C;&#x8FD9;6&#x79CD;&#x7C7B;&#x578B;&#x7684;struct&#x5360;&#x7528;&#x7684;&#x5185;&#x5B58;&#x662F;&#x591A;&#x5C11;&#xFF0C;&#x5C31;&#x662F;unsafe.Sizeof()&#x7684;&#x503C;&#x3002;</p>
+<p>&#x5927;&#x5BB6;&#x53EF;&#x80FD;&#x731C;&#x6D4B;1+4+8=13&#xFF0C;&#x56E0;&#x4E3A;byte&#x7684;&#x5927;&#x5C0F;&#x4E3A;1&#xFF0C;int32&#x5927;&#x5C0F;&#x4E3A;4&#xFF0C;int64&#x5927;&#x5C0F;&#x4E3A;8&#xFF0C;&#x800C;struct&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x7EC4;&#x5408;&#xFF0C;&#x6240;&#x4EE5;&#x731C;&#x6D4B;struct&#x5927;&#x5C0F;&#x4E3A;&#x5B57;&#x6BB5;&#x5927;&#x5C0F;&#x4E4B;&#x548C;&#x4E5F;&#x5F88;&#x6B63;&#x5E38;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x4F46;&#x662F;&#xFF0C;&#x6211;&#x53EF;&#x4EE5;&#x660E;&#x786E;&#x7684;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x9519;&#x8BEF;&#x7684;&#x3002;</p>
+<p>&#x4E3A;&#x4EC0;&#x4E48;&#x662F;&#x9519;&#x8BEF;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x6709;&#x5185;&#x5B58;&#x5BF9;&#x9F50;&#x5B58;&#x5728;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4F7F;&#x7528;&#x4E86;&#x5185;&#x5B58;&#x5BF9;&#x9F50;&#xFF0C;&#x90A3;&#x4E48;&#x6700;&#x540E;&#x7684;&#x5927;&#x5C0F;&#x7ED3;&#x679C;&#x5C31;&#x4E0D;&#x4E00;&#x6837;&#x4E86;&#x3002;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6B63;&#x5F0F;&#x9A8C;&#x8BC1;&#x4E0B;&#xFF0C;&#x8FD9;&#x51E0;&#x79CD;struct&#x7684;&#x503C;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">package main
+<span class="token function">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;unsafe&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token builtin class-name">type</span> user1 struct <span class="token punctuation">{</span>
+    b byte
+    i int32
+    j int64
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user2 struct <span class="token punctuation">{</span>
+    b byte
+    j int64
+    i int32
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user3 struct <span class="token punctuation">{</span>
+    i int32
+    b byte
+    j int64
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user4 struct <span class="token punctuation">{</span>
+    i int32
+    j int64
+    b byte
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user5 struct <span class="token punctuation">{</span>
+    j int64
+    b byte
+    i int32
+<span class="token punctuation">}</span>
+<span class="token builtin class-name">type</span> user6 struct <span class="token punctuation">{</span>
+    j int64
+    i int32
+    b byte
+<span class="token punctuation">}</span>
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var u1 user1
+    var u2 user2
+    var u3 user3
+    var u4 user4
+    var u5 user5
+    var u6 user6
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;u1 size is &quot;</span>, unsafe.Sizeof<span class="token punctuation">(</span>u1<span class="token punctuation">))</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;u2 size is &quot;</span>, unsafe.Sizeof<span class="token punctuation">(</span>u2<span class="token punctuation">))</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;u3 size is &quot;</span>, unsafe.Sizeof<span class="token punctuation">(</span>u3<span class="token punctuation">))</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;u4 size is &quot;</span>, unsafe.Sizeof<span class="token punctuation">(</span>u4<span class="token punctuation">))</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;u5 size is &quot;</span>, unsafe.Sizeof<span class="token punctuation">(</span>u5<span class="token punctuation">))</span>
+    fmt.Println<span class="token punctuation">(</span><span class="token string">&quot;u6 size is &quot;</span>, unsafe.Sizeof<span class="token punctuation">(</span>u6<span class="token punctuation">))</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru11.go</span>
+u1 size is  <span class="token number">16</span>
+u2 size is  <span class="token number">24</span>
+u3 size is  <span class="token number">16</span>
+u4 size is  <span class="token number">24</span>
+u5 size is  <span class="token number">16</span>
+u6 size is  <span class="token number">16</span>
+</code></pre>
+<p>&#x5185;&#x5B58;&#x5BF9;&#x9F50;&#x5F71;&#x54CD;struct&#x7684;&#x5927;&#x5C0F; struct&#x7684;&#x5B57;&#x6BB5;&#x987A;&#x5E8F;&#x5F71;&#x54CD;struct&#x7684;&#x5927;&#x5C0F;
+&#x7EFC;&#x5408;&#x4EE5;&#x4E0A;&#x4E24;&#x70B9;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5F97;&#x77E5;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x5B57;&#x6BB5;&#x987A;&#x5E8F;&#xFF0C;&#x6700;&#x7EC8;&#x51B3;&#x5B9A;struct&#x7684;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#xFF0C;&#x6240;&#x4EE5;&#x6709;&#x65F6;&#x5019;&#x5408;&#x7406;&#x7684;&#x5B57;&#x6BB5;&#x987A;&#x5E8F;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x5185;&#x5B58;&#x7684;&#x5F00;&#x9500;&#x3002;</p>
+<h2 id="19-&#x4F7F;&#x7528;&#x6CE8;&#x610F;&#xFF1A;"><a name="19-&#x4F7F;&#x7528;&#x6CE8;&#x610F;&#xFF1A;" class="anchor-navigation-ex-anchor" href="#19-&#x4F7F;&#x7528;&#x6CE8;&#x610F;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a>19. &#x4F7F;&#x7528;&#x6CE8;&#x610F;&#xFF1A;</h2>
+<h3 id="191-struct&#x7684;&#x8D4B;&#x503C;"><a name="191-struct&#x7684;&#x8D4B;&#x503C;" class="anchor-navigation-ex-anchor" href="#191-struct&#x7684;&#x8D4B;&#x503C;"><i class="fa fa-link" aria-hidden="true"></i></a>19.1 struct&#x7684;&#x8D4B;&#x503C;</h3>
+<p>&#x9519;&#x8BEF;&#x5B9E;&#x4F8B;</p>
+<pre class="language-"><code class="lang-bash">package main
+
+import<span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> person struct <span class="token punctuation">{</span>
+    name string
+    age int
+<span class="token punctuation">}</span>
+
+var P person
+
+P.name <span class="token operator">=</span> <span class="token string">&quot;annie&quot;</span>
+P.age <span class="token operator">=</span> <span class="token number">20</span>
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt.Printf<span class="token punctuation">(</span><span class="token string">&quot;The person&apos;s name is %s&quot;</span>, P.name<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>root@localhost struct<span class="token punctuation">]</span><span class="token comment"># go run stru12.go</span>
+<span class="token comment"># command-line-arguments</span>
+./stru12.go:14:1: syntax error: non-declaration statement outside <span class="token keyword">function</span> body
+</code></pre>
+<p>&#x6B63;&#x786E;&#x5199;&#x6CD5;1</p>
+<pre class="language-"><code class="lang-bash">package main
+
+import<span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> person struct <span class="token punctuation">{</span>
+    name string
+    age int
+<span class="token punctuation">}</span>
+
+var P <span class="token operator">=</span>person<span class="token punctuation">{</span><span class="token string">&quot;annie&quot;</span>,20<span class="token punctuation">}</span>
+
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt.Printf<span class="token punctuation">(</span><span class="token string">&quot;The person&apos;s name is %s&quot;</span>, P.name<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x6B63;&#x786E;&#x5199;&#x6CD5;2</p>
+<pre class="language-"><code class="lang-bash">package main
+
+import<span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token builtin class-name">type</span> person struct <span class="token punctuation">{</span>
+    name string
+    age int
+<span class="token punctuation">}</span>
+
+var P person
+
+
+func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token assign-left variable">P.name</span><span class="token operator">=</span><span class="token string">&quot;a&quot;</span>
+    <span class="token assign-left variable">P.age</span><span class="token operator">=</span><span class="token number">10</span>
+    fmt.Printf<span class="token punctuation">(</span><span class="token string">&quot;The person&apos;s name is %s&quot;</span>, P.name<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>go&#x548C;c&#x4E00;&#x6837;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x8FD0;&#x7B97;&#x90FD;&#x5E94;&#x8BE5;&#x5728;&#x51FD;&#x6570;&#x5185;&#x8FDB;&#x884C;&#xFF0C;&#x51FD;&#x6570;&#x5916;&#x8FDB;&#x884C;&#x7684;&#x662F;&#x8BED;&#x6CD5;&#x9519;&#x8BEF;&#x3002;
+&#x51FD;&#x6570;&#x4F53;&#x5916;&#x521D;&#x59CB;&#x5316;&#x7ED3;&#x6784;&#x4F53;&#x5C31;&#x4E24;&#x4E2A;&#x529E;&#x6CD5;&#xFF0C;&#x8981;&#x4E48;&#x4E00;&#x6B21;&#x6027;&#x5168;&#x90E8;&#x8D4B;&#x503C;&#xFF0C;&#x8981;&#x4E48;&#x5148;&#x58F0;&#x660E;&#xFF08;&#x5168;&#x5C40;/&#x5C40;&#x90E8;&#xFF09;&#x53D8;&#x91CF;&#xFF0C;&#x5728;&#x67D0;&#x4E2A;&#x51FD;&#x6570;&#x5185;&#x8FDB;&#x884C;&#x8D4B;&#x503C;&#xFF0C;&#x5728;&#x51FD;&#x6570;&#x4F53;&#x5916;&#x8FDB;&#x884C;&#x7ED3;&#x6784;&#x4F53;&#x6210;&#x5458;&#x8D4B;&#x503C;&#x76F8;&#x5F53;&#x4E8E;&#x51FD;&#x6570;&#x5916;&#x9762;&#x8FDB;&#x884C;&#x8FD0;&#x7B97;&#x4E86;&#x3002;</p>
+<p>&#x53C2;&#x8003;&#xFF1A;</p>
+<ul>
+<li><a href="http://www.ahadoc.com/read/Golang-Detailed-Explanation/ch3.md?wd=goto" target="_blank">http://www.ahadoc.com/read/Golang-Detailed-Explanation/ch3.md?wd=goto</a></li>
+<li><a href="https://segmentfault.com/q/1010000009276425" target="_blank">https://segmentfault.com/q/1010000009276425</a></li>
+<li><a href="https://www.cnblogs.com/wdliu/p/9209419.html" target="_blank">https://www.cnblogs.com/wdliu/p/9209419.html</a></li>
+</ul>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; ghostwritten &#x6D59;ICP&#x5907;2020032454&#x53F7; 2022 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2022-12-22 13:23:35
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="go_15_map.html" class="navigation navigation-prev " aria-label="Previous page: go map容器引用">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="go_17_function.html" class="navigation navigation-next " aria-label="Next page: go 了解函数运用">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"go struc 结构体","level":"1.4.17","depth":2,"next":{"title":"go 了解函数运用","level":"1.4.18","depth":2,"path":"Go-Base/go_17_function.md","ref":"Go-Base/go_17_function.md","articles":[]},"previous":{"title":"go map容器引用","level":"1.4.16","depth":2,"path":"Go-Base/go_15_map.md","ref":"Go-Base/go_15_map.md","articles":[]},"dir":"ltr"},"config":{"plugins":["3-ba","accordion","advanced-emoji","anchor-navigation-ex","baidu-tongji","code","change_girls","custom-favicon","donate","expandable-chapters-small","edit-link","flexible-alerts","github-buttons","github","insert-logo","musicxml","prism","prism-themes","pageview-count","-highlight","-search","-lunr","rss","search-plus","splitter","-sharing","sharing-plus","sidebar-style","theme-default","tags","tbfed-pagefooter"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"sidebar-style":{"author":"zongxun","title":"《Go Docs》"},"tbfed-pagefooter":{"copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-holi-theme.css"],"lang":{"shell":"bash"}},"github":{"url":"https://github.com/Ghostwritten"},"baidu-tongji":{"url":"https://hm.baidu.com/hm.js","token":"55e7dfe47f4dc1c018d4042fdfa62565"},"splitter":{},"change_girls":{"time":10,"urls":["https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg","https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg","https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg","https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg","https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg","https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg","https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg","https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg","https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg","https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg","https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg","https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg","https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"]},"accordion":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"donate":{"alipay":"https://github.com/Ghostwritten/go-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://github.com/Ghostwritten/go-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["go"],"title":"Go Docs","description":"This is the best book ever.","author":"Zong Xun","feed_url":"http://smoothies.com.cn/rss","site_url":"https://smoothies.com.cn/go-docs/","managingEditor":"writer@smoothies.com.cn (Zong Xun)","webMaster":"webmaster@smoothies.com.cn (Zong Xun)"},"musicxml":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"assets/imgs/1_girl.ico","pageview-count":{},"prism-themes":{},"github-buttons":{"buttons":[{"user":"Ghostwritten","repo":"go-docs","type":"star","count":true,"size":"small"}]},"custom-favicon":{},"tags":{"placement":"top"},"3-ba":{"configuration":"auto","token":"9ffc0dce8d7079aceab6b0bc18eb626b"},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Danger"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"advanced-emoji":{"embedEmojis":false},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"douban":false,"facebook":true,"weibo":false,"twitter":true,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"Edit","base":"https://github.com/Ghostwritten/go-docs/edit/master/"},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"insert-logo":{"style":"background: none; max-height: 120px; min-height: 120px","url":"https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg"},"search-plus":{}},"theme":"default","author":"宗勋 - zongxun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Go Docs","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Blog":"https://smoothies.com.cn","Kubernetes":"https://smoothies.com.cn/kubernetes-docs/","Go":"https://smoothies.com.cn/go-docs/","Prometheus":"https://smoothies.com.cn/prometheus-docs/","Command":"https://smoothies.com.cn/linux-command-docs/","Shell":"https://smoothies.com.cn/shell-docs/","Linux":"https://smoothies.com.cn/linux-docs/","Gitbook":"https://smoothies.com.cn/gitbook-docs/","Python":"https://smoothies.com.cn/python-docs/","Exam":"https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"}},"gitbook":"*","description":"这是一本关于 [Go](https://go.dev/) 的书籍"},"file":{"path":"Go-Base/go_16_struc.md","mtime":"2022-12-22T05:23:35.823Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-22T10:32:54.750Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-baidu-tongji/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-change_girls/girls.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/osmd.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/musicxml.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-musicxml/promise.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sidebar-style/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
