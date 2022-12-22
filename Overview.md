@@ -2,6 +2,11 @@
 
 * [序言](./README.md)
 * [summary](./Overview.md)
+- [Go Practice](Go-Practice/README.md)
+  * [go 如何获取文件的大小](Go-Practice/go_get_file_size.md)
+  * [go 获取 url 实战](Go-Practice/go_get_URL.md)
+  * [go 查找重复的行](Go-Practice/go_get_Duplicate_lines.md)
+  * [go 编写 echo 命令](Go-Practice/go_dev_command_echo.md)
 - [Go Base](Go-Base/README.md)
   * [go goroot 与 gopath 介绍](Go-Base/go_1_GOPATH_and_GOROOT.md)
   * [go 通过 import 导入包](Go-Base/go_2_import.md)
@@ -31,6 +36,8 @@
   * [go 了解 channel 管道](Go-Base/go_25_channel.md)
   * [go container 容器数据类型 heap list  ring](Go-Base/go_26_container.md)
   * [go cas操作](Go-Base/go_27_cas.md)
-
+- [Go Package](Go-Package/README.md)
   * [go 库 pflag 命令行参数解析](Go-Package/go-pflag.md)
   * [go 库 viper 配置解析神器](Go-Package/go-viper.md)
+  * [go 包 fmt 打印输出](Go-Package/go-fmt.md)
+  * [go 包 os 文件操作](Go-Package/go-os.md)
