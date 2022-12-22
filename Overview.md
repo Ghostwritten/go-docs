@@ -2,11 +2,6 @@
 
 * [序言](./README.md)
 * [summary](./Overview.md)
-
-  
-    
-      * [the mit license  mit](_book/gitbook/gitbook-plugin-advanced-emoji/LICENSE.md)
-      * [octocat  squirrel  shipit](_book/gitbook/gitbook-plugin-advanced-emoji/LICENSE-IMAGES.md)
 - [Go Base](Go-Base/README.md)
   * [go goroot 与 gopath 介绍](Go-Base/go_1_GOPATH_and_GOROOT.md)
   * [go 通过 import 导入包](Go-Base/go_2_import.md)
